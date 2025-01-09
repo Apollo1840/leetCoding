@@ -23,3 +23,15 @@ https://docs.google.com/spreadsheets/d/1iZgiFTFVtfH4xduRrAm08t6eOoL-fO6FfvuCCbLw
     - Divide & Conquer
     - Reduce & Conquer
     - DP
+  
+## Inputs
+
+- String
+- Array
+  - Array(int)
+  - Array(str)
+- 2D Array
+  - Matrix
+  - 0-1 Matrix
+- Node
+- Graph (see `input_graph.md`)
