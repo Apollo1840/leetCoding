@@ -5,6 +5,10 @@ This is a repository tutorialing leetcode challenges.
 LeetcodeIndex is my clustering of leetcode challenges:
 https://docs.google.com/spreadsheets/d/1iZgiFTFVtfH4xduRrAm08t6eOoL-fO6FfvuCCbLwuP4/edit?gid=0#gid=0
 
+reference:
+- (Animation) https://github.com/MisterBooo/LeetCodeAnimation
+- (Tutorial) https://www.youtube.com/watch?v=KLlXCFG5TnA&list=PLot-Xpze53ldVwtstag2TL4HQhAnC8ATf&index=1&ab_channel=NeetCode
+
 ## Methodology
 
 - Data structure
@@ -16,7 +20,7 @@ https://docs.google.com/spreadsheets/d/1iZgiFTFVtfH4xduRrAm08t6eOoL-fO6FfvuCCbLw
     - DFS Backtracking
 - Two pointers
     - two arrays
-    - FastSlow
+    - SlowFast
     - LeftRight
         - Binary Search
 - Recursive
