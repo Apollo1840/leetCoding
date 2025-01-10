@@ -1,5 +1,12 @@
 # HashMap
+Use set/dict to solve problem.
+(because set/dict is a hash map and is fast to trace)
 
+Usually, 
+- we use set to record **Visited** (141, 202), 
+or we use set to quickly find sequential **Existance** (36) with while loop.
+- we use dict as counter to count **Freq** (242, 49, 350) or **Degree** (997).
+- a more tricky use of dict is to record **Index** (1, 3, 679) and associatives.
 
 ## Set-Visited
 Use a set to record visited points.
@@ -84,7 +91,7 @@ count degree
 
 Use Map-Counter to solve the problem
 
-### Valid Anagram
+### Valid Anagram(242)
 Task: judge whether a pair of strings is anagram or not.
 
 ```python
@@ -102,7 +109,7 @@ def isAnagram(self, s: str, t: str) -> bool:
 
 ```
 
-### Group Anagram
+### Group Anagram(49)
 Task: return groups of anagrams.
 
 Solution: use tuplized Map-counter as key.
