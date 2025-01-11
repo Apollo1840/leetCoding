@@ -14,6 +14,8 @@ eg.
 - $a_n = a_{n-1} * a_{n-2}$
 - $a_n = min(a_{n-1}, a_{n-2}+b_{n})$
 
+
+Challenges:
 - (indoor) (509) Fibonacci
 - (62) Unique Path
 - (542) 0-1 Matrix
