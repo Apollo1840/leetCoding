@@ -10,7 +10,9 @@ $$
 
 eg.
 
-$a_n = a_{n-1} + a_{n-2}$, $a_n = a_{n-1} * a_{n-2}$, $a_n = min(a_{n-1}, a_{n-2}+b_{n})
+- $a_n = a_{n-1} + a_{n-2}$
+- $a_n = a_{n-1} * a_{n-2}$
+- $a_n = min(a_{n-1}, a_{n-2}+b_{n})$
 
 - (indoor) (509) Fibonacci
 - (62) Unique Path
