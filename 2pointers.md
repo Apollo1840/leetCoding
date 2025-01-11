@@ -3,11 +3,12 @@
 Trival case: two pointers on two arrays
 
 - 392 Is subsequence
-- 925 Long pressed
+- 925 Is Long-pressed
 
 ```python
 p1, p2 = 0, 0 
 while p1<len(a) and p2<len(b):
+# while p1<len(a): # mostly single track
     
     # ...
     p1+=1
@@ -15,5 +16,7 @@ while p1<len(a) and p2<len(b):
     
     # ...
     p1+=1
+
+# return p2==len(b)
 
 ```

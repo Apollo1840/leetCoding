@@ -1,7 +1,7 @@
 # Two pointers (Slow-Fast)
 
 Conventionally, I use `p1` as slow pointer and `p2` as fast pointer.
-`p1` also used to mark something until it meets new occurence and update itself as `p2`.
+`p1` also used to mark something until it meets new occurence and update itself as `p2`(`p1 <- p2`).
 
 
 ```python
@@ -54,20 +54,56 @@ p1, p2 = 0, 0   # Slow, Fast
 while p2<len(a):
     
     if ...
+        a[p1] = ...
         p1+=1
     
     # ...
     p2+=1
-
+    
+# return p1
 ```
 
 
 ### Three pointers
 
-- 88 In-place mergeSort
+Three pointers are:
+- p1: Overlay, as the slowest pointer
+- p2_1: Slow pointer, hold to count
+- p2_2: Fast pointer, forward to look up.
+
 - 443 Compress duplicates
+- (Reverse) 88 In-place mergeSort
 
 ```python
+        
+# Compress duplicates: "aaabbc" -> "a3b2c"
+def compress(self, chars: List[str]) -> int:
+    p1, p2_1, p2_2 = 0, 0, 0  # overlay, slow, fast
+    char_curr = chars[0]
+
+    while p2_2 <= len(chars):
+        # when it is over or meets different
+        if p2_2 == len(chars) or chars[p2_2]!=char_curr:
+            chars[p1] = chars[p2_1]
+            p1 += 1
+
+            if p2_2 - p2_1 > 1:
+                num = str(p2_2 - p2_1)
+                chars[p1:p1+len(num)] = num
+                p1 += len(num)
+            
+            # slow catch up with fast
+            p2_1 = p2_2
+
+            # change current char if needed
+            if p2_2 < len(chars):
+                char_curr = chars[p2_2]
+
+        # print(p1,p1_1, p1_2, chars[0:p1])
+        p2_2 += 1
+    chars = chars[0:p1]
+    return len(chars)
+
 
 # In-place mergeSort
 def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
@@ -77,6 +113,8 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     - p1_1: slow-1, as inverse pointer of 1st array
     - p1_2: slow-2, as inverse pointer of 2rd array
     - p2: fast pointer, as overlay index
+    
+    # PS. in merge case, overlay pointer is the fastest.
     """
     p1_1 = m - 1
     p1_2 = n - 1
@@ -95,34 +133,6 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
             p1_2 -= 1
 
         p2 -= 1
-        
-# Compress duplicates: "aaabbc" -> "a3b2c"
-def compress(self, chars: List[str]) -> int:
-    p1_1, p1_2, p2 = 0, 0, 0  # overlay, slow, fast
-    char_curr = chars[0]
-
-    while p1_2 <= len(chars):
-        # when it is over or meets different
-        if p1_2 == len(chars) or chars[p1_2]!=char_curr:
-            chars[p2] = chars[p1_1]
-            p2 += 1
-
-            if p1_2 - p1_1 > 1:
-                num = str(p1_2 - p1_1)
-                chars[p2:p2+len(num)] = num
-                p2 += len(num)
-            
-            # slow catch fast
-            p1_1 = p1_2
-
-            # change current char if needed
-            if p1_2 < len(chars):
-                char_curr = chars[p1_2]
-
-        # print(p1,p1_1, p1_2, chars[0:p1])
-        p1_2 += 1
-    chars = chars[0:p2]
-    return len(chars)
 
         
 

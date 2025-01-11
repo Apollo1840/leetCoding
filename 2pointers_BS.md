@@ -18,7 +18,7 @@ while l < r:
 
 ```
 
-It needs practice.
+    "BS needs practice."
 
 - (Indoor) 35 insert
 - 69	sqrt
@@ -64,7 +64,6 @@ def splitArray(self, nums: List[int], k: int) -> int:
         return l
 
 def achieve(self, nums, target_sum, k):
-    max_sum = 0
     p1, p2 = 0, 0
     curr_sum = 0
     while p2 <= len(nums) and k>0:
@@ -90,7 +89,7 @@ def achieve(self, nums, target_sum, k):
 
 # 875 Koko
 def minEatingSpeed(self, piles: List[int], h: int) -> int:
-    l, r = ceil(sum(piles)/h), max(piles)
+    l, r = math.ceil(sum(piles)/h), max(piles)
     while l < r:
         mid = (l + r)//2
         if self.achieve(piles, mid, h):
@@ -103,7 +102,7 @@ def minEatingSpeed(self, piles: List[int], h: int) -> int:
 def achieve(self, piles, mid, h):
     total_time = 0
     for i in piles:
-        total_time += ceil(i/mid)
+        total_time += math.ceil(i/mid)
         if total_time > h:
             break
     return total_time <= h
