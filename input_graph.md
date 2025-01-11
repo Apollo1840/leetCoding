@@ -60,3 +60,27 @@ Meaning:
 - Node 0 is the root (-1).
 - Nodes 1 and 2 are children of 0.
 - Nodes 3 and 4 are children of 1, and so on.
+
+
+# Transformation
+
+## EdgeList to AdjacencyMap
+
+```python
+def edgeList2AdjList(edge_list):
+    adj_map = defaultdict(list)
+    for u, v in edge_list:
+        adj_map[u].append(v)  # Directed graph: only append v to u's list
+    return dict(adj_map)
+```
+
+## AdjacencyMap to EdgeList
+
+```python
+def adjList2edgeList(adj_map):
+    edge_list = []
+    for u, vs in adj_map.items():
+        for v in vs:
+            edge_list.append((u, v))  # Directly append the directed edge
+    return edge_list
+```
