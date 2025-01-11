@@ -153,8 +153,40 @@ Based on `dp[i-1]` and others, but for the easy of thinking.
 - (2D) (542) closest zero
 
 ### High dimensional DP
-- (2D) (simple) (62) Unique Path
-- (2D) (542) 0-1 Matrix
+- (2D native) (simple) (62) Path Number
+- (2D native) (63) Unique Path II 
+- (2D native) (542) 0-1 Matrix
+- (2D) Longest Sub-Palindromic 
+
+
+**Longest sub-Palindromic**
+Task: find longest Plindromic substring given a string.
+
+Solution: use a 2-D dp matrix to record **s[i:(j+1)] is Palindrome or not**
+
+Hint: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
+
+```python
+def longestPalindrome(self, s: str) -> str:
+    n = len(s)
+    # DP table to check if s[i:j] is a palindrome
+    dp = [[False] * n for _ in range(n)]
+    
+    start, end = 0, 0
+    # Fill DP table
+    for length in range(n):  # Length of substring
+        for i in range(n - length):
+            j = i + length
+            if s[i] == s[j]:
+                if length <= 1:  # Single character or two equal characters
+                    dp[i][j] = True
+                else:
+                    dp[i][j] = dp[i + 1][j - 1]  # Check inner substring
+                if dp[i][j]:
+                    start, end = i, j
+    return s[start: (end+1)]
+
+```
 
 ### Hashmap DP
 
