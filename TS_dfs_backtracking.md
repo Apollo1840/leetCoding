@@ -1,6 +1,10 @@
 # DFS Backtracking
 
-## 17 Phone Typing
+## Methodology
+
+### On Array
+
+#### 17 Phone Typing
 classic backtracking
 
 Expand version:
@@ -15,10 +19,12 @@ def letterCombinations(self, digits: str) -> List[str]:
     return self.res
 
 def dfs(self, digits, path):
+    # finish ends
     if not digits:
         self.res.append("".join(path))
         return
     
+    # recursive
     for letter in self.phone_map[digits[0]]:
         path = path + [letter]
         self.dfs(digits[1:], path)
@@ -32,17 +38,115 @@ Shorter version of `dfs()`:
 ```python
 
 def dfs(self, digits, path):
+    # finish ends
     if not digits:
         self.res.append("".join(path))
         return
-    
+        
+    # recursive
     for letter in self.phone_map[digits[0]]:
         self.dfs(digits[1:], path + [letter])
 
 ```
 
+#### 46 Permutations
+Solution: Use `visited` dictionary to mark consumed characters.
 
-## 797 All Source2Target
+```python
+
+def dfs(self, nums, used, currentPath):
+    # None ends
+    # no need
+
+    # finish ends
+    if len(currentPath)==len(used):
+        self.res.append(currentPath[:])
+        return 
+
+    # recursive
+    for i, n in enumerate(nums):
+        if used[i]:
+            continue
+
+        # prepare backtracking
+        used[i] = True
+        currentPath.append(n)
+
+        self.dfs(nums, used, currentPath)
+
+        # here is core of the BACK-tracking
+        currentPath.pop()
+        used[i] = False  
+
+
+
+```
+
+
+#### 131 Palindrome partition
+Task: return all partition methods on a string to make each substring palindrome.
+
+Solution: **DFS Backtracking for enumerate all valid partitions**
+```python
+
+def dfs(start, n, path):
+    # finish ends
+    if start == n:
+        result.append(path[:])
+        return
+    
+    # recursive
+    for end in range(start, n):
+        if dp[start][end]:  # Check if s[start:end+1] is a palindrome
+            path += [s[start:(end + 1)]]
+            self.dfs(end + 1, n, path)
+            path.pop()
+
+```
+
+### On Grid
+
+#### 79 Word search
+
+Solution: Use `#` to mark consumed characters.
+
+```python
+
+# check whether can find word, start at (i,j) position    
+def dfs(self, board, i, j, word):
+
+    # None ends & incorrect ends
+    if not self.withinGrid(board, i, j):
+        return False
+    elif word[0]!=board[i][j]:
+        return False
+
+    # Finish ends
+    if len(word) == 1 and word[0] == board[i][j]:
+        return True
+
+    # Backtracking prepare
+    tmp = board[i][j]  # first character is found, check the remaining part
+    board[i][j] = "#"  # avoid visit again
+
+    # recursive
+    for d in self.directions:
+        res = self.dfs(board, i+d[0], j+d[1], word[1:])
+        if res:
+            break
+
+    # Backtracking
+    board[i][j] = tmp   # here is the core concept of BACK-tracking 
+
+    return res
+
+
+
+```
+
+### On Graph
+
+#### 797 All Source2Target
 
 Task: return all paths from source(0) to target(n) given a graph as adjancency list.
 
@@ -68,21 +172,3 @@ def dfs(self, graph, path):
 ```
 
 
-## 131 Palindrome partition
-Task: return all partition methods on a string to make each substring palindrome.
-```python
-
-def backtrack(start, path):
-    if start == n:
-        result.append(path[:])
-        return
-    
-    for end in range(start, n):
-        if dp[start][end]:  # Check if s[start:end+1] is a palindrome
-            path += [s[start:(end + 1)]]
-            backtrack(end + 1, path)
-            path.pop()
-
-backtrack(0, [])
-
-```
