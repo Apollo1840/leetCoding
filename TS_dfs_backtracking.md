@@ -1,33 +1,70 @@
 # DFS Backtracking
 
-## 797 Source2Target
+## 17 Phone Typing
+classic backtracking
+
+Expand version:
+```python
+
+def letterCombinations(self, digits: str) -> List[str]:
+    if not digits:
+            return []
+
+    self.res = list()
+    self.dfs(digits, list())  # list() are starting path
+    return self.res
+
+def dfs(self, digits, path):
+    if not digits:
+        self.res.append("".join(path))
+        return
+    
+    for letter in self.phone_map[digits[0]]:
+        path = path + [letter]
+        self.dfs(digits[1:], path)
+        path.pop()  # The BACK-tracking step
+
+
+```
+
+
+Shorter version of `dfs()`:
+```python
+
+def dfs(self, digits, path):
+    if not digits:
+        self.res.append("".join(path))
+        return
+    
+    for letter in self.phone_map[digits[0]]:
+        self.dfs(digits[1:], path + [letter])
+
+```
+
+
+## 797 All Source2Target
 
 Task: return all paths from source(0) to target(n) given a graph as adjancency list.
 
 ```python
 
 def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-    
-    # initialize the group to store the results
     self.res = list()
-    
-    # start with initial point and result space_holder
-    self.dfs(graph, len(graph), 0, list())
-    
+    self.target = len(graph)-1
+    self.dfs(graph, [0])
     return self.res
 
-def dfs(self, graph, n, currNode, currPath):
+def dfs(self, graph, path):
     # finish ends
-    if currNode==n-1:
-        self.res.append(currPath + [currNode])
+    if path[-1]==self.target:
+        self.res.append(path[:])
         return
 
     # recursive
-    for j in graph[currNode]:
-        currPath.append(currNode)
-        self.dfs(graph, n, j, currPath)
-        currPath.pop()  # The BACK-tracking step
-
+    for j in graph[path[-1]]:
+        path += [j]
+        self.dfs(graph, path)
+        path.pop() # The BACK-tracking step
 ```
 
 

@@ -1,6 +1,6 @@
 # Dynamic Programming
 
-Store gradually increased intermediate results.
+## Prerequisites
 
 Related to a concept called **Recursive Sequence**:
 
@@ -13,6 +13,11 @@ eg.
 - $a_n = a_{n-1} + a_{n-2}$
 - $a_n = a_{n-1} * a_{n-2}$
 - $a_n = min(a_{n-1}, a_{n-2}+b_{n})$
+
+## Ideaology
+Dynamic Programming (DP) incrementally stores intermediate **results** in RAM, 
+with each subsequent result being derived from previously computed values (like what happened in **Recursive Sequence**), 
+continuing until the final desired result is obtained.
 
 
 Challenges:
@@ -53,6 +58,7 @@ Use DP to store **max reachable index over than index** instead of the answer up
 **Jump game**
 Task: Whether able to reach top.
 
+Solution: `dp[i] = max(dp[i-1], i + nums[i])`
 
 ```python
 def jump(nums):
@@ -137,10 +143,6 @@ use `dp[i-1], dp[i-2], ..., dp[i-k]`:
 use dynamic number of previous results `dp[i-1], dp[i-2], ...`:
 - (322) Coin change
 
-### Standard DP
-use extra sequence `a[i]` and `dp[i-1], dp[i-2], ...`:
-- (746) Climbing stairs II
-- (198) House Robber
 
 ### Alternative DP
 Based on `dp[i-1]` and others, but for the easy of thinking.
@@ -148,16 +150,20 @@ Based on `dp[i-1]` and others, but for the easy of thinking.
 - (55) Jump game
 - (45) Jump game II
 
+### Standard DP
+use extra sequence `a[i]` and `dp[i-1], dp[i-2], ...`:
+- (746) Climbing stairs II
+- (198) House Robber
+
 ### Multiple-rounds DP
 - (821) closest occurency
 - (2D) (542) closest zero
 
 ### High dimensional DP
-- (2D native) (simple) (62) Path Number
+- (2D native) (simple) (62) Unique Path
 - (2D native) (63) Unique Path II 
-- (2D native) (542) 0-1 Matrix
+- (2D native) (542) Closest zero
 - (2D) Longest Sub-Palindromic 
-
 
 **Longest sub-Palindromic**
 Task: find longest Plindromic substring given a string.
