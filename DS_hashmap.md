@@ -131,12 +131,62 @@ def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
 
 ```
 
-you can use `tuple(sorted(counter))` as key if characters are not limited to small letter english.
+Alternatively, you can also use `tuple(sorted(counter(s)))` as key if characters are not limited to small letter english.
+
+### All Anagram(438)
+Task: return start index of all anagrams of a certain string within a longer string.
+
 
 ## Map
+`(target: index)`:
 - (index) 1 Two Sum
+  
+`(mid-target: index)`:
+- (index) 525 balance sub-array
+
+  
+`(char: index)`:
 - (index) 3 Longest Non-repeating
 - **(index & ...) 697 Array degree**
+
+`(mid-target: count)`:
+- (count) 560 k-sum sub-array
+
+**Array degree**
+
+Task: find (the length of) a minimum sub-array with the same degree of the original array.
+(def. Array degree: max(counter.values()))
+
+Solution: Use a hash map to store `(char: (degree, start, end))`
+
+```python
+
+def findShortestSubArray(self, nums: List[int]) -> int:
+
+    # specific hashmap
+    store = {}
+    for i in range(len(nums)):
+        if nums[i] not in store:
+            store[nums[i]] = [1,i,i] # (frequency, startIdx, endIdx)
+        else:
+            store[nums[i]][0] +=1
+            store[nums[i]][2] = i
+    
+    # use this hashmap to easy get result
+    maxFreq = max(val[0]  for val in store.values())
+    minlen = float("inf")
+    for freq, start, end in store.values():
+        if freq == maxFreq:
+            minlen = min(minlen, end-start+1)
+    
+    return minlen
+
+```
+### Sub-arrays
+- 3 Non-repeating sub-array
+- 697 same-degree sub-array
+- 525 balance sub-array
+- 560 k-sum sub-array
 
 ## Challenges
 - 791 Custom sort

@@ -142,6 +142,23 @@ use `dp[i-1], dp[i-2], ..., dp[i-k]`:
 ### Flexible DP
 use dynamic number of previous results `dp[i-1], dp[i-2], ...`:
 - (322) Coin change
+- (139) Word break
+
+```python
+
+# coin change
+for c in coins:
+    if i-c >=0:
+        dp[i] = min(dp[i], dp[i-c] + 1)
+        
+
+# word break
+for word in wordDict:
+    if i-len(word) >= 0:
+        if dp[i-len(word)] and s[i-len(word):i] in word_set:
+            dp[i] = True
+            break
+```
 
 
 ### Alternative DP
