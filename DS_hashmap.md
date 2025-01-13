@@ -85,6 +85,10 @@ count frequency
 ### Town judge(997)
 count degree
 
+## Counter as Middle result
+
+- (#pairs) 447 Boomerangs amount
+- (#pairs) 1128 Domino pairs
 
 
 ## Counter - Anagram
