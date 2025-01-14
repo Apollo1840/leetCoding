@@ -173,7 +173,29 @@ def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
 
 ```
 
+### Tree-based
+- 743 Network delay
+- 787 Cheapest Path
+
+**Network delay**
+Solution: `(arrive_time, node)` in heap.
+
+```python
+
+min_heap = [(0, source)]   # (arrive_time, node)
+visited = {}
+while min_heap:
+    time, node = heapq.heappop(min_heap)
+    if node not in visited:
+        visited[node] = time
+        for node_i, time_i in adjMap[node]:
+            heapq.heappush(min_heap, (time + time_i, node_i))
+```
+
+
+**Cheapest path**
+Solution: `(cost, node, stops)` in heap.
 
 ### Others
-
+- (simple) 502 IPO
 - 218 Skyline
