@@ -97,7 +97,7 @@ Often with greedy solution:
 
 Those are typically the hardest application of PQ.
 
-### Sections
+### Array-based: Sections
 - 253 Meeting Rooms II
 - 1094 Car Pooling
 
@@ -201,6 +201,7 @@ while min_heap:
 
 
 **Cheapest path**
+
 Solution: `(cost, node, stops)` in heap.
 
 ### Others
