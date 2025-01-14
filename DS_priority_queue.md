@@ -176,6 +176,7 @@ def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
 ### Tree-based
 - 743 Network delay
 - 787 Cheapest Path
+- (Grid) 778 Flooding swim
 
 **Network delay**
 Solution: `(arrive_time, node)` in heap.
@@ -198,4 +199,5 @@ Solution: `(cost, node, stops)` in heap.
 
 ### Others
 - (simple) 502 IPO
+- 378 K-th smallest 
 - 218 Skyline
