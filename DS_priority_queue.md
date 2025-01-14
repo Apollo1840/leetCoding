@@ -29,6 +29,8 @@ while h:
 ```
 
 ### Take Two
+Take two (first and second) item out of the heap.
+
 - 1046 Stone smash
 - 2335 Fill cups
 
@@ -99,14 +101,16 @@ Those are typically the hardest application of PQ.
 - 253 Meeting Rooms II
 - 1094 Car Pooling
 
-Sections: list of `(start, end)`.
-often, the heap stores the `(end, *)`.
+def. **Sections**: list of `(start, end)`.
+
+Often, the heap stores the `(end, *)`.
 
 **Meeting rooms II** (253)
+
 Task: Given sections, figure out how many meeting rooms required.
 
 Solution: use PQ to track the first available room and how many rooms are been used.
-
+The heap stores section `to`s.
 
 ```python
 
@@ -135,6 +139,7 @@ def minMeetingRooms(self, intervals):
 ```
 
 **Car pooling** (1094)
+
 Task: Given sections with num_passengers, judge whether it possible to taking them.
 
 ```python
@@ -153,14 +158,14 @@ def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
         return False
     
     for i in range(1, len(trips)):
-        n_passenger, loc_from, loc_to = trips[i]
+        n_passenger, loc_start, loc_end = trips[i]
         
         # empty the car if it already reached target location.
-        while h and h[0][0] <= loc_from:  
+        while h and loc_start >= h[0][0]:  
             _, p = heappop(h)
             took -= p
             
-        heappush(h, (loc_to, n_passenger))
+        heappush(h, (loc_end, n_passenger))
         
         # load the new passengers and check capacity.
         took += n_passenger
@@ -179,6 +184,7 @@ def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
 - (Grid) 778 Flooding swim
 
 **Network delay**
+
 Solution: `(arrive_time, node)` in heap.
 
 ```python
