@@ -76,7 +76,7 @@ def longestConsecutive(self, nums: List[int]) -> int:
 
 
 ## Counter
-
+Use Map-Counter to solve the problem
 
 ### Array Intersection II (350)
 count frequency
@@ -89,11 +89,10 @@ count degree
 
 - (#pairs) 447 Boomerangs amount
 - (#pairs) 1128 Domino pairs
-
+- (#pairs) perfect pairs
 
 ## Counter - Anagram
-
-Use Map-Counter to solve the problem
+specific case: Freq counter of chars in a string.
 
 ### Valid Anagram(242)
 Task: judge whether a pair of strings is anagram or not.
