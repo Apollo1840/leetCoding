@@ -186,7 +186,7 @@ def findShortestSubArray(self, nums: List[int]) -> int:
 
 ```
 ### Sub-arrays
-- 3 Non-repeating sub-array
+- 3 non-repeating sub-array
 - 697 same-degree sub-array
 - 525 balance sub-array
 - 560 k-sum sub-array

@@ -1,5 +1,6 @@
 # Two pointers (Slow-Fast)
 
+## Step recorder
 Conventionally, I use `p1` as slow pointer and `p2` as fast pointer.
 `p1` also used to mark something until it meets new occurence and update itself as `p2`(`p1 <- p2`).
 
@@ -74,7 +75,49 @@ def maxProfit(self, prices: List[int]) -> int:
     return profit
 
 ```
+## Sliding window
 
+- (209) Shortest sub-array
+
+## Jumping pointer
+- (Jumping slow) 3 non-repeating sub-array
+- (Jumping fast) 763 non-crossing sub-array
+
+```python
+
+# (3) non-repeating sub-array
+def nonRepeating(self, s):
+    visited = dict()  # non-repeating start
+    res = 0
+    
+    p1 = -1
+    for p2, c in enumerate(s):
+        if c in visited:
+            p1 = max(p1, visited[c])
+        visited[c] = p2
+        res = max(res, p2-p1)
+    return res        
+        
+
+# (763) non-crossing sub-array
+def partitionLabels(self, s: str) -> List[int]:
+    last = dict()
+    for i, c in enumerate(s):
+        last[c] = i
+    
+    ans = []
+    anchor = 0
+    
+    p2 = 0
+    for p1, c in enumerate(s):
+        p2 = max(p2, last[c])
+        if p1 == p2:
+            ans.append(p2 - anchor + 1)
+            anchor = p1 + 1  
+    return ans
+
+
+```
 
 ## In-place
 

@@ -20,9 +20,9 @@ It is widely used for Tree Search (BFS, DFS) challenge and also in some Two poin
 ## ListNode
 
 - (141) Linked-List Cycle
-- (19) Remove n-th node
-- (61) Rotate k times
-
+- (19) Linked-List removal
+- (61) Linked-List rotation
+- (hard) (86) Linked-List partition
 
 ## TreeNode
 - 98

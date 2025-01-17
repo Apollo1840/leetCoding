@@ -18,33 +18,6 @@ while l < r:
 
 ```
 
-## Greedy
-
-- Two Sum II (167)
-- Largest container (11)
-
-```python
-# Task: Find largest container, contains most water
-def maxArea(self, height: List[int]) -> int:
-    l, r = 0, len(height) - 1
-
-    maxArea = 0
-    while l < r:
-        maxArea = max(maxArea, min(height[l], height[r]) * (r - l))
-
-        if height[l] < height[r]:
-            l += 1
-        else:
-            r -= 1
-
-    return maxArea
-```
-
-### After sort
-Sometimes, in order to use LeftRight Pointer, we apply sort first. 
-
-- 3Sum Closest (16)
-- 4Sum (18)
 
 ## Palindrome (125)
 Task: judge whether it is a valid Palindrome.
@@ -127,5 +100,33 @@ def sortColors(self, nums: List[int]) -> None:
 
 ```
 
+
+## Greedy
+
+- Two Sum II (167)
+- Largest container (11)
+
+```python
+# Task: Find largest container, contains most water
+def maxArea(self, height: List[int]) -> int:
+    l, r = 0, len(height) - 1
+
+    maxArea = 0
+    while l < r:
+        maxArea = max(maxArea, min(height[l], height[r]) * (r - l))
+
+        if height[l] < height[r]:
+            l += 1
+        else:
+            r -= 1
+
+    return maxArea
+```
+
+### After sort
+Sometimes, in order to use LeftRight Pointer, we apply sort first. 
+
+- 3Sum Closest (16)
+- 4Sum (18)
 
 
