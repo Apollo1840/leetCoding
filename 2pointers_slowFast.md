@@ -3,6 +3,9 @@
 Conventionally, I use `p1` as slow pointer and `p2` as fast pointer.
 `p1` also used to mark something until it meets new occurence and update itself as `p2`(`p1 <- p2`).
 
+- Smallest Larger
+- Distance to LeftChar
+- Best BuySale (121)
 
 ```python
 p1, p2 = 0, 0   # Slow, Fast
@@ -14,7 +17,31 @@ while p2<len(a):
     # ...
     p2+=1
     
-# example: distance to the left char
+```
+
+**Smallest Larger**
+
+Task: given nums and target, find the index of the smallest number in nums which is larger than target.
+
+```python
+
+p1, p2 = 0, 0
+smallest = float('inf')
+while p2 < len(nums):
+    if target < nums[p2] < smallest:
+        smallest = nums[p2]
+        p1 = p2
+    p2+=1
+return p1
+
+```
+
+**Distance to LeftChar**
+
+Task: given a string and a target char, return list of number counting char's distance to its left target char.
+
+```python
+
 def leftToChar(self, s, char):
     res = [float("Inf")]*len(s)
     p1, p2 = 0, 0  # p1 mark the left char
@@ -28,7 +55,12 @@ def leftToChar(self, s, char):
         p2 += 1
     return res
 
-# (121 Best BuySale)
+```
+
+
+**Best BuySale(121)**
+
+```python
 # example: maxProfit buy one time stock
 def maxProfit(self, prices: List[int]) -> int:
     profit = 0
@@ -71,6 +103,7 @@ Three pointers are:
 - p2_1: Slow pointer, hold to count
 - p2_2: Fast pointer, forward to look up.
 
+Challenges:
 - 443 Compress duplicates
 - (Reverse) 88 In-place mergeSort
 

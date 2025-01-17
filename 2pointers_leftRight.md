@@ -40,6 +40,11 @@ def maxArea(self, height: List[int]) -> int:
     return maxArea
 ```
 
+### After sort
+Sometimes, in order to use LeftRight Pointer, we apply sort first. 
+
+- 3Sum Closest (16)
+- 4Sum (18)
 
 ## Palindrome (125)
 Task: judge whether it is a valid Palindrome.
@@ -91,6 +96,36 @@ def reverseOnlyLetters(self, s: str) -> str:
 
 ```
 
+## Tri-sort
+
+**(75) Sort colors**
+
+Task: Sort an array with three kind of elements.
+
+Solution: use the pivot element
+
+
+```python
+
+def sortColors(self, nums: List[int]) -> None:
+    """
+    Do not return anything, modify nums in-place instead.
+    """
+    l, r = 0, len(nums) -1   # l: where 0 starts, where 2 starts.
+    p = 0
+    while p <= r:
+        if nums[p] == 2:  
+            nums[r], nums[p] = nums[p], nums[r]
+            r -= 1
+        elif nums[p] == 0:
+            nums[l], nums[p] = nums[p], nums[l]
+            l += 1
+            p += 1  # this is hard to understand
+        else:
+            p += 1
+         
+
+```
 
 
 
