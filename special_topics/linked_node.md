@@ -7,9 +7,31 @@ class ListNode:
      def __init__(self, val=0, next=None):
          self.val = val
          self.next = next
+
+class TreeNode:
+    def __init__(self, val=0, children=None):
+        self.val = val
+        self.children = children
+
 ```
 
 It is widely used for Tree Search (BFS, DFS) challenge and also in some Two pointers challenge.
 
+## ListNode
+
+- (141) Linked-List Cycle
 - (19) Remove n-th node
 - (61) Rotate k times
+
+
+## TreeNode
+- 98
+- 110
+- 112
+- 113
+- 114
+- 543
+- 797
+- 993
+- 2385
+
