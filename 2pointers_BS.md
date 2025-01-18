@@ -23,13 +23,86 @@ while l < r:
 - (Indoor) 35 insert
 - 69	sqrt
 - 34	First and Last
-- (Hard) 153	Minimum in cycle
+
+## In Rotated Array
+- 153   Minimum in rotated
+- 33    Search in rotated
+- 34    Search in rotated II
+
+In this cases, we usually differentiate the situation via:
+- edge case
+- left part is sorted  (`nums[left] <= nums[mid]`)
+- right part is sorted (`else`)
+
+```python
+
+# 153 Minimum in rotated
+def findMin(self, nums: List[int]) -> int:
+    l, r = 0, len(nums)-1
+    while l < r:
+        mid = (l+r)//2
+
+        # Edge cases
+        if nums[l] < nums[r]:
+            return nums[l]
+        elif nums[l] == nums[mid] > nums[r]:
+            return nums[r]
+
+        # left part is sorted
+        elif nums[l] < nums[mid]:
+            l = mid + 1
+        
+        # right part is sorted
+        else:
+            r = mid
+
+    return nums[l]
+
+# 34 Search in rotated II
+def search(self, nums: List[int], target: int) -> bool:
+    l, r = 0, len(nums) - 1
+
+    while l < r:
+        mid = (l + r) // 2
+
+        # Check if the middle element is the target
+        if nums[mid] == target:
+            return True
+
+        # Edge cases: Handle duplicates
+        if nums[l] == nums[mid] == nums[r]:
+            l += 1
+            r -= 1
+
+        # Left part is sorted
+        elif nums[l] <= nums[mid]:
+            if nums[l] <= target < nums[mid]:
+                r = mid
+            else:
+                l = mid + 1
+
+        # Right part is sorted
+        else:
+            if nums[mid] < target <= nums[r]:
+                l = mid + 1
+            else:
+                r = mid
+
+    return nums[l]==target
+
+```
+
+## BS as Problem Reduce/DC
+- 162 Local Maximum
+
+Half the problem size.
 
 ## BS Computing
 Sometimes use tricky BS to find numerical solution.
 
 - 410 Mininum largest sum
 - 875 Koko
+- 1011 D-day shipping
 
 
 ```python
@@ -64,27 +137,21 @@ def splitArray(self, nums: List[int], k: int) -> int:
         return l
 
 def achieve(self, nums, target_sum, k):
-    p1, p2 = 0, 0
-    curr_sum = 0
-    while p2 <= len(nums) and k>0:
+    curr_sum = 0  # Tracks the sum of the current segment
 
-        if p2 < len(nums):
-            curr_sum += nums[p2]
+    for num in nums:
+        curr_sum += num
 
-        # print("p1: {}, p2:{}, curr_sum: {}".format(p1, p2, curr_sum))
+        # If the current sum exceeds the target, we need to start a new segment
         if curr_sum > target_sum:
-            # print(target_sum, nums[p1:p2])
-            p1 = p2
             k -= 1
+            curr_sum = num  # Start a new segment with the current number
 
-            if p2 < len(nums):
-                curr_sum = nums[p2]
+            # If `k` drops below zero, it means we cannot split the array as required
+            if k < 0:
+                return False
 
-        if curr_sum <= target_sum:
-            p2 += 1
-        
-
-    return k > 0
+    return True  # If we complete the loop with k >= 0, it's achievable
         
 
 # 875 Koko
@@ -108,7 +175,27 @@ def achieve(self, piles, mid, h):
     return total_time <= h
 
 
+# 1011 D-day shipping
+def achieve(self, weights, capacity, d):
+    """
+    same achieve function as in (410 Minimum largest sum)
+    """
+    curr_sum = 0  # Tracks the sum of the current segment
 
+    for weight in weights:
+        curr_sum += weight
+
+        # If the current sum exceeds the target, we need to start a new segment
+        if curr_sum > capacity:
+            d -= 1
+            curr_sum = weight  # Start a new segment with the current number
+
+            # If `k` drops below zero, it means we cannot split the array as required
+            if d < 0:
+                return False
+
+    return True  # If we complete the loop with k >= 0, it's achievable
+        
 
 
 ```
