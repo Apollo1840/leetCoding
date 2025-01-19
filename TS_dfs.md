@@ -7,7 +7,7 @@
 - DFS can be extended to backtracking methods, making it suitable for solving a wider range of collection problems.
 
 ## Methodology
-DFS to collect:
+### DFS to collect
 
 ```python
 
@@ -24,7 +24,7 @@ def dfs(visited, point):
 
 eg. 547 Province Number.
 
-DFS to judge:
+### DFS to judge
 
 ```python
 # pseudo code:
@@ -52,6 +52,7 @@ def dfs(inputs):
 
 eg. 112 Path Sum
 
+### DFS-II
 Sometimes, `dfs()` needs to return extra information for the inference of current node:
 
 I call it **"DFS-II"**.

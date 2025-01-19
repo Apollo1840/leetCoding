@@ -3,10 +3,12 @@ Use set/dict to solve problem.
 (because set/dict is a hash map and is fast to trace)
 
 Usually, 
-- we use set to record **Visited** (141, 202), 
-or we use set to quickly find sequential **Existance** (36) with while loop.
-- we use dict as counter to count **Freq** (242, 49, 350) or **Degree** (997).
-- a more tricky use of dict is to record **Index** (1, 3, 679) and associatives.
+- we use set to:
+  - record **Visited** (141, 202)
+  - quickly find sequential **Existance** (36) with while loop.
+- we use dict:
+  - as counter to count **Freq** (242, 49, 350) or **Degree** in graph (997).
+  - as locator (recording **Index** (1, 3, 679) and associatives), to track things we focus (eg, char) or target/mid-target.
 
 ## Set-Visited
 Use a set to record visited points.
@@ -85,7 +87,7 @@ count frequency
 ### Town judge(997)
 count degree
 
-## Counter as Middle result
+## Counter as middle result
 
 - (#pairs) 447 Boomerangs amount
 - (#pairs) 1128 Domino pairs
@@ -137,7 +139,7 @@ def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
 Alternatively, you can also use `tuple(sorted(counter(s)))` as key if characters are not limited to small letter english.
 
 ### All Anagram(438)
-Task: return start index of all anagrams of a certain string within a longer string.
+Task: return start index of all anagrams of a certain string within a  longer string, given that certain string.
 
 
 ## Map
@@ -192,4 +194,4 @@ def findShortestSubArray(self, nums: List[int]) -> int:
 - 560 k-sum sub-array
 
 ## Challenges
-- 791 Custom sort
+- 791 Custom sort (solution: use counter)

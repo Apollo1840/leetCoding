@@ -206,5 +206,5 @@ Solution: `(cost, node, stops)` in heap.
 
 ### Others
 - (simple) 502 IPO
-- 378 K-th smallest 
+- 378 K-th smallest in matrix 
 - 218 Skyline

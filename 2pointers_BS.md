@@ -20,6 +20,7 @@ while l < r:
 
     "BS needs practice."
 
+Examples:
 - (Indoor) 35 insert
 - 69	sqrt
 - 34	First and Last
@@ -121,7 +122,7 @@ def MinSolver(self, ...):
 ```
 
 
-example:
+Examples:
 ```python
 
 # 410 Minimum largest sum

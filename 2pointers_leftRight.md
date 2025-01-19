@@ -19,8 +19,10 @@ while l < r:
 ```
 
 
-## Palindrome (125)
+## Palindrome
 Task: judge whether it is a valid Palindrome.
+- (125) Valid Palindrome
+- (680) Valid Palindrome II
 
 `TENET`
 
