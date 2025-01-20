@@ -94,9 +94,14 @@ def search(self, nums: List[int], target: int) -> bool:
 ```
 
 ## BS as Problem Reduce/DC
+Very similar to the idea of Divide&Conquer(DC).
+
 - 162 Local Maximum
 
 Half the problem size.
+
+- (Hard) 4 Median in 2 sorted
+
 
 ## BS Computing
 Sometimes use tricky BS to find numerical solution.

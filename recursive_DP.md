@@ -14,14 +14,19 @@ eg.
 - $a_n = a_{n-1} * a_{n-2}$
 - $a_n = min(a_{n-1}, a_{n-2}+b_{n})$
 
+Representative challenges:
+- (indoor) (509) Fibonacci
+
+
 ## Ideaology
 Dynamic Programming (DP) incrementally stores intermediate **results** in RAM, 
 with each subsequent result being derived from previously computed values (like what happened in **Recursive Sequence**), 
 continuing until the final desired result is obtained.
 
+Since we are frequently re-use the previously computed values, 
+it is beneficial to store those intermediate results in RAM (array for index query, or dict for hash query).
 
-Challenges:
-- (indoor) (509) Fibonacci
+(Notes: when you intutively get a recursive methods like DC or RC, think whether is able to transfer to DP to be more efficient)
 
 
 ## Classic

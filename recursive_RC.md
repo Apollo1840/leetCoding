@@ -2,7 +2,7 @@
 - A special form of DC, where the problem size is divided as n-1 and 1.
 - A special form of DP, where intermediate results is not explicitly stored because there is no reuse.
 
-challenges:
+Challenges:
 - 66 plus one
 
 ## Pascal triangle(118)

@@ -168,7 +168,7 @@ Examples:
 - Smallest Larger
 - Distance to LeftChar
 - Best BuySale (121)
-
+- Max sub-array (53)
 
 **Smallest Larger**
 
