@@ -1,8 +1,6 @@
 
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-F
-TS_dfs_backtracking.md,a/8/a8aa003f92b263c0d185706f92988b608e2f3576
 M
 special_topics/input_graph.md,4/1/4197f43817a3dc5850878028721519531f30ae41
 G

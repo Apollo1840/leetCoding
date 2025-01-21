@@ -58,10 +58,10 @@ Whether able to reach top.
 - (55) Jump game
 - (45) Jump game II
 
-Use DP to store **max reachable index over than index** instead of the answer upto i.
-
 **Jump game**
 Task: Whether able to reach top.
+
+Idea: Use DP to store **max reachable index over than index** instead of the answer upto i.
 
 Solution: `dp[i] = max(dp[i-1], i + nums[i])`
 
@@ -88,7 +88,7 @@ def jump(nums):
 **Jump game II**
 Task: Minimum number of jumps reach the top.
 
-Use DP to store answer.
+Idea: Use DP to store answer.
 
 ```python
 
@@ -139,13 +139,13 @@ Fewest number of coins to make up the amount.
 ## Methodology
 
 ### Trival DP
-use `dp[i-1], dp[i-2], ..., dp[i-k]`:
+`dp[i]` based on `dp[i-1], dp[i-2], ..., dp[i-k]`:
 
 - (509) Fibonacci
 - (70) Climbing stairs
 
 ### Flexible DP
-use dynamic number of previous results `dp[i-1], dp[i-2], ...`:
+`dp[i]` based on a **dynamic** range of previous results `dp[i-1], dp[i-2], ...`:
 - (322) Coin change
 - (139) Word break
 
@@ -165,6 +165,11 @@ for word in wordDict:
             break
 ```
 
+### Standard DP
+`dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
+- (746) Climbing stairs II
+- (198) House Robber
+
 
 ### Alternative DP
 Based on `dp[i-1]` and others, but for the easy of thinking.
@@ -172,10 +177,6 @@ Based on `dp[i-1]` and others, but for the easy of thinking.
 - (55) Jump game
 - (45) Jump game II
 
-### Standard DP
-use extra sequence `a[i]` and `dp[i-1], dp[i-2], ...`:
-- (746) Climbing stairs II
-- (198) House Robber
 
 ### Multiple-rounds DP
 - (821) closest occurency
@@ -217,7 +218,7 @@ def longestPalindrome(self, s: str) -> str:
 ```
 
 ### Hashmap DP
-
+- (1025) Divisor Game
 
 
 

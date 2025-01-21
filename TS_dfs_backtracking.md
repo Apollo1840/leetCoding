@@ -1,6 +1,24 @@
 # DFS Backtracking
-
+Often used in collection tasks, collect all valid solutions.
+Also used in some judgement tasks where resource can not be reused.
 ## Methodology
+
+```python
+
+res = set()
+dfs(resource, point)
+return visited
+
+def dfs(resource, point):
+    if isValid(point):
+        res.add(point)
+
+    for i in allRelated(resource, point):
+        dfs(reduced_resource, i)
+        
+        # traceback i & free resource 
+        backtrack()
+```
 
 ### On Array
 

@@ -4,6 +4,24 @@ We use queue to implement BFS, my convention is:
 - hard in  (check conditions before add into queue) 
 - easy out (dealt with that node before add into queue)
 
+
+```python
+
+while q:
+    lq = len(q)
+    for _ in range(lq):
+        x, y = q.popleft()
+        for x_, y_ in children((x, y)):
+            # hard-in
+            if isValid(x_, y_):
+                
+                # easy-out
+                operate(x_, y_)
+                q.append((x_, y_))      
+
+```
+
+
 Challenges:
 - (simple)(Grid) 733 Flood Fill
 
@@ -20,7 +38,7 @@ Islands number/perimeter/area.
 
 Advanced: inlands bridge(934)
 
-#### Islands number
+#### 200 Islands number
 Task: count number of islands in a 0-1 matrix.
 
 
@@ -47,7 +65,7 @@ def bfs(self, q, grid, m, n):
 
 ```
 
-#### Island perimeter
+#### 463 Island perimeter
 Task: calculate the perimeter of an island in a 0-1 matrix
 
 Solution: count when explore alters or on the boundary. Note to mark the visited as "-1".
@@ -73,7 +91,7 @@ def bfs(self, count, q, grid, m, n):
 
 ```
 
-#### Island area
+#### 695 Island area
 Task: find max area island in a 0-1 matrix
 
 Solution: count when find "1".
@@ -99,51 +117,48 @@ def bfs(self, area, q, grid, m, n):
 
 ```
 
-#### Island bridge
+#### 934 Island bridge
 Task: find shortest bridge between two islands on a 0-1 matrix map.
 
 ```python
 
-    def shortestBridge(self, grid):
-        m, n = len(grid), len(grid[0])
-        
-        # use dfs to locate the first island, collect all indices pairs into self.visited
-        self.visited = set()
-        start_i, start_j = next((i, j) for i in range(m) for j in range(n) if grid[i][j])
-        self.dfs(grid, m, n, start_i, start_j)
-        
-        # use bfs to find shortest bridge
-        queue = deque(self.visited)
-        ans = self.bfs(queue, grid, m, n, 0)
-        return ans
+def shortestBridge(self, grid):
+    m, n = len(grid), len(grid[0])
     
-    # mark the first island as visited
-    def dfs(self, grid, m, n, i, j):
-        if (i, j) not in self.visited and grid[i][j]:
-            self.visited.add((i, j))
+    # use dfs to locate the first island, collect all indices pairs into self.visited
+    self.visited = set()
+    start_i, start_j = next((i, j) for i in range(m) for j in range(n) if grid[i][j])
+    self.visited.add((start_i, start_j))
+    self.dfs(grid, m, n, start_i, start_j)
+    
+    # use bfs to find shortest bridge
+    queue = deque(self.visited)
+    ans = self.bfs(queue, grid, m, n, 0)
+    return ans
+
+def dfs(self, grid, m, n, i, j):
+    self.visited.add((i, j))
+    for d in self.directions:
+        i_ = i + d[0]
+        j_ = j + d[1]
+        if self.withinGrid(m, n, i_, j_) and (i_, j_) not in self.visited and grid[i_][j_]:
+            self.dfs(grid, m, n, i_, j_)
+
+def bfs(self, q, grid, m, n, ans):
+    while q:
+        lq = len(q)
+        for _ in range(lq):
+            i, j = q.popleft()
             for d in self.directions:
                 i_ = i + d[0]
                 j_ = j + d[1]
-                if self.withinGrid(m, n, i_, j_):
-                    self.dfs(grid, m, n, i_, j_)
-    
-    # count length of the bridge
-    def bfs(self, q, grid, m, n, ans):
-        while q:
-            lq = len(q)
-            for _ in range(lq):
-                i, j = q.popleft()
-                for d in self.directions:
-                    i_ = i + d[0]
-                    j_ = j + d[1]
-                    if self.withinGrid(m,n, i_, j_) and (i_, j_) not in self.visited:
-                        if grid[i_][j_]:
-                            return ans
+                if self.withinGrid(m,n, i_, j_) and (i_, j_) not in self.visited:
+                    if grid[i_][j_]:
+                        return ans
 
-                        self.visited.add((i_, j_))
-                        q.append((i_, j_))
-            ans += 1
-
+                    self.visited.add((i_, j_))
+                    q.append((i_, j_))
+        ans += 1
 
 ```
 
