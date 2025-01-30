@@ -1,19 +1,21 @@
-# HashMap
+# HashSet & HashMap
 Use set/dict to solve problem.
 (because set/dict is a hash map and is fast to trace)
 
 Usually, 
 - we use set to:
   - record **Visited** (141, 202)
-  - quickly find sequential **Existance** (36) with while loop.
+  - quickly find sequential **Existance** (128) with while loop.
 - we use dict:
   - as counter to count **Freq** (242, 49, 350) or **Degree** in graph (997).
   - as locator (recording **Index** (1, 3, 679) and associatives), to track things we focus (eg, char) or target/mid-target.
 
-## Set-Visited
+## Set
+
+### Visited
 Use a set to record visited points.
 
-### Linked-List Cycle(141) and Happy number(202)
+#### Linked-List Cycle(141) and Happy number(202)
 
 ```python
 
@@ -51,9 +53,9 @@ def isHappy(self, n: int) -> bool:
 
 More visited trackers: Valid sudoku (36)
 
-## Set-Exists
+### Exists
 
-### Longest Consecutive (128)
+#### Longest Consecutive (128)
 
 Task: count the length of the largest consecutive sub array exists in a given array.
 
@@ -77,26 +79,31 @@ def longestConsecutive(self, nums: List[int]) -> int:
 ```
 
 
-## Counter
+## Map
+
+### Counter
 Use Map-Counter to solve the problem
 
-### Array Intersection II (350)
-count frequency
+- Array Intersection II (350): count frequency
+- Town judge(997): count degree
 
+#### Counter for middle result
+`(mid-target: count)`:
+- (count) 560 k-sum sub-array
 
-### Town judge(997)
-count degree
-
-## Counter as middle result
+#### Counter as middle result
 
 - (#pairs) 447 Boomerangs amount
 - (#pairs) 1128 Domino pairs
 - (#pairs) perfect pairs
 
-## Counter - Anagram
+
+
+#### Classic: Anagram
 specific case: Freq counter of chars in a string.
 
-### Valid Anagram(242)
+**Valid Anagram(242)**
+
 Task: judge whether a pair of strings is anagram or not.
 
 ```python
@@ -114,7 +121,8 @@ def isAnagram(self, s: str, t: str) -> bool:
 
 ```
 
-### Group Anagram(49)
+**Group Anagram(49)**
+
 Task: return groups of anagrams.
 
 Solution: use tuplized Map-counter as key.
@@ -138,24 +146,23 @@ def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
 
 Alternatively, you can also use `tuple(sorted(counter(s)))` as key if characters are not limited to small letter english.
 
-### All Anagram(438)
+**All Anagram(438)**
+
 Task: return start index of all anagrams of a certain string within a  longer string, given that certain string.
 
+#### Special
+- 791 Custom sort (solution: use counter)
 
-## Map
+### Locator
 `(target: index)`:
 - (index) 1 Two Sum
   
 `(mid-target: index)`:
 - (index) 525 balance sub-array
 
-  
 `(char: index)`:
 - (index) 3 Longest Non-repeating
 - **(index & ...) 697 Array degree**
-
-`(mid-target: count)`:
-- (count) 560 k-sum sub-array
 
 **Array degree**
 
@@ -187,13 +194,10 @@ def findShortestSubArray(self, nums: List[int]) -> int:
     return minlen
 
 ```
-### Sub-arrays
+### Classic: sub-arrays
 - 3 non-repeating sub-array
 - 697 same-degree sub-array
 - 525 balance sub-array
 - 560 k-sum sub-array
 
 when a search of the previous index is needed.
-
-## Challenges
-- 791 Custom sort (solution: use counter)
