@@ -2,13 +2,13 @@
 Use set/dict to solve problem.
 (because set/dict is a hash map and is fast to trace)
 
-Usually, 
+Usually,
 - we use set to:
-  - record **Visited** (141, 202)
-  - quickly find sequential **Existance** (36) with while loop.
-- we use dict:
-  - as counter to count **Freq** (242, 49, 350) or **Degree** in graph (997).
-  - as locator (recording **Index** (1, 3, 679) and associatives), to track things we focus (eg, char) or target/mid-target.
+  - record [**Visited**](#Set-Visited) (141, 202, 36)
+  - quickly find sequential [**Existence**](#Set-Exists) (128) with while loop.
+- we use dict/map:
+  - as counter to count [**Freq**](#Map-counter---frequency--degree) (242, 49, 438, 350) or **Degree** in graph (997) or **Middle result** (447, 1128).
+  - as locator (recording [**Index**](#Map-locator) (1, 3, 679) and associatives), to track things we focus (eg, char) or target/mid-target (525, 560).
 
 ## Set-Visited
 Use a set to record visited points.
@@ -75,9 +75,10 @@ def longestConsecutive(self, nums: List[int]) -> int:
     return longest
 
 ```
+### Longest Non-repeating (3)
+Set to store existing characters
 
-
-## Counter
+## Map-Counter - frequency & degree
 Use Map-Counter to solve the problem
 
 ### Array Intersection II (350)
@@ -87,13 +88,13 @@ count frequency
 ### Town judge(997)
 count degree
 
-## Counter as middle result
+## Map-Counter - middle result
 
 - (#pairs) 447 Boomerangs amount
 - (#pairs) 1128 Domino pairs
 - (#pairs) perfect pairs
 
-## Counter - Anagram
+## Map-Counter - Anagram
 specific case: Freq counter of chars in a string.
 
 ### Valid Anagram(242)
@@ -141,17 +142,14 @@ Alternatively, you can also use `tuple(sorted(counter(s)))` as key if characters
 ### All Anagram(438)
 Task: return start index of all anagrams of a certain string within a  longer string, given that certain string.
 
-
-## Map
+## Map-Locator
 `(target: index)`:
 - (index) 1 Two Sum
-  
+
 `(mid-target: index)`:
 - (index) 525 balance sub-array
 
-  
 `(char: index)`:
-- (index) 3 Longest Non-repeating
 - **(index & ...) 697 Array degree**
 
 `(mid-target: count)`:
