@@ -4,11 +4,11 @@ Use set/dict to solve problem.
 
 Usually, 
 - we use set to:
-  - record **Visited** (141, 202)
-  - quickly find sequential **Existance** (128) with while loop.
+  - record **Visited**.
+  - quickly find sequential **Existance** with while loop.
 - we use dict:
-  - as counter to count **Freq** (242, 49, 350) or **Degree** in graph (997).
-  - as locator (recording **Index** (1, 3, 679) and associatives), to track things we focus (eg, char) or target/mid-target.
+  - as counter to count **Freq** or **Degree** in graph.
+  - as locator (recording **Index** and associatives), to track things we focus (eg, char) or target/mid-target.
 
 ## Set
 
