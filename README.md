@@ -12,6 +12,7 @@ reference:
 ## Methodology
 
 - Data structure
+    - stack
     - hash map
     - priority queue
 - Tree structure
