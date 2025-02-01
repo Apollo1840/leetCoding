@@ -29,3 +29,33 @@
 - 190 Reverse Bits
 - 693 non-repeating bits
 - 2220 minimum flips
+
+## Bit Trick
+
+
+
+### XOR-cancel out
+- `a ^ 0 = a`
+- `a ^ a = 0`
+- `a ^ b = b ^ a` (commutative)
+- `a ^ b ^ c = a ^ (b ^ c)` (associative)
+
+=>
+
+`a ^ b ^ b ^ A ^ a = A`
+
+  
+examples:
+- 136 Single number
+- 268 Missing number
+- 389 Find difference
+- 1310 XOR sections
+
+### The Last one
+- `a & (-a)`: last 1-bit remain. 
+  
+examples:
+- (231) power of two
+- (260) Single number II
+
+### 

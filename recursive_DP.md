@@ -144,6 +144,9 @@ Fewest number of coins to make up the amount.
 - (509) Fibonacci
 - (70) Climbing stairs
 
+**Jumping DP**
+- (338) Counting Bits
+
 ### Flexible DP
 `dp[i]` based on a **dynamic** range of previous results `dp[i-1], dp[i-2], ...`:
 - (322) Coin change
