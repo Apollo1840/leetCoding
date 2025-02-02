@@ -1,8 +1,6 @@
 
 M
 special_topics/input_graph.md,4/1/4197f43817a3dc5850878028721519531f30ae41
-M
-special_topics/linked_node.md,e/9/e9676b35b69373f08e48ac4842e4bb05f4e9a2e5
 F
 2pointers_leftRight.md,3/9/394f5241a1365a02669297c1e50c4a2b474c8518
 ?

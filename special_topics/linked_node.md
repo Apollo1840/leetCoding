@@ -22,7 +22,9 @@ It is widely used for Tree Search (BFS, DFS) challenge and also in some Two poin
 - (141) Linked-List Cycle
 - (19) Linked-List removal
 - (61) Linked-List rotation
+- (143) Linked-List reorder
 - (hard) (86) Linked-List partition
+
 
 ## TreeNode
 - 98
