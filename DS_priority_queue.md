@@ -92,6 +92,7 @@ def fillCups(self, amount: List[int]) -> int:
 Often with greedy solution:
 
 - 767 Distinctive adjacent
+- 621 Task Scheduler
 
 ## Gradually-in & Gradually-out
 

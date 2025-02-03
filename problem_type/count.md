@@ -11,16 +11,19 @@ Typical clues:
 
 - conditional counting
   - (200) Islands number
-  - (547) Province number
+  - (547, 1319) Province number
   - (463) Islands perimeter
   - (695) Islands area
   - (771) Jewels & stones
 - adds-up when PQ pop
   - (2335) Fill cups
+  - (621) Task Scheduler
 - adds-up when BFS expanding:
-  - (2385) Infection time
   - (934) Islands bridge
-  - (1284) Minimum Flips
+  - (1162) Farest from land
+  - (1926) Escape Maze
+  - (1284) Minimum Flips: brutal force.
+  - (2385) Infection time: until BFS stop expanding.
 
 ## Caching
 - (778) Flooding swim
@@ -38,16 +41,18 @@ Typical clues:
 - (1011) D-day shipping
 
 ## Accumulative counting
-with recursive logic
-- (543) Diameter of BT
-- (62, 63, 64) Unique Path
-- (70) Climbing stairs
-- (746) Climbing stairs II
-- (509) Fibonacci
-- (50) Pow(x, n)
-- (45) Jump game II
-- (198) House Rabber
-- (322) Coin Change
+With recursive logic.
+- Recursive(DC/DFS)
+  - (543) Diameter of BT
+  - (50) Pow(x, n)
+- DP  
+  - (509) Fibonacci
+  - (62, 63, 64) Unique Path
+  - (70) Climbing stairs
+  - (746) Climbing stairs II
+  - (45) Jump game II
+  - (198) House Rabber
+  - (322) Coin Change
 
 ## Others
 ### processed counting

@@ -1,37 +1,4 @@
-# BFS
-
-We use queue to implement BFS, my convention is:
-- hard in  (check conditions before add into queue) 
-- easy out (dealt with that node before add into queue)
-
-
-```python
-
-while q:
-    lq = len(q)
-    for _ in range(lq):
-        x, y = q.popleft()
-        for x_, y_ in children((x, y)):
-            # hard-in
-            if isValid(x_, y_):
-                
-                # easy-out
-                operate(x_, y_)
-                q.append((x_, y_))      
-
-```
-
-
-Challenges:
-- (simple)(Grid) 733 Flood Fill
-
-## Classic
-### (Tree-based) 
-- 993 Are cousins
-
-
-
-### (Grid-based) Islands
+# Islands
 
 Islands number/perimeter/area.
 (200/463/695)
@@ -120,6 +87,7 @@ def bfs(self, area, q, grid, m, n):
 #### 1020 Island area II
 Task: count the area of the TRUE islands. 
 
+
 #### 1162 Farest from land
 Task: return fast distance from sea to land.
 
@@ -168,54 +136,5 @@ def bfs(self, q, grid, m, n, ans):
 
 ```
 
-### (Graph-based) Course schedule
-
-#### (1971) Exist Source2Target
-Standard BFS with visited hashmap.
-
-```python
-
-q = deque([source])
-visited = set()
-
-while q:
-    lq = len(q)
-    for _ in range(lq):
-        node = q.popleft()
-        for t in adjmap[node]:
-            if t == target:
-                return True
-            if t not in visited:
-                visited.add(t)
-                q.append(t)
-return False
-
-
-```
-
-
-#### (207) Course schedule I
-Task: Give prerequisite edge list, judge whether it is possible to finish all.
-
-Solution: use bfs to collect free(in_degree becomes zero) nodes.
-
-```python
-
-def bfs(self, q, supp_adjmap, in_degree, finished):
-    while q:
-        lq = len(q)
-        for _ in range(lq):
-            take = q.popleft()
-            finished.add(take)
-            for course in supp_adjmap[take]:
-                in_degree[course] -= 1
-                if in_degree[course]==0:  # be "freed"
-                    q.append(course)
-
-```
-
-
-#### (210) Course schedule II
-Task: Give prerequisite edge list, return possible sequence of courses
-
-Solution: same as before, instead of using finished as `set`, use `list`.
+#### 1926 shiping out
+Task: shorest time to escape the grid 
