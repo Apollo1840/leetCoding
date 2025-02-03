@@ -33,6 +33,9 @@ HashSet/Map, DP and Recursive methods are frequently used.
 - (1094) Car pooling
 - (1496) Path crossing
 
+## Item existance (search)
+- (74) Search in 2D
+
 ## Solution existance
 - (1025) Divisor game
 - (139) Word break

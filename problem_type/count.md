@@ -52,6 +52,7 @@ with recursive logic
 ## Others
 ### processed counting
 with PQ to process the result step by step
+- (1046) Stone smash
 - (787) Cheapest path
 - (743) Network Delay
 - (502) IPO
