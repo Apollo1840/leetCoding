@@ -9,16 +9,16 @@ Typical clues:
 
 ## Adds-up
 
-- conditional counting
+- adds-up when meet condition:
   - (200) Islands number
   - (547, 1319) Province number
   - (463) Islands perimeter
   - (695) Islands area
   - (771) Jewels & stones
-- adds-up when PQ pop
+- adds-up when PQ pop:
   - (2335) Fill cups
   - (621) Task Scheduler
-- adds-up when BFS expanding:
+- adds-up when BFS expand:
   - (934) Islands bridge
   - (1162) Farest from land
   - (1926) Escape Maze
