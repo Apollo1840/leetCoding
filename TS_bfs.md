@@ -168,6 +168,9 @@ def bfs(self, q, grid, m, n, ans):
 
 ```
 
+(see more island-related challenges in `special_topics/island.md`)
+
+
 ### (Graph-based) Course schedule
 
 #### (1971) Exist Source2Target

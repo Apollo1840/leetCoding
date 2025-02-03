@@ -200,4 +200,6 @@ def findShortestSubArray(self, nums: List[int]) -> int:
 - 525 balance sub-array
 - 560 k-sum sub-array
 
+(see more sub-array related challenges in `special_topics/sub_array.md`)
+
 when a search of the previous index is needed.

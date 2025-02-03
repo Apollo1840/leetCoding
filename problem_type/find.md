@@ -50,5 +50,8 @@ sub-array:
 - 763 non-crossing sub-arrays
 - 438 anagram sub-arrays
 
+(see more sub-array related challenges in `special_topics/sub_array.md`)
+
+
 
 

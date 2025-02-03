@@ -26,13 +26,27 @@ Typical clues:
   - (2385) Infection time: until BFS stop expanding.
 
 ## Caching
-- (778) Flooding swim
-- (253) Meet rooms II
-- (11) Largest container
-- (42) Trapping rain
+Possible results are enumerated, we use 
+- `res = max(res, ...)` or
+- `res = min(res, ...)`
+to record the result.
+
+### Greedy
+If only a subset of the possible results is enumerated.
+i.e. we find out ways to exclude some result.
+
+
 - (121) Best Buysale
-- (560) k-sum sub-array
+- (53) Max sub-array
+- (152) Max-prod sub-array
+- (11) Largest container
 - (128) Longest consecutive
+
+### Others
+Or naturally update the result during the process.
+- (42) Trapping rain
+- (253) Meet rooms II
+- (778) Flooding swim
 
 ## Binary search
 - (69) Sqrt
@@ -65,6 +79,7 @@ with PQ to process the result step by step
 
 ### subtractive
 - (2055) Plates & candles
+- (560) k-sum sub-array
 
 ### calculation
 - (1128) Domino pairs
