@@ -72,13 +72,13 @@ Solution: Use `visited` dictionary to mark consumed characters.
 
 ```python
 
-def dfs(self, nums, used, currentPath):
+def dfs(self, nums, used, path):
     # None ends
     # no need
 
     # finish ends
-    if len(currentPath)==len(used):
-        self.res.append(currentPath[:])
+    if len(path)==len(used):
+        self.res.append(path[:])
         return 
 
     # recursive
@@ -88,16 +88,36 @@ def dfs(self, nums, used, currentPath):
 
         # prepare backtracking
         used[i] = True
-        currentPath.append(n)
+        path.append(n)
 
-        self.dfs(nums, used, currentPath)
+        self.dfs(nums, used, path)
 
         # here is core of the BACK-tracking
-        currentPath.pop()
+        path.pop()
         used[i] = False  
 
 
 
+```
+#### 78 Subsets 
+Tasks: return all possible subsets
+
+```python
+
+def dfs(self, i, path):
+    # finish ends
+    if i == len(self.nums):
+        self.result.append(path[:])
+        return
+    
+    # include i
+    path += [self.nums[i]]
+    self.dfs(i+1, path)
+
+    # not include i
+    path.pop()
+    self.dfs(i+1, path)
+        
 ```
 
 

@@ -84,8 +84,9 @@ def longestConsecutive(self, nums: List[int]) -> int:
 ### Counter
 Use Map-Counter to solve the problem
 
-- Array Intersection II (350): count frequency
-- Town judge(997): count degree
+- 350 Array Intersection II : count frequency
+- 76 Including sub-array: count frequency
+- 997 Town judge: count degree
 
 #### Counter for middle result
 `(mid-target: count)`:
@@ -199,6 +200,7 @@ def findShortestSubArray(self, nums: List[int]) -> int:
 - 697 same-degree sub-array
 - 525 balance sub-array
 - 560 k-sum sub-array
+- 76 including sub-array
 
 (see more sub-array related challenges in `special_topics/sub_array.md`)
 

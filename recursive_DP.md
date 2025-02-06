@@ -146,6 +146,7 @@ Fewest number of coins to make up the amount.
 
 **Jumping DP**
 - (338) Counting Bits
+- (368) Divisible Subset
 
 ### Flexible DP
 `dp[i]` based on a **dynamic** range of previous results `dp[i-1], dp[i-2], ...`:

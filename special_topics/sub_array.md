@@ -6,6 +6,7 @@ prefix:
 
 sub-array:
 - 3 non-repeating sub-array
+- 76 Including sub-array
 - 697 same-degree sub-array
 - 525 balance sub-array
 - 560 k-sum sub-array

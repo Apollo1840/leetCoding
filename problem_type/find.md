@@ -35,12 +35,13 @@ A popular method is **Two Pointers**.
 - 1 Two sum
 - 167 Two Sum II
 - 34 First and Last
-- 74 Search in 2D
+- 74 (2D) Search in 2D
 
 ### Find multiple
 - 16 3 Sum closest
 - 18 4 Sum
-- 417 Pacific & Atlantic
+- 417 (2D) Pacific & Atlantic
+- 368 Divisible Subset
 
 ## Find sub-array
 Also can be interpreted as finding two indices.
@@ -49,12 +50,14 @@ prefix:
 - 14 common prefix
 
 sub-array:
-- 3 non-repeating sub-array
+- 3 non-repeating sub-array 
+- 76 Including sub-array
 - 697 same-degree sub-array
 - 525 balance sub-array
 - 560 k-sum sub-array
 - 5 palindrome sub-array
 - 53 Max sub-array
+- 152 Max-prod sub-array
 
 ### sub-arrays
 - 763 non-crossing sub-arrays
