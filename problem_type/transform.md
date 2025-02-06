@@ -42,13 +42,15 @@ sort:
 ### int <-> Array(int)
 - 118,119 Pascal Triangle
 
-### str <-> Array(str)
-- 46 Permutation
-- 90 Subsets II
 
 ### Array(int) -> Array(str)
 - 17 Phone typing
 - 506 Rank & Medal
+
+### Array(int/char) <-> Array(Array)
+- 46 Permutation
+- 78 Subsets
+- 90 Subsets II
 
 ### Tree <-> Array/ListNode
 - 114 Flatten BST
