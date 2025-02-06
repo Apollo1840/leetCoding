@@ -189,6 +189,7 @@ Based on `dp[i-1]` and others, but for the easy of thinking.
 - (2D native) (simple) (62) Unique Path
 - (2D native) (63) Unique Path II 
 - (2D native) (542) Closest zero
+- (2D native) (329) Increasing Path
 - (2D) Longest Sub-Palindromic 
 
 **Longest sub-Palindromic**

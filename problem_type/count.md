@@ -47,17 +47,36 @@ Or naturally update the result during the process.
 - (42) Trapping rain
 - (253) Meet rooms II
 - (778) Flooding swim
+- (543) Diameter of BT
 
 ## Binary search
+see `BS Computing` in `../2pointers_BS.md`.
 - (69) Sqrt
 - (410) Minimum Largest sum
 - (875) KoKo
 - (1011) D-day shipping
 
+Template:
+
+```python
+
+# HalfOpen to find minimum achievable solution
+def MinSolver(self, ...):
+    l, r = ...
+    while l < r:
+        mid = (l +r)//2
+        if self.achieve(*):
+            # print("ok with {}".format(mid))
+            r = mid
+        else:
+            l = mid + 1
+    return l
+```
+
+
 ## Accumulative counting
 With recursive logic.
 - Recursive(DC/DFS)
-  - (543) Diameter of BT
   - (50) Pow(x, n)
 - DP  
   - (509) Fibonacci

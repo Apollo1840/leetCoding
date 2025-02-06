@@ -14,6 +14,7 @@ Very close to the concept of finding index.
 - 1337 k-weakest row
 - 378 k-smallest in matrix
 - 347 k-frequent item
+- 658 k-closest int
 
 ### items
 - 349 array intersection
@@ -21,16 +22,25 @@ Very close to the concept of finding index.
 
 
 ## Find index
-- 167 Two Sum II
-- 1 Two sum
-- 16 3 Sum closest
-- 18 4 Sum
+A popular method is **Two Pointers**.
+
+### Find one
 - 35 insert
-- 34 First and Last
 - 153 Minimum in rotated
 - 33 search in rotated
 - 34 search in rotated II
 - 162 Local maximum
+
+### Find two
+- 1 Two sum
+- 167 Two Sum II
+- 34 First and Last
+- 74 Search in 2D
+
+### Find multiple
+- 16 3 Sum closest
+- 18 4 Sum
+- 417 Pacific & Atlantic
 
 ## Find sub-array
 Also can be interpreted as finding two indices.

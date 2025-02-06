@@ -1,8 +1,6 @@
 
 M
 special_topics/input_graph.md,4/1/4197f43817a3dc5850878028721519531f30ae41
-F
-2pointers_leftRight.md,3/9/394f5241a1365a02669297c1e50c4a2b474c8518
 ?
 recursive_DC.md,0/6/065962b89c3340da56ce31c38418fbca56f60fc8
 ?

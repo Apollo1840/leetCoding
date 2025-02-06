@@ -170,6 +170,9 @@ def bfs(self, q, grid, m, n, ans):
 
 (see more island-related challenges in `special_topics/island.md`)
 
+### (Grid-based) Others
+
+- 417 Pacific & Atlantic
 
 ### (Graph-based) Course schedule
 
