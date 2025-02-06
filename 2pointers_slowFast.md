@@ -169,6 +169,7 @@ Examples:
 - Distance to LeftChar
 - Best BuySale (121)
 - Max sub-array (53)
+- Merge intervals (56)
 
 **Smallest Larger**
 
@@ -225,3 +226,31 @@ def maxProfit(self, prices: List[int]) -> int:
     return profit
 
 ```
+
+**Merge Intervals(56)**
+
+```python
+
+
+def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+    intervals = sorted(intervals, key=lambda x: x[0])
+
+    result = []
+
+    p1, p2 = 0, 0
+    end = intervals[p1][1]
+    while p2 < len(intervals):
+        start_2, end_2 = intervals[p2]
+        if start_2 > end:
+            result.append([intervals[p1][0], end])
+            p1 = p2
+            
+        end = max(end, end_2)
+        p2+=1
+    result.append([intervals[p1][0], end])
+    return result
+
+```
+
+Note: Almost all jumping pointers solution can be optimized with tmp variable, to be more concise. 
+But it will be harder for us to find the connections between those challenges.

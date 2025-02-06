@@ -179,6 +179,8 @@ def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
 
 ```
 
+(P.S. see more sections-related challenges in `special_topics/sections.md`.)
+
 ### Tree-based
 - 743 Network delay
 - 787 Cheapest Path
