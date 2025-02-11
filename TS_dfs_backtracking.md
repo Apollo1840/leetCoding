@@ -107,7 +107,7 @@ Tasks: return all possible subsets
 def dfs(self, i, path):
     # finish ends
     if i == len(self.nums):
-        self.result.append(path[:])
+        self.res.append(path[:])
         return
     
     # include i
@@ -127,10 +127,10 @@ Task: return all partition methods on a string to make each substring palindrome
 Solution: **DFS Backtracking for enumerate all valid partitions**
 ```python
 
-def dfs(start, n, path):
+def dfs(self, start, n, path):
     # finish ends
     if start == n:
-        result.append(path[:])
+        self.res.append(path[:])
         return
     
     # recursive
@@ -138,6 +138,46 @@ def dfs(start, n, path):
         if dp[start][end]:  # Check if s[start:end+1] is a palindrome
             path += [s[start:(end + 1)]]
             self.dfs(end + 1, n, path)
+            path.pop()
+
+```
+
+
+#### 126 Word Ladder II
+
+Straight forward:
+```python
+
+def dfs(self, word, endWord, n, level, path):
+    if word == endWord:
+        self.res.append(path[:])
+        return
+
+    if level == n:
+        return
+
+    for item in nodes[level]:
+        if connected(item, word):
+            path += [item]
+            self.dfs(item, endWord, n, level+1, path)
+            path.pop()
+```
+
+Actually better: 
+```python
+# only consider the valid path, hence much faster            
+def dfs_reverse(self, word, beginWord, level, path):
+    if word == beginWord:
+        self.res.append(path[::-1])
+        return
+
+    if level < 0:
+        return
+
+    for item in self.nodes[level]:
+        if self.areNeighbors(item, word):
+            path += [item]
+            self.dfs(item, beginWord, level-1, path)
             path.pop()
 
 ```
