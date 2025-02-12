@@ -29,13 +29,17 @@ HashSet/Map, DP and Recursive methods are frequently used.
 ## Valid relation
 
 - Pair
-  - (392) is subsequence
-  - (925) is long-pressed
-    
+  - (205/290) is bijection
   - (242) is anagram
   - (993) is cousin
   
 - Contains
+  - (383) is sub-support
+  - (392) is subsequence
+  - (925) is long-pressed
+  - (567) Contains permutation
+
+- Includes (with integrity)
   - (79) Word search
   - (572) Subtree
 
