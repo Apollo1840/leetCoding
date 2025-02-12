@@ -6,28 +6,38 @@ HashSet/Map, DP and Recursive methods are frequently used.
 ## Valid integrity
 
 - number
+    - (263) Ugly number
     - (202) Happy number
-- array
+- array7
    - (217, 219) Contains duplicates
+   - (605) Flowerbed
 - string
     - (125) Valid Palindrome: two-pointers left-right
     - (20) Valid Parentheses: stack + hashmap
 - list
     - (141) Non-cycle linked-List
+    - (234) Palindrome Linked List
 - tree
     - (98) Valid BST
-    - (110) Valid BBT
+    - (110) Valid BBT (Balanced BT)
+    - (101) Valid SBT (Symmetric BT)
+- graph
+   - (785) Valid Bi-partite graph
 - matrix
     - (36) Valid sudoku
 
 ## Valid relation
 
-- (392) is subsequence
-- (925) is long-pressed
+- Pair
+  - (392) is subsequence
+  - (925) is long-pressed
+    
+  - (242) is anagram
+  - (993) is cousin
   
-- (242) is anagram
-- (993) is cousin
-- (79) Word search
+- Contains
+  - (79) Word search
+  - (572) Subtree
 
 ## Plan feasibility
 - (1094) Car pooling
@@ -43,4 +53,5 @@ HashSet/Map, DP and Recursive methods are frequently used.
 
 - (112) Path sum
 - (1971) Source2Target
+- (127) Word Ladder
 - (207) Course Schedule
