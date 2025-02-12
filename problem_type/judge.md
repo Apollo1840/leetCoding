@@ -3,7 +3,7 @@ Return of the algorithm is a **Boolean**.
 
 HashSet/Map, DP and Recursive methods are frequently used.
 
-## Valid integrity
+## Valid identity
 
 - number
     - (263) Ugly number
