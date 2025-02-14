@@ -12,9 +12,9 @@ reference:
 ## Methodology
 
 - Data structure
-    - stack
     - hash map
     - priority queue
+    - others(stack, trie, union-find)
 - Tree structure
     - BFS
     - DFS
