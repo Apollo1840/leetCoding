@@ -52,10 +52,11 @@ HashSet/Map, DP and Recursive methods are frequently used.
 
 ## Solution existance
 - (1025) Divisor game
-- (139) Word break
 - (55) Jump game
+- (416) Equal Partition
+- (139) Word break
 
+- (127) Word Ladder
 - (112) Path sum
 - (1971) Source2Target
-- (127) Word Ladder
 - (207) Course Schedule

@@ -1,8 +1,9 @@
 # Graph
 
-graph and its given form
 
-## Adjacency List (Most Common)
+## Form
+
+### Adjacency List (Most Common)
 
 Representation: graph[i] is a list of nodes reachable from node i.
 
@@ -13,7 +14,7 @@ Meaning:
 - Node 2 → {3}
 - Node 3 → {}
 
-## Adjacency Map
+### Adjacency Map
 
 Representation: graph[i] is a list of nodes reachable from node i.
 
@@ -23,7 +24,7 @@ Meaning:
 - Node 2 → {3}
 
 
-## Adjacency matrix
+### Adjacency matrix
 
 Representation: matrix[i][j] = 1 if there is an edge from i to j, otherwise 0.
 
@@ -40,7 +41,7 @@ graph = [
 ```
 
 
-## Edge list
+### Edge list
 
 Representation: A list of (from, to, weight) tuples.
 
@@ -50,7 +51,7 @@ Typical Input Format:
 edges = [(0, 1, 5), (0, 2, 3), (1, 3, 2), (2, 3, 4)]
 ```
 
-## Parent list
+### Parent list
 
 Representation: Each index represents a node, and parent[i] is its parent.
 
@@ -62,9 +63,9 @@ Meaning:
 - Nodes 3 and 4 are children of 1, and so on.
 
 
-# Transformation
+## Form Transformation
 
-## EdgeList to AdjacencyMap
+### EdgeList to AdjacencyMap
 
 ```python
 def edgeList2AdjList(edge_list):
@@ -74,7 +75,7 @@ def edgeList2AdjList(edge_list):
     return dict(adj_map)
 ```
 
-## AdjacencyMap to EdgeList
+### AdjacencyMap to EdgeList
 
 ```python
 def adjList2edgeList(adj_map):
@@ -84,3 +85,7 @@ def adjList2edgeList(adj_map):
             edge_list.append((u, v))  # Directly append the directed edge
     return edge_list
 ```
+
+## Challenges
+- (1971) Source2Target
+- (207) Course Schedule

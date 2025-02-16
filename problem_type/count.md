@@ -87,6 +87,7 @@ With recursive logic.
   - (45) Jump game II
   - (198) House Rabber
   - (322) Coin Change
+  - (300) longest sub-increasing
 
 ## Others
 ### processed counting

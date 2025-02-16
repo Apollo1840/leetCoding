@@ -169,6 +169,9 @@ for word in wordDict:
             break
 ```
 
+- (300) longest sub-increasing (based on all previous)
+
+
 ### Standard DP
 `dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
 - (746) Climbing stairs II
@@ -185,6 +188,9 @@ Based on `dp[i-1]` and others, but for the easy of thinking.
 ### Multiple-rounds DP
 - (821) closest occurency
 - (2D) (542) closest zero
+
+#### Flexible multi-rounds DP
+- (416) Equal partition
 
 ### High dimensional DP
 - (2D native) (simple) (62) Unique Path
