@@ -145,6 +145,8 @@ def dfs(self, start, n, path):
 
 #### 126 Word Ladder II
 
+Prerequisties: `self.nodes` stores levels of nodes of  the search tree containing the word ladder.
+
 Straight forward:
 ```python
 
@@ -156,8 +158,8 @@ def dfs(self, word, endWord, n, level, path):
     if level == n:
         return
 
-    for item in nodes[level]:
-        if connected(item, word):
+    for item in self.nodes[level]:
+        if self.areNeighbors(item, word):
             path += [item]
             self.dfs(item, endWord, n, level+1, path)
             path.pop()
@@ -165,7 +167,8 @@ def dfs(self, word, endWord, n, level, path):
 
 Actually better: 
 ```python
-# only consider the valid path, hence much faster            
+# The Search tree is a wide tree. 
+# Only consider the valid path, hence much faster            
 def dfs_reverse(self, word, beginWord, level, path):
     if word == beginWord:
         self.res.append(path[::-1])

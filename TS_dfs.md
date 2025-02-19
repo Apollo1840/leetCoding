@@ -81,6 +81,12 @@ def dfs(inputs):
 
 ```
 
+For example:
+- (112) Path sum
+- (543) Diameter of tree
+- (98) Valid BST
+- (110) Valid BBT (Balanced BT)
+
 
 ## Classic
 
@@ -168,3 +174,6 @@ def dfs(self, node):
     return curr_balance, curr_maximum, curr_minimum
 
 ```
+
+### Board (Matrix)
+- 130 surrounded region

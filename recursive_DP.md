@@ -192,6 +192,13 @@ Based on `dp[i-1]` and others, but for the easy of thinking.
 #### Flexible multi-rounds DP
 - (416) Equal partition
 
+**Equal partition**
+Task: return whether can split the array into two subsets with equal sum.
+
+Idea: calculate half-sum, use `dp[i]` to store whether can get subsum as i.
+
+Solution: `dp[i] = dp[i-num]`(if num not used)
+
 ### High dimensional DP
 - (2D native) (simple) (62) Unique Path
 - (2D native) (63) Unique Path II 
@@ -230,6 +237,18 @@ def longestPalindrome(self, s: str) -> str:
 
 ### Hashmap DP
 - (1025) Divisor Game
+
+```python
+
+def dp(n):
+    if n in self.dp_map:
+        return self.dp_map[n]
+    
+    # res = = self.calc(self.dp(n-1), ...)
+    self.dp_map[n] = res
+    return self.dp_map[n]
+
+```
 
 
 

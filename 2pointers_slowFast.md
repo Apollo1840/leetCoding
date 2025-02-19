@@ -167,9 +167,12 @@ while p2<len(a):
 Examples:
 - Smallest Larger
 - Distance to LeftChar
-- Best BuySale (121)
-- Max sub-array (53)
-- Merge intervals (56)
+- (121) Best BuySale 
+- (53) Max sub-array 
+
+- (56) Merge intervals
+- (57) Insert interval
+- (435) Non-overlapping Intervals
 
 **Smallest Larger**
 

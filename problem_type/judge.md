@@ -51,12 +51,14 @@ HashSet/Map, DP and Recursive methods are frequently used.
 - (74) Search in 2D
 
 ## Solution existance
-- (1025) Divisor game
-- (55) Jump game
-- (416) Equal Partition
-- (139) Word break
-
-- (127) Word Ladder
-- (112) Path sum
-- (1971) Source2Target
-- (207) Course Schedule
+- (416) Equal Partition: DP
+- Game
+  - (1025) Divisor game: DP
+  - (55) Jump game: DP
+- Word
+  - (139) Word break: DP
+  - (127) Word Ladder (simpler version): BFS
+- Path
+  - (112) Path sum: BFS
+  - (1971) Source2Target: BFS
+  - (207) Course Schedule: BFS
