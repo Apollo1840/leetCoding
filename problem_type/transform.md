@@ -27,7 +27,8 @@ sort:
 - (66) Plus One
 - (56) Merge intervals
 - (57) Insert interval
-- (435) Non-overlapping Intervals
+- (435) Non-overlapping Intervals (hint: sort by ends)
+
 
 ## Build
 
