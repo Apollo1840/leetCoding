@@ -14,20 +14,28 @@ Keep the data-structure, change in-place or not. Or, alter the data-structure, t
     - 73	boob in matrix
     - 733	Flood Fill
     - 130   Surrounded region
+    - 48    Rotate image (hint: reverse & transpose)
 
 ### same type and shape
 
-Sort: 
-- 23 MergeSort
-- 791 Custom sort
-- 451 Freq-based sort
-- 767 Distinctive adjacent
+- Sort 
+  - 23 MergeSort
+  - 791 Custom sort
+  - 451 Freq-based sort
+  - 767 Distinctive adjacent 
+- Modify
+  - 151 Reverse words
+
 
 ### same type
-- (66) Plus One
-- (56) Merge intervals
-- (57) Insert interval
-- (435) Non-overlapping Intervals (hint: sort by ends)
+- array
+  - (66) Plus One
+  - (67) Add binary
+- array of tuple (intervals)  
+  - (56) Merge intervals
+  - (57) Insert interval
+  - (435) Non-overlapping Intervals (hint: sort by ends)
+- linked list (see `../special_topics/input_linked_node.md`)
 
 
 ## Build
@@ -41,6 +49,7 @@ Sort:
 Find one path or collect all valid paths in a tree or graph
 
 - routing (Tree/Graph -> Array)
+  - 54 Spiral Matrix (hint: just simulation)
   - 209 Course Schedule
 - routes collection (Tree/Graph -> Array(Array/ListNode))
   - 113 Path Sum II
@@ -77,6 +86,7 @@ Collect all valid combinations. Mostly using dfs-backtracking.
 - 17 Phone typing
 
 <-:
+- 238 self-except production
 - 821 closest occurrence
 - 542 (2D) closest zero
 
