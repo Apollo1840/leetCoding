@@ -1,17 +1,18 @@
 # DFS Backtracking
 Often used in collection tasks, collect all valid solutions.
 Also used in some judgement tasks where resource can not be reused.
+
 ## Methodology
 
 ```python
 
-res = set()
+result = set()
 dfs(resource, point)
-return visited
+return result
 
 def dfs(resource, point):
     if isValid(point):
-        res.add(point)
+        result.add(point)
 
     for i in allRelated(resource, point):
         dfs(reduced_resource, i)
@@ -32,14 +33,14 @@ def letterCombinations(self, digits: str) -> List[str]:
     if not digits:
             return []
 
-    self.res = list()
+    self.result = list()
     self.dfs(digits, list())  # list() are starting path
-    return self.res
+    return self.result
 
 def dfs(self, digits, path):
     # finish ends
     if not digits:
-        self.res.append("".join(path))
+        self.result.append("".join(path))
         return
     
     # recursive
@@ -52,13 +53,13 @@ def dfs(self, digits, path):
 ```
 
 
-Shorter version of `dfs()`:
+Shorter version of `dfs()`, implicit back-tracking:
 ```python
 
 def dfs(self, digits, path):
     # finish ends
     if not digits:
-        self.res.append("".join(path))
+        self.result.append("".join(path))
         return
         
     # recursive
@@ -78,7 +79,7 @@ def dfs(self, nums, used, path):
 
     # finish ends
     if len(path)==len(used):
-        self.res.append(path[:])
+        self.result.append(path[:])
         return 
 
     # recursive
@@ -107,7 +108,7 @@ Tasks: return all possible subsets
 def dfs(self, i, path):
     # finish ends
     if i == len(self.nums):
-        self.res.append(path[:])
+        self.result.append(path[:])
         return
     
     # include i
@@ -120,6 +121,28 @@ def dfs(self, i, path):
         
 ```
 
+- 90 Subsets II (hint: first sort, when skip, skip all the rest)
+  
+```python
+
+def dfs(self, i, path):
+    # finish ends
+    if i == len(self.nums):
+        self.result.append(path[:])
+        return
+    
+    # include i
+    self.dfs(i+1, path + [self.nums[i]])
+
+    # not include i
+    # in case there is duplicate in array
+    while i < len(self.nums)-1 and self.nums[i]==self.nums[i+1]:
+        i += 1
+    
+    self.dfs(i+1, path)
+           
+
+```
 
 #### 131 Palindrome partition
 Task: return all partition methods on a string to make each substring palindrome.
@@ -130,7 +153,7 @@ Solution: **DFS Backtracking for enumerate all valid partitions**
 def dfs(self, start, n, path):
     # finish ends
     if start == n:
-        self.res.append(path[:])
+        self.result.append(path[:])
         return
     
     # recursive
@@ -144,6 +167,7 @@ def dfs(self, start, n, path):
 
 
 #### 126 Word Ladder II
+Task: Return all possible ladders.
 
 Prerequisties: `self.nodes` stores levels of nodes of  the search tree containing the word ladder.
 
@@ -152,7 +176,7 @@ Straight forward:
 
 def dfs(self, word, endWord, n, level, path):
     if word == endWord:
-        self.res.append(path[:])
+        self.result.append(path[:])
         return
 
     if level == n:
@@ -171,7 +195,7 @@ Actually better:
 # Only consider the valid path, hence much faster            
 def dfs_reverse(self, word, beginWord, level, path):
     if word == beginWord:
-        self.res.append(path[::-1])
+        self.result.append(path[::-1])
         return
 
     if level < 0:
@@ -234,15 +258,15 @@ Task: return all paths from source(0) to target(n) given a graph as adjancency l
 ```python
 
 def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-    self.res = list()
+    self.result = list()
     self.target = len(graph)-1
     self.dfs(graph, [0])
-    return self.res
+    return self.result
 
 def dfs(self, graph, path):
     # finish ends
     if path[-1]==self.target:
-        self.res.append(path[:])
+        self.result.append(path[:])
         return
 
     # recursive

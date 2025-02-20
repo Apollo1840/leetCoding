@@ -137,4 +137,4 @@ def bfs(self, q, grid, m, n, ans):
 ```
 
 #### 1926 shiping out
-Task: shorest time to escape the grid 
+Task: shorest time to escape the grid. 

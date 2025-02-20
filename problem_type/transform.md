@@ -17,7 +17,7 @@ Keep the data-structure, change in-place or not. Or, alter the data-structure, t
 
 ### same type and shape
 
-sort: 
+Sort: 
 - 23 MergeSort
 - 791 Custom sort
 - 451 Freq-based sort
@@ -35,38 +35,52 @@ sort:
 - 218 skyline
 - 31 Next permutation
 
-### int <-> str
+### Classic
+
+#### Routing
+Find one path or collect all valid paths in a tree or graph
+
+- routing (Tree/Graph -> Array)
+  - 209 Course Schedule
+- routes collection (Tree/Graph -> Array(Array/ListNode))
+  - 113 Path Sum II
+  - 797 All Source2Target
+  
+#### Partition
+- string partition (str <-> Array(string))
+  - 131 Palindrome partition
+  - 763 non-crossing partition (output as substrings)
+- array partition/grouping (Array(int/char) -> Array(Array))
+  - 49 Group anagrams
+
+#### Collection
+Collect all valid combinations. Mostly using dfs-backtracking. 
+
+- Collection (Array(int/char) -> Array(Array))
+  - 46 Permutation
+  - 78 Subsets
+  - 90 Subsets II (hint: first sort, when skip, skip all the rest)
+
+
+### General
+
+#### int <-> str
 - 12 Int2Roman
 - 13 Roman2Int
 
-### int <-> Array(int)
+#### int <-> Array(int)
 - 118,119 Pascal Triangle
 
-### str <-> Array(string)
-- 131 Palindrome partition
-- 763 non-crossing partition (output as substrings)
-
-### Array(int) <-> Array(str)
+#### Array(int) <-> Array(int/char/str)
 ->:
-- 17 Phone typing
 - 506 Rank & Medal
+- 17 Phone typing
 
 <-:
-- 542 closest zero
 - 821 closest occurrence
+- 542 (2D) closest zero
 
-### Array(int/char) <-> Array(Array)
-- 46 Permutation
-- 78 Subsets
-- 90 Subsets II
-  
-- 49 Group anagrams
-
-### Tree <-> Array/ListNode
+#### Tree <-> Array/ListNode
 - 114 Flatten BST
 - 108 Sorted2BST
-- 113 Path Sum II
-- 797 All Source2Target
 
-### Graph <-> Array
-- 209 Course Schedule
