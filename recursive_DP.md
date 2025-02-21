@@ -36,8 +36,8 @@ Can be understood as single-channel DP, where an array of answers or answer-rela
 #### Trival DP
 `dp[i]` based on `dp[i-1], dp[i-2], ..., dp[i-k]`:
 
-- (509) Fibonacci
-- (70) Climbing stairs
+- (509) Fibonacci (`dp[i] = dp[i-1] + dp[i-2]`)
+- (70) Climbing stairs (`dp[i] = dp[i-1] + dp[i-2]`)
 
 #### Jumping DP
 `dp[i]` based on some `dp[i-x]`, where `x` is not straightforward)
@@ -88,11 +88,11 @@ for elem in coins:
         
 # perfect square
 for elem in squares:
-    if i-elem < 0:
-        break  # No need to check larger squares
-    dp[i] = min(dp[i], dp[i - elem] + 1)
+    if i-elem >= 0:
+        dp[i] = min(dp[i], dp[i - elem] + 1)
     
-
+# If coins and squares are many and sorted.
+# we can use (if i-elem <0: break) to accelerate the algorithm
 ```
 
 
@@ -103,7 +103,8 @@ Can be solved both with conditional method and Conditional fixed-set method.
 
 ```python
 
-# word break: conditional (better approach)
+# word break: conditional
+# (better approach)
 for j in range(max(i - wordlen_max, 0), i):
     if s[j:i] in wordDictSet:
         dp[i] = dp[i] or dp[j]
