@@ -163,8 +163,8 @@ High dimensional DP is a special case of Multiple DP.
 - (2D native) (542) Closest zero
 - (2D native) (329) Increasing Path
 
-- (2D) (5) Longest Sub-Palindromic 
-- (2D) (583) Delete game
+- (2D) (5) Longest Sub-Palindromic
+- (2D) (1143/583) Longest common sub-seq/Delete game
 
 
 **(5) Longest sub-Palindromic**
@@ -196,8 +196,10 @@ def longestPalindrome(self, s: str) -> str:
 
 ```
 
-** (583) Delete game **
-Task: count minimum number of deletion that makes word1 and word2 same.
+** (1143/583) LCS/Delete game **
+Task: 
+- 1143: count length of the longest common sub sequence.
+- 583: count minimum number of deletion that makes word1 and word2 same.
 
 Hint: use `dp[i][j]` to represent length of longest equal sub-sequence between `word1[:i]` and `word2[:j]`.
 `if word1[i-1] == word2[j-1]: dp[i][j] = dp[i-1][j-1] + 1`
