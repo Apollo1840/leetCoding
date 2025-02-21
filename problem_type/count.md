@@ -38,7 +38,7 @@ i.e. we find out ways to exclude some result.
 
 - (121) Best Buysale
 - (53) Max sub-array
-- (152) Max-prod sub-array
+- (152) Max-prod sub-array (hint: without considering zero first)
 - (11) Largest container
 - (128) Longest consecutive
 

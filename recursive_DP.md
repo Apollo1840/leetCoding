@@ -28,6 +28,212 @@ it is beneficial to store those intermediate results in RAM (array for index que
 
 (Notes: when you intutively get a recursive methods like DC or RC, think whether is able to transfer to DP to be more efficient)
 
+## Methodology
+
+### Standard DP
+Can be understood as single-channel DP, where an array of answers or answer-related array `dp` is maintained.
+
+#### Trival DP
+`dp[i]` based on `dp[i-1], dp[i-2], ..., dp[i-k]`:
+
+- (509) Fibonacci
+- (70) Climbing stairs
+
+#### Jumping DP
+`dp[i]` based on some `dp[i-x]`, where `x` is not straightforward)
+
+- (338) Counting Bits (hint: forward generative)
+
+#### Flexible DP
+`dp[i]` based on a **dynamic** range of previous results `dp[i-1], dp[i-2], ...` and 
+usually with multi-base:
+
+
+- Conditional 
+  - (368) Divisible Subset (hint: DP not as result, but a processing tool)
+  - (300) longest sub-increasing (based on all previous)
+  - (673) \# longest sub-increasing (hint: double-DP)
+    
+Enumerate all previous indices and update on a sub-set based on certain condition.
+
+```python
+# longest sub-increasing
+for j in range(i):
+    if nums[j] < nums[i]:
+        dp[i] = max(dp[i], dp[j] + 1)
+
+
+# divisible subset (relaxation: only counting max size of the divisible subset)
+for j in range(i):
+    if nums[i] % nums[j] == 0:
+        dp[i] = max(dp[i], dp[j] + 1)
+        
+        # use prev, max_index, max_length to store the information for trace back the results
+
+```
+
+- Conditional fixed-set
+    - (322) Coin change
+    - (279) Perfect Squares
+    
+Enumerate some previous indices and update on a sub-set based on certain condition.
+
+
+```python
+
+# coin change
+for elem in coins:
+    if i-elem >=0:
+        dp[i] = min(dp[i], dp[i - elem] + 1)
+        
+# perfect square
+for elem in squares:
+    if i-elem < 0:
+        break  # No need to check larger squares
+    dp[i] = min(dp[i], dp[i - elem] + 1)
+    
+
+```
+
+
+
+
+**(139) Word break**
+Can be solved both with conditional method and Conditional fixed-set method.
+
+```python
+
+# word break: conditional (better approach)
+for j in range(max(i - wordlen_max, 0), i):
+    if s[j:i] in wordDictSet:
+        dp[i] = dp[i] or dp[j]
+        if dp[i]:
+            break
+
+# word break: conditional fix-set
+for elem in wordDict:
+    if i-len(elem) >= 0 and s[i-len(elem):i]==elem:
+        dp[i] = dp[i] or dp[i-len(elem)]
+        if dp[i]:
+            break
+
+```
+
+
+
+
+### Multi-channel DP
+Multiple DP sequences are adapted. 
+
+Either in form of `dp_0`, `dp_1` or `dp[:][0]`, `dp[:][1]`.
+Recommended to use meaningful name such as `dp_name_1`, `dp_name_2`.
+
+- (256) Paint House
+- (673) \# longest sub-increasing (hint: conditional flexible DP)
+
+
+```python
+
+#  Paint House
+for i in range(1, n):
+    dp_red[i] += min(dp_green[i-1], dp_blue[i-1])
+    dp_green[i] += min(dp_red[i-1], dp_blue[i-1])
+    dp_blue[i] += min(dp_red[i-1], dp_green[i-1])
+# (p.s here DP is also alternative)
+
+# Number of longest sub-increasing
+for j in range(i):
+    if nums[j] < nums[i]:
+        if dp_len[j] + 1 > dp_len[i]:
+            dp_len[i] = dp_len[j] + 1
+            dp_count[i] = dp_count[j]
+        elif dp_len[j] + 1 == dp_len[i]:
+            dp_count[i] += dp_count[j]
+```
+    
+
+
+
+
+#### High dimensional DP
+High dimensional DP is a special case of Multiple DP.
+- (2D native) (simple) (62) Unique Path
+- (2D native) (63) Unique Path II 
+- (2D native) (542) Closest zero
+- (2D native) (329) Increasing Path
+- (2D) Longest Sub-Palindromic 
+
+**Longest sub-Palindromic**
+Task: find longest Plindromic substring given a string.
+
+Solution: use a 2-D dp matrix to record **s[i:(j+1)] is Palindrome or not**
+
+Hint: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
+
+```python
+def longestPalindrome(self, s: str) -> str:
+    n = len(s)
+    # DP table to check if s[i:j] is a palindrome
+    dp = [[False] * n for _ in range(n)]
+    
+    start, end = 0, 0
+    # Fill DP table
+    for length in range(n):  # Length of substring
+        for i in range(n - length):
+            j = i + length
+            if s[i] == s[j]:
+                if length <= 1:  # Single character or two equal characters
+                    dp[i][j] = True
+                else:
+                    dp[i][j] = dp[i + 1][j - 1]  # Check inner substring
+                if dp[i][j]:
+                    start, end = i, j
+    return s[start: (end+1)]
+
+```
+
+### Hashmap DP
+- (1025) Divisor Game
+
+```python
+
+def dp(n):
+    if n in self.dp_map:
+        return self.dp_map[n]
+    
+    # res = = self.calc(self.dp(n-1), ...)
+    self.dp_map[n] = res
+    return self.dp_map[n]
+
+```
+
+
+### Multiple-rounds DP
+- (821) closest occurency
+- (2D) (542) closest zero
+
+#### Flexible multi-rounds DP
+- (416) Equal partition
+
+**Equal partition**
+Task: return whether can split the array into two subsets with equal sum.
+
+Idea: calculate half-sum, use `dp[i]` to store whether can get subsum as i.
+
+Solution: `dp[i] = dp[i-num]`(if num not used)
+
+### Aligned DP
+`dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
+- (746) Climbing stairs II
+- (198) House Robber
+
+
+#### Alternative DP
+Based on `dp[i-1]` and others, but for the easy of thinking.
+
+- (55) Jump game
+- (45) Jump game II
+
 
 ## Classic
 ### Climbing stairs
@@ -136,119 +342,6 @@ Fewest number of coins to make up the amount.
     # ...
 ```
 
-## Methodology
-
-### Trival DP
-`dp[i]` based on `dp[i-1], dp[i-2], ..., dp[i-k]`:
-
-- (509) Fibonacci
-- (70) Climbing stairs
-
-**Jumping DP**
-- (338) Counting Bits
-- (368) Divisible Subset
-
-### Flexible DP
-`dp[i]` based on a **dynamic** range of previous results `dp[i-1], dp[i-2], ...`:
-- (322) Coin change
-- (139) Word break
-
-```python
-
-# coin change
-for c in coins:
-    if i-c >=0:
-        dp[i] = min(dp[i], dp[i-c] + 1)
-        
-
-# word break
-for word in wordDict:
-    if i-len(word) >= 0:
-        if dp[i-len(word)] and s[i-len(word):i] in word_set:
-            dp[i] = True
-            break
-```
-
-- (300) longest sub-increasing (based on all previous)
-
-
-### Standard DP
-`dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
-- (746) Climbing stairs II
-- (198) House Robber
-
-
-### Alternative DP
-Based on `dp[i-1]` and others, but for the easy of thinking.
-
-- (55) Jump game
-- (45) Jump game II
-
-
-### Multiple-rounds DP
-- (821) closest occurency
-- (2D) (542) closest zero
-
-#### Flexible multi-rounds DP
-- (416) Equal partition
-
-**Equal partition**
-Task: return whether can split the array into two subsets with equal sum.
-
-Idea: calculate half-sum, use `dp[i]` to store whether can get subsum as i.
-
-Solution: `dp[i] = dp[i-num]`(if num not used)
-
-### High dimensional DP
-- (2D native) (simple) (62) Unique Path
-- (2D native) (63) Unique Path II 
-- (2D native) (542) Closest zero
-- (2D native) (329) Increasing Path
-- (2D) Longest Sub-Palindromic 
-
-**Longest sub-Palindromic**
-Task: find longest Plindromic substring given a string.
-
-Solution: use a 2-D dp matrix to record **s[i:(j+1)] is Palindrome or not**
-
-Hint: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
-
-```python
-def longestPalindrome(self, s: str) -> str:
-    n = len(s)
-    # DP table to check if s[i:j] is a palindrome
-    dp = [[False] * n for _ in range(n)]
-    
-    start, end = 0, 0
-    # Fill DP table
-    for length in range(n):  # Length of substring
-        for i in range(n - length):
-            j = i + length
-            if s[i] == s[j]:
-                if length <= 1:  # Single character or two equal characters
-                    dp[i][j] = True
-                else:
-                    dp[i][j] = dp[i + 1][j - 1]  # Check inner substring
-                if dp[i][j]:
-                    start, end = i, j
-    return s[start: (end+1)]
-
-```
-
-### Hashmap DP
-- (1025) Divisor Game
-
-```python
-
-def dp(n):
-    if n in self.dp_map:
-        return self.dp_map[n]
-    
-    # res = = self.calc(self.dp(n-1), ...)
-    self.dp_map[n] = res
-    return self.dp_map[n]
-
-```
 
 
 
