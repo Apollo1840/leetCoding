@@ -162,9 +162,12 @@ High dimensional DP is a special case of Multiple DP.
 - (2D native) (63) Unique Path II 
 - (2D native) (542) Closest zero
 - (2D native) (329) Increasing Path
-- (2D) Longest Sub-Palindromic 
 
-**Longest sub-Palindromic**
+- (2D) (5) Longest Sub-Palindromic 
+- (2D) (583) Delete game
+
+
+**(5) Longest sub-Palindromic**
 Task: find longest Plindromic substring given a string.
 
 Solution: use a 2-D dp matrix to record **s[i:(j+1)] is Palindrome or not**
@@ -191,6 +194,33 @@ def longestPalindrome(self, s: str) -> str:
                     start, end = i, j
     return s[start: (end+1)]
 
+```
+
+** (583) Delete game **
+Task: count minimum number of deletion that makes word1 and word2 same.
+
+Hint: use `dp[i][j]` to represent length of longest equal sub-sequence between `word1[:i]` and `word2[:j]`.
+`if word1[i-1] == word2[j-1]: dp[i][j] = dp[i-1][j-1] + 1`
+
+
+```python
+
+def minDistance(self, word1: str, word2: str) -> int:
+    m, n = len(word1), len(word2)
+    # dp[i][j] represents the LCS length between word1[:i] and word2[:j]
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if word1[i - 1] == word2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    
+    # LCS length
+    lcs = dp[m][n]
+    # Minimum deletions = total characters - 2 * LCS length
+    return m + n - 2 * lcs
 ```
 
 ### Hashmap DP
