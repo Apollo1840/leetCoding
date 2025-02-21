@@ -158,19 +158,24 @@ for j in range(i):
 
 #### High dimensional DP
 High dimensional DP is a special case of Multiple DP.
-- (2D native) (simple) (62) Unique Path
-- (2D native) (63) Unique Path II 
-- (2D native) (542) Closest zero
-- (2D native) (329) Increasing Path
 
-- (2D) (5) Longest Sub-Palindromic
-- (2D) (1143/583) Longest common sub-seq/Delete game
+- (2D native) **Matrix** operation (On Board)
+    - (simple) (62) Unique Path
+    - (63) Unique Path II 
+    - (542) Closest zero
+    - (329) Increasing Path
+- **String** operation
+  - single
+    - (2D) (5) Longest Sub-Palindromic
+  - tuple
+    - (2D) (72) Edit distance
+    - (2D) (1143/583) Longest common sub-seq/Delete game
 
 
 **(5) Longest sub-Palindromic**
 Task: find longest Plindromic substring given a string.
 
-Solution: use a 2-D dp matrix to record **s[i:(j+1)] is Palindrome or not**
+Solution: use a 2-D dp matrix to record `s[i:(j+1)]` **is Palindrome or not**
 
 Hint: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
 
@@ -195,6 +200,23 @@ def longestPalindrome(self, s: str) -> str:
     return s[start: (end+1)]
 
 ```
+
+** (72) Edit distance **
+Task: count minimum number of operation that makes word1 and word2 same.
+
+Hint: use `dp[i][j]` to represent minimum number of operations that makes `word1[:i]` and `word2[:j]` same.
+
+```python
+    if word1[i - 1] == word2[j - 1]:
+        dp[i][j] = dp[i - 1][j - 1]
+    else:
+        dp[i][j] = 1 + min(
+            dp[i - 1][j],    # Delete from word1 (delete word1[i-1])
+            dp[i][j - 1],    # Insert into word1 (from word2[j-1])
+            dp[i - 1][j - 1] # Replace in word1 (word1[i-1] <- word2[j-1])
+        )
+```
+
 
 ** (1143/583) LCS/Delete game **
 Task: 
