@@ -126,9 +126,15 @@ for elem in wordDict:
 ### Multi-channel DP
 Multiple DP sequences are adapted. 
 
-Either in form of `dp_0`, `dp_1` or `dp[:][0]`, `dp[:][1]`.
-Recommended to use meaningful name such as `dp_name_1`, `dp_name_2`.
+Either in form of ：
+- `dp_0`, `dp_1` or 
+- `dp[:][0]`, `dp[:][1]` or
+- `dp[i][j]` as 2-D DP
 
+If the number of DP arrays are fixed and equiped with specfic meaning, 
+then recommended to use meaningful name such as `dp_name_1`, `dp_name_2`.
+
+Examples:
 - (256) Paint House
 - (673) \# longest sub-increasing (hint: conditional flexible DP)
 
@@ -154,10 +160,9 @@ for j in range(i):
     
 
 
-
-
 #### High dimensional DP
 High dimensional DP is a special case of Multiple DP.
+Usually using `dp[i][j]` as 2-D DP.
 
 - (2D native) **Matrix** operation (On Board)
     - (simple) (62) Unique Path
@@ -168,16 +173,30 @@ High dimensional DP is a special case of Multiple DP.
   - single
     - (2D) (5) Longest Sub-Palindromic
   - tuple
+    - (2D) (97) Interleaving string
     - (2D) (72) Edit distance
     - (2D) (1143/583) Longest common sub-seq/Delete game
+   
+**(97) Interleaving string**
+Task: judge whether two string can interleave a target string or not.
 
+Hint: `dp[i][j]` represent whether `s1[:i]`, `s2[:j]` interleave `s3[:(i+j)]`
+
+Solution: 
+
+```python
+
+dp[i][j] = (dp[i-1][j] and s1[i-1] == s3[i+j-1]) or \
+           (dp[i][j-1] and s2[j-1] == s3[i+j-1])
+
+```
 
 **(5) Longest sub-Palindromic**
 Task: find longest Plindromic substring given a string.
 
-Solution: use a 2-D dp matrix to record `s[i:(j+1)]` **is Palindrome or not**
+Hint: use a 2-D dp matrix to record `s[i:(j+1)]` **is Palindrome or not**
 
-Hint: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
+Solution: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
 
 ```python
 def longestPalindrome(self, s: str) -> str:
@@ -196,29 +215,29 @@ def longestPalindrome(self, s: str) -> str:
                 else:
                     dp[i][j] = dp[i + 1][j - 1]  # Check inner substring
                 if dp[i][j]:
-                    start, end = i, j
+                    start, end = i, j  # update to the longest
     return s[start: (end+1)]
 
 ```
 
-** (72) Edit distance **
+**(72) Edit distance**
 Task: count minimum number of operation that makes word1 and word2 same.
 
 Hint: use `dp[i][j]` to represent minimum number of operations that makes `word1[:i]` and `word2[:j]` same.
 
 ```python
-    if word1[i - 1] == word2[j - 1]:
-        dp[i][j] = dp[i - 1][j - 1]
-    else:
-        dp[i][j] = 1 + min(
-            dp[i - 1][j],    # Delete from word1 (delete word1[i-1])
-            dp[i][j - 1],    # Insert into word1 (from word2[j-1])
-            dp[i - 1][j - 1] # Replace in word1 (word1[i-1] <- word2[j-1])
-        )
+if word1[i - 1] == word2[j - 1]:
+    dp[i][j] = dp[i - 1][j - 1]
+else:
+    dp[i][j] = 1 + min(
+        dp[i - 1][j],    # Delete from word1 (delete word1[i-1])
+        dp[i][j - 1],    # Insert into word1 (from word2[j-1])
+        dp[i - 1][j - 1] # Replace in word1 (word1[i-1] <- word2[j-1])
+    )
 ```
 
 
-** (1143/583) LCS/Delete game **
+**(1143/583) LCS/Delete game**
 Task: 
 - 1143: count length of the longest common sub sequence.
 - 583: count minimum number of deletion that makes word1 and word2 same.
