@@ -160,10 +160,14 @@ for j in range(i):
 High dimensional DP is a special case of Multiple DP. Usually using `dp[i][j]` as 2-D DP.
 
 - (2D native) **Matrix** operation (On Board)
-    - (simple) (62) Unique Path
-    - (63) Unique Path II
-    - (542) Closest zero
-    - (329) Increasing Path
+    - Naive-Board
+      - (simple) (62) Unique Path
+      - (63) Unique Path II
+    - 01-Board
+      - (542) Closest zero
+      - (221) Maximum Square
+    - Number-Board
+      - (329) Increasing Path
 - **String** operation
     - single
         - (2D) (5) Longest Sub-Palindromic
@@ -312,14 +316,42 @@ def dp(n):
 
 #### Flexible multi-rounds DP
 
-- (416) Equal partition
+- (518) Coin change II
+- (416) Coin change III -> Equal partition
+
+**Coin change II**
+Task: count the number of combinations of coins sum up to target(amount)
+
+Idea: `dp[i]` stores number of combinations that can sum up to `i`.
+
+Solution: 
+
+```python
+for c in coins:
+    for i in range(c, amount):
+        dp[i] += dp[i-c]
+```
+
+**Coin change III**
+Task: judge whether sub-sequence of coins can sum up to the target. (Note that each coin can be used only once in the coins bag.)
+
+Idea: `dp[i]` stores whether coins can sum up to `i`.
+
+Solution: 
+
+```python
+for coin in coins:
+    # Iterate backwards to ensure each coin is only used once
+    for i in range(amount, coin - 1, -1):
+        dp[i] |= dp[i - coin]
+
+```
 
 **Equal partition**
 Task: return whether can split the array into two subsets with equal sum.
 
-Idea: calculate half-sum, use `dp[i]` to store whether can get subsum as i.
+Idea: calculate half-sum, then the problem = Coin Change III. we can use `dp[i]` to store whether can get a sub-sequence that can sum up to i.
 
-Solution: `dp[i] = dp[i-num]`(if num not used)
 
 ### Aligned DP
 
@@ -433,15 +465,24 @@ Comments: DP is not necessary here, because only `dp[i-1]` is used
 
 ### Coin change
 
-Fewest number of coins to make up the amount.
-
-- (322) Coin change
+- (322) Coin change: fewest \# of coins
+- (518) Coin change II: \# of combinations
 
 ```python
+# Task: minimum number of coins
     # ...
 for c in coins:
     if i - c >= 0:
         dp[i] = min(dp[i], dp[i - c] + 1)
+# ...
+```
+
+```python
+# Task: number of combinations
+    # ...
+for c in coins:
+    for i in range(c, amount):
+        dp[i] += dp[i-c]
 # ...
 ```
 

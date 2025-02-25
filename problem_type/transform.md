@@ -28,6 +28,8 @@ Keep the data-structure, change in-place or not. Or, alter the data-structure, t
 
 
 ### same type
+- set
+  - (474) Ones \& Zeros
 - array
   - (66) Plus One
   - (67) Add binary
