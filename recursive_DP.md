@@ -168,14 +168,14 @@ High dimensional DP is a special case of Multiple DP. Usually using `dp[i][j]` a
       - (221) Maximum Square
     - Number-Board
       - (329) Increasing Path
-- **String** operation
+- (2D) **String** operation
     - single
-        - (2D) (5) Longest Sub-Palindromic
+        - (5) Longest Sub-Palindromic
     - tuple
-        - (2D) (97) Interleaving string
-        - (2D) (72) Edit distance
-        - (2D) (LCS) (1143/583)Longest common sub-seq/Delete game
-        - (2D) (LCS) (718) Longest commong sub-array
+        - (97) Interleaving string
+        - (72) Edit distance
+        - (LCS) (1143/583)Longest common sub-seq/Delete game
+        - (LCS) (718) Longest commong sub-array
 
 **(5) Longest sub-Palindromic**
 Task: find longest Plindromic substring given a string.
@@ -315,11 +315,13 @@ def dp(n):
 - (2D) (542) closest zero
 
 #### Flexible multi-rounds DP
+Also can be understood as a generative way.
 
 - (518) Coin change II
 - (416) Coin change III -> Equal partition
+- (474) Ones and zeros (hint: 2D DP)
 
-**Coin change II**
+**(518) Coin change II**
 Task: count the number of combinations of coins sum up to target(amount)
 
 Idea: `dp[i]` stores number of combinations that can sum up to `i`.
@@ -327,9 +329,15 @@ Idea: `dp[i]` stores number of combinations that can sum up to `i`.
 Solution: 
 
 ```python
-for c in coins:
+for c in coins:   # imaging you are free to use coin one type after one.
     for i in range(c, amount):
         dp[i] += dp[i-c]
+    
+    # print(dp) suppose coins = [1,2,5], amount = 5
+    # [1, 1, 1, 1, 1, 1]  only use coins = [1]
+    # [1, 1, 2, 2, 3, 3]  only use coins = [1, 2]
+    # [1, 1, 2, 2, 3, 4]  only use coins = [1, 2, 5]
+    
 ```
 
 **Coin change III**
@@ -344,14 +352,40 @@ for coin in coins:
     # Iterate backwards to ensure each coin is only used once
     for i in range(amount, coin - 1, -1):
         dp[i] |= dp[i - coin]
+        
+        
+    # print(dp) suppose coins = [1, 1, 2, 4], amount = 4
+    # [T, T, False, False, False]   used coins = [1]
+    # [T, T, T,     False, False]   used coins = [1, 1]
+    # [T, T, T,     T, T]       used coins = [1, 1, 2]
+
 
 ```
 
-**Equal partition**
+**(416) Equal partition**
 Task: return whether can split the array into two subsets with equal sum.
 
 Idea: calculate half-sum, then the problem = Coin Change III. we can use `dp[i]` to store whether can get a sub-sequence that can sum up to i.
 
+**(474) Ones \& Zeros**
+Task: return size of largest subset of strs where 0s and 1s below m and n.
+
+Idea: 
+- `dp[i][j]` represents size of largest subset of strs where 0s and 1s below i and j.
+- the solution is very similar to **Coin change III**.
+
+Solution: 
+```python
+
+for s in strs:
+    zeros = s.count('0')
+    ones = s.count('1')
+    # Update dp array in reverse to avoid reuse of the same string
+    for i in range(m, zeros - 1, -1):
+        for j in range(n, ones - 1, -1):
+            dp[i][j] = max(dp[i][j], dp[i - zeros][j - ones] + 1)
+
+```
 
 ### Aligned DP
 
