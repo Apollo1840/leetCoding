@@ -7,5 +7,5 @@ D
 DS_priority_queue.md,a/8/a83a57c0db550f54a5548f0c58f00932318a01cf
 <
 DS_others.md,8/b/8babf10ccf500a06bb7518b12dab6ebdb7fc6ba0
-K
-special_topics/sub_array.md,b/6/b6f15236498dced865ffbe0c02cc5fd8e8b18869
+S
+#special_topics/input_linked_node.md,1/6/164b2c7114dec948504a850635c4f95ba58adce9

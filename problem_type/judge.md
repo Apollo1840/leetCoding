@@ -34,8 +34,8 @@ HashSet/Map, DP and Recursive methods are frequently used.
   - (993) is cousin
   
 - Contains
-  - (383) is sub-support
-  - (392) is subsequence
+  - (383) is support
+  - (392) is sub-sequence
   - (925) is long-pressed
   - (567) Contains permutation
 
