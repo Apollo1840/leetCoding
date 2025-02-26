@@ -36,7 +36,7 @@ def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
     return [heappop(h)[1] for _ in range(k)]
 
 ```
-Although straight-forward, this is not the most efficient (time & space) to solve 1337 and 347. A better approach is in 
+Although straight-forward, this is not the most efficient (time & space) way to solve 1337 and 347. A better approach is in 
 "Gradually-in and Gradually-out".
 
 
