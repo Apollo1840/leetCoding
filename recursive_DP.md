@@ -31,7 +31,7 @@ efficient)
 
 ## Methodology
 
-### Standard DP
+### 1. Standard DP
 
 Can be understood as single-channel DP, where an array of answers or answer-related array `dp` is maintained.
 
@@ -133,7 +133,7 @@ for elem in wordDict:
 
 ```
 
-### Hashmap DP
+### 2. Hashmap DP
 
 - (464) Addition game
 - (1025) Divisor Game
@@ -150,7 +150,7 @@ def dp(n):
 
 ```
 
-### Multi-channel DP
+### 3. Multi-channel DP
 
 Multiple DP sequences are adapted.
 
@@ -214,7 +214,29 @@ Usually using `dp[i][j]` as 2-D DP. Use case including:
 - **Matrix** operation and
 - **String** operation.
 
-1. For **Matrix** operation (On Board), we have:
+Challenges:
+- Matrix
+    - Naive-Board
+        - (simple) (62) Unique Path
+        - (63) Unique Path II
+    - 01-Board
+        - (542) Closest zero
+        - (221) Maximum Square
+    - Number-Board
+        - (329) Increasing Path
+- String
+    - single
+        - (5) Longest Sub-Palindromic
+    - tuple
+        - (97) Interleaving string
+        - (72) Edit distance
+        - (LCS) (1143/583)Longest common sub-seq/Delete game
+        - (LCS) (718) Longest common sub-array
+        - (115) \# sub-sequences
+
+    
+
+1) For **Matrix** operation (On Board), we have:
 
 - Naive-Board
     - (simple) (62) Unique Path
@@ -247,7 +269,7 @@ else:
 
 ```
 
-2. For **String** operation, we have:
+2) For **String** operation, we have:
 
 - single
     - (5) Longest Sub-Palindromic
@@ -375,7 +397,7 @@ def findLength(self, nums1: List[int], nums2: List[int]) -> int:
 
 ```
 
-### Multiple-rounds DP
+### 4. Multiple-rounds DP
 
 - (821) closest occurency
 - (2D) (542) closest zero
@@ -424,7 +446,7 @@ Task: return number of combinations of expressions(+/-) results in target sum.
 
 Idea: A variant of Coin Change V. Starts from `-sum(nums)` then the problem == Coin Change V.
 
-### Aligned DP
+### 5. Aligned DP
 
 `dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
 
@@ -559,6 +581,12 @@ Based those two categories:
 
 #### Infinite coins
 
+- (322) Coin change: fewest \# of coins.
+- Coin change I+: largest \# of coins.
+- Coin change II-: judge exist combination.
+- (518) Coin change II: count \# of combinations
+- (377) Coin change II+: count \# of un-ordered combinations
+
 **(518) Coin change I/I+**
 
 Solution:
@@ -627,6 +655,11 @@ for i in range(1, amount + 1):
 ```
 
 #### Finite coins
+
+- Coin change III: fewest \# of coins.
+- Coin change III+: largest \# of coins.
+- Coin change IV: judge exist sub-sequence.
+- Coin change V: count \# of sub-sequences.
 
 **Coin change III/III+**
 Task: return length of the shortest sub-sequence.
