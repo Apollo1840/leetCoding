@@ -318,61 +318,17 @@ def dp(n):
 Also can be understood as a generative way.
 
 - (518) Coin change II
-- (416) Coin change III -> Equal partition
-- (474) Ones and zeros (hint: 2D DP)
+- (474) Coin change III+ -> Ones and zeros (hint: 2D DP)
+- (416) Coin change IV -> Equal partition
+- (494) Coin change V -> Target Sum
 
-**(518) Coin change II**
-Task: count the number of combinations of coins sum up to target(amount)
-
-Idea: `dp[i]` stores number of combinations that can sum up to `i`.
-
-Solution: 
-
-```python
-for c in coins:   # imaging you are free to use coin one type after one.
-    for i in range(c, amount):
-        dp[i] += dp[i-c]
-    
-    # print(dp) suppose coins = [1,2,5], amount = 5
-    # [1, 1, 1, 1, 1, 1]  only use coins = [1]
-    # [1, 1, 2, 2, 3, 3]  only use coins = [1, 2]
-    # [1, 1, 2, 2, 3, 4]  only use coins = [1, 2, 5]
-    
-```
-
-**Coin change III**
-Task: judge whether sub-sequence of coins can sum up to the target. (Note that each coin can be used only once in the coins bag.)
-
-Idea: `dp[i]` stores whether coins can sum up to `i`.
-
-Solution: 
-
-```python
-for coin in coins:
-    # Iterate backwards to ensure each coin is only used once
-    for i in range(amount, coin - 1, -1):
-        dp[i] |= dp[i - coin]
-        
-        
-    # print(dp) suppose coins = [1, 1, 2, 4], amount = 4
-    # [T, T, False, False, False]   used coins = [1]
-    # [T, T, T,     False, False]   used coins = [1, 1]
-    # [T, T, T,     T, T]       used coins = [1, 1, 2]
-
-
-```
-
-**(416) Equal partition**
-Task: return whether can split the array into two subsets with equal sum.
-
-Idea: calculate half-sum, then the problem = Coin Change III. we can use `dp[i]` to store whether can get a sub-sequence that can sum up to i.
 
 **(474) Ones \& Zeros**
 Task: return size of largest subset of strs where 0s and 1s below m and n.
 
 Idea: 
 - `dp[i][j]` represents size of largest subset of strs where 0s and 1s below i and j.
-- the solution is very similar to **Coin change III**.
+- the solution is very similar to **Coin change III+**.
 
 Solution: 
 ```python
@@ -386,6 +342,19 @@ for s in strs:
             dp[i][j] = max(dp[i][j], dp[i - zeros][j - ones] + 1)
 
 ```
+
+**(416) Equal partition**
+Task: return whether can split the array into two subsets with equal sum.
+
+Idea: A variant of Coin Change IV. Calculate half-sum, then the problem = Coin Change IV. 
+we can use `dp[i]` to store whether can get a sub-sequence that can sum up to i.
+
+
+**(494) Target Sum**
+Task: return number of combinations of expressions(+/-) results in target sum.
+
+Idea: A variant of Coin Change V. Starts from `-sum(nums)` then the problem == Coin Change V.
+
 
 ### Aligned DP
 
@@ -499,26 +468,133 @@ Comments: DP is not necessary here, because only `dp[i-1]` is used
 
 ### Coin change
 
-- (322) Coin change: fewest \# of coins
-- (518) Coin change II: \# of combinations
+There are two types of coin change problem:
+- infinite coins: coins are given as type, and you can use as many that value of coin as you wish.
+- finite coins (coins bag): each coin is unique, but might have same value. You can use each coin only once. 
+This case is exactly knackspack problem.
 
+Based those two categories:
+- infinite coins
+    - (322) Coin change: fewest \# of coins.
+    - Coin change I+: largest \# of coins.
+    - Coin change II-: judge exist combination.
+    - (518) Coin change II: count \# of combinations
+- finite coins
+    - Coin change III: fewest \# of coins.
+    - Coin change III+: largest \# of coins.
+    - Coin change IV: judge exist sub-sequence. 
+    - Coin change V: count \# of sub-sequences. 
+    
+#### Infinite coins
+
+**(518) Coin change I/I+**
+
+Solution:
 ```python
-# Task: minimum number of coins
+
+# Task: minimum number of coins.
     # ...
 for c in coins:
-    if i - c >= 0:
+    for i in range(c, amount): # or if i - c >= 0:
         dp[i] = min(dp[i], dp[i - c] + 1)
 # ...
-```
 
-```python
-# Task: number of combinations
+# Task: maximum number of coins.
     # ...
 for c in coins:
-    for i in range(c, amount):
-        dp[i] += dp[i-c]
+    for i in range(c, amount): # or if i - c >= 0:
+        dp[i] = max(dp[i], dp[i - c] + 1)
 # ...
 ```
+
+**Coin change II-**
+Task: judge exist combination.
+
+Solution:
+```python
+    # ...
+for c in coins:
+    for i in range(c, amount): # or if i - c >= 0:
+        dp[i] |= dp[i - c]
+# ...
+```
+
+**(518) Coin change II**
+Task: count the number of combinations of coins sum up to target(amount)
+
+Idea: `dp[i]` stores number of combinations that can sum up to `i`.
+
+Solution: 
+
+```python
+for c in coins:   # imaging you are free to use coin one type after one.
+    for i in range(c, amount):
+        dp[i] += dp[i-c]
+    
+    # print(dp) suppose coins = [1,2,5], amount = 5
+    # [1, 1, 1, 1, 1, 1]  only use coins = [1]
+    # [1, 1, 2, 2, 3, 3]  only use coins = [1, 2]
+    # [1, 1, 2, 2, 3, 4]  only use coins = [1, 2, 5]
+    
+```
+#### Finite coins
+
+**Coin change III/III+**
+Task: return length of the shortest sub-sequence.
+
+Idea: `dp[i]` stores length of the sub-sequence that can sum up to `i`.
+
+Solution:
+
+```python
+# Task: shortest
+for c in coins:
+    # Iterate backwards to ensure each coin is only used once
+    for i in range(amount, c-1, -1):
+        dp[i] = min(dp[i], dp[i-c]+1)
+
+
+# Task: longest
+for c in coins:
+    for i in range(amount, c-1, -1):
+        dp[i] = max(dp[i], dp[i-c]+1)
+```
+
+**Coin change IV**
+Task: judge whether exist sub-sequence of coins can sum up to the target. 
+
+Idea: `dp[i]` stores whether exist sub-sequence can sum up to `i`.
+
+Solution: 
+
+```python
+for coin in coins:
+    for i in range(amount, coin - 1, -1):
+        dp[i] |= dp[i - coin]
+        
+        
+    # print(dp) suppose coins = [1, 1, 2, 4], amount = 4
+    # [T, T, False, False, False]   used coins = [1]
+    # [T, T, T,     False, False]   used coins = [1, 1]
+    # [T, T, T,     T, T]       used coins = [1, 1, 2]
+
+
+```
+
+**Coin change V**
+Task: return number of distinct sub-sequences can sum up to the target. 
+
+Idea: `dp[i]` stores number of sub-sequences that can sum up to `i`.
+
+Solution:
+
+```python
+for c in coins:
+    for i in range(amount, c-1, -1):
+        dp[i] += dp[i-c]
+```
+
+
 
 
 
