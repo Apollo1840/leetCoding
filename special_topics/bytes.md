@@ -62,3 +62,5 @@ examples:
 - `(1 << n) - 1` all 1's of length (n-1)
 - `1 << i` only position i as 1.
 - `mask | (1 << i)` mark i as 1.
+
+- 847 Shortest traversal
