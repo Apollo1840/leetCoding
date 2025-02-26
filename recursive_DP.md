@@ -60,6 +60,7 @@ Can be understood as single-channel DP, where an array of answers or answer-rela
 Enumerate all previous indices and update on a sub-set based on certain condition.
 
 Idea: `dp[i]` represents length of longest increasing subsequence ends with i.
+
 ```python
 # longest sub-increasing
 for j in range(i):
@@ -75,24 +76,36 @@ for j in range(i):
 
 ```
 
-
 - Conditional fixed-set
-    - (322) Coin change
-    - (279) Perfect Squares
+    - (91) decode ways (+ Aligned)
+    - (322/279) Coin change/Perfect Squares
+    - (377) Coin change II+/Combination Sum
 
 Enumerate some previous indices and update on a sub-set based on certain condition.
 
 ```python
 
+# decode ways
+if self.decodable(s[i - 2], s[i - 1]):
+    dp[i] += dp[i - 2]
+if s[i - 1] != "0":
+    dp[i] += dp[i - 1]
+
 # coin change
 for elem in coins:
     if i - elem >= 0:
         dp[i] = min(dp[i], dp[i - elem] + 1)
-
+        
 # perfect square
 for elem in squares:
     if i - elem >= 0:
         dp[i] = min(dp[i], dp[i - elem] + 1)
+        
+# coin change II+
+for elem in coins:
+    if i - elem >= 0:
+        dp[i] += dp[i - elem]
+
 
 # If coins and squares are many and sorted.
 # we can use (if i-elem <0: break) to accelerate the algorithm
@@ -120,6 +133,23 @@ for elem in wordDict:
 
 ```
 
+### Hashmap DP
+
+- (464) Addition game
+- (1025) Divisor Game
+
+```python
+
+def dp(n):
+    if n in self.dp_map:
+        return self.dp_map[n]
+
+    # res = = self.calc(self.dp(n-1), ...)
+    self.dp_map[n] = res
+    return self.dp_map[n]
+
+```
+
 ### Multi-channel DP
 
 Multiple DP sequences are adapted.
@@ -141,6 +171,7 @@ Examples:
 **(256) Paint House**
 
 Idea: `dp_color[i]` represents minimum cost of painting houses with `i`-th room paint as `color`.
+
 ```python
 # (!) First initialize dp_red, dp_green, dp_blue with sole cost.
 
@@ -152,14 +183,15 @@ for i in range(1, n):
 
 ```
 
-
 **(673) \# longest sub-increasing**
 
-Idea: 
-- `dp_len[i]`  representss the **length** of longest increasing subsequence ends with `nums[i]`.
-- `dp_count[i]` representss the **amount** of longest increasing subsequence ends with `nums[i]`.
+Idea:
 
-Solution: 
+- `dp_len[i]`  represents the **length** of longest increasing subsequence ends with `nums[i]`.
+- `dp_count[i]` represents the **amount** of longest increasing subsequence ends with `nums[i]`.
+
+Solution:
+
 ```python
 
 for i in range(n):
@@ -175,26 +207,56 @@ for i in range(n):
 
 #### High dimensional DP
 
-High dimensional DP is a special case of Multiple DP. Usually using `dp[i][j]` as 2-D DP.
+High dimensional DP is a special case of Multiple DP.
 
-- (2D native) **Matrix** operation (On Board)
-    - Naive-Board
-      - (simple) (62) Unique Path
-      - (63) Unique Path II
-    - 01-Board
-      - (542) Closest zero
-      - (221) Maximum Square
-    - Number-Board
-      - (329) Increasing Path
-- (2D) **String** operation
-    - single
-        - (5) Longest Sub-Palindromic
-    - tuple
-        - (97) Interleaving string
-        - (72) Edit distance
-        - (LCS) (1143/583)Longest common sub-seq/Delete game
-        - (LCS) (718) Longest common sub-array
-        - (115) \# sub-sequences
+Usually using `dp[i][j]` as 2-D DP. Use case including:
+
+- **Matrix** operation and
+- **String** operation.
+
+1. For **Matrix** operation (On Board), we have:
+
+- Naive-Board
+    - (simple) (62) Unique Path
+    - (63) Unique Path II
+- 01-Board
+    - (542) Closest zero
+    - (221) Maximum Square
+- Number-Board
+    - (329) Increasing Path
+
+**(62) Unique Path**
+Task: count number of unique paths from left-upper to right-bottom.
+
+Solution: `dp[i][j] = dp[i-1][j] + dp[i][j-1]`
+
+**(221) Maximum square**
+Task: return the area of the maximum ones square
+
+Solution:
+
+```python
+
+if matrix[i - 1][j - 1] == "1":
+    dp[i][j] = 1 + min(dp[i - 1][j],
+                       dp[i][j - 1],
+                       dp[i - 1][j - 1])
+    max_side = max(max_side, dp[i][j])
+else:
+    dp[i][j] = 0
+
+```
+
+2. For **String** operation, we have:
+
+- single
+    - (5) Longest Sub-Palindromic
+- tuple
+    - (97) Interleaving string
+    - (72) Edit distance
+    - (LCS) (1143/583)Longest common sub-seq/Delete game
+    - (LCS) (718) Longest common sub-array
+    - (115) \# sub-sequences
 
 **(5) Longest sub-Palindromic**
 Task: find longest Plindromic substring given a string.
@@ -236,7 +298,7 @@ Solution:
 ```python
 
 dp[i][j] = (dp[i - 1][j] and s1[i - 1] == s3[i + j - 1]) or
-           (dp[i][j - 1] and s2[j - 1] == s3[i + j - 1])
+(dp[i][j - 1] and s2[j - 1] == s3[i + j - 1])
 
 ```
 
@@ -313,28 +375,13 @@ def findLength(self, nums1: List[int], nums2: List[int]) -> int:
 
 ```
 
-### Hashmap DP
-
-- (1025) Divisor Game
-
-```python
-
-def dp(n):
-    if n in self.dp_map:
-        return self.dp_map[n]
-
-    # res = = self.calc(self.dp(n-1), ...)
-    self.dp_map[n] = res
-    return self.dp_map[n]
-
-```
-
 ### Multiple-rounds DP
 
 - (821) closest occurency
 - (2D) (542) closest zero
 
 #### Flexible multi-rounds DP
+
 Also can be understood as a generative way.
 
 - (518) Coin change II
@@ -342,15 +389,16 @@ Also can be understood as a generative way.
 - (416) Coin change IV -> Equal partition
 - (494) Coin change V -> Target Sum
 
-
 **(474) Ones \& Zeros**
 Task: return size of largest subset of strs where 0s and 1s below m and n.
 
-Idea: 
+Idea:
+
 - `dp[i][j]` represents size of largest subset of strs where 0s and 1s below i and j.
 - the solution is very similar to **Coin change III+**.
 
-Solution: 
+Solution:
+
 ```python
 
 for s in strs:
@@ -366,15 +414,13 @@ for s in strs:
 **(416) Equal partition**
 Task: return whether can split the array into two subsets with equal sum.
 
-Idea: A variant of Coin Change IV. Calculate half-sum, then the problem = Coin Change IV. 
-we can use `dp[i]` to store whether can get a sub-sequence that can sum up to i.
-
+Idea: A variant of Coin Change IV. Calculate half-sum, then the problem = Coin Change IV. we can use `dp[i]` to store
+whether can get a sub-sequence that can sum up to i.
 
 **(494) Target Sum**
 Task: return number of combinations of expressions(+/-) results in target sum.
 
 Idea: A variant of Coin Change V. Starts from `-sum(nums)` then the problem == Coin Change V.
-
 
 ### Aligned DP
 
@@ -382,6 +428,7 @@ Idea: A variant of Coin Change V. Starts from `-sum(nums)` then the problem == C
 
 - (746) Climbing stairs II
 - (198) House Robber
+- (91) decode ways
 
 #### Alternative DP
 
@@ -489,74 +536,94 @@ Comments: DP is not necessary here, because only `dp[i-1]` is used
 ### Coin change
 
 There are two types of coin change problem:
+
 - infinite coins: coins are given as type, and you can use as many that value of coin as you wish.
-- finite coins (coins bag): each coin is unique, but might have same value. You can use each coin only once. 
-This case is exactly knackspack problem.
+- finite coins (coins bag): each coin is unique, but might have same value. You can use each coin only once. This case
+  is exactly knackspack problem.
 
 Based those two categories:
+
 - infinite coins
     - (322) Coin change: fewest \# of coins.
     - Coin change I+: largest \# of coins.
     - Coin change II-: judge exist combination.
     - (518) Coin change II: count \# of combinations
+    - (377) Coin change II+: count \# of un-ordered combinations
 - finite coins
     - Coin change III: fewest \# of coins.
     - Coin change III+: largest \# of coins.
-    - Coin change IV: judge exist sub-sequence. 
-    - Coin change V: count \# of sub-sequences. 
-    
+    - Coin change IV: judge exist sub-sequence.
+    - Coin change V: count \# of sub-sequences.
+
 #### Infinite coins
 
 **(518) Coin change I/I+**
 
 Solution:
+
 ```python
 
 # Task: minimum number of coins.
-    # ...
+# ...
 for c in coins:
-    for i in range(c, amount): # or if i - c >= 0:
+    for i in range(c, amount):  # or if i - c >= 0:
         dp[i] = min(dp[i], dp[i - c] + 1)
 # ...
 
 # Task: maximum number of coins.
-    # ...
+# ...
 for c in coins:
-    for i in range(c, amount): # or if i - c >= 0:
+    for i in range(c, amount):  # or if i - c >= 0:
         dp[i] = max(dp[i], dp[i - c] + 1)
 # ...
 ```
 
 **Coin change II-**
-Task: judge exist combination.
+Task: judge exist (ordered) combination.
 
 Solution:
+
 ```python
     # ...
 for c in coins:
-    for i in range(c, amount): # or if i - c >= 0:
+    for i in range(c, amount):  # or if i - c >= 0:
         dp[i] |= dp[i - c]
 # ...
 ```
 
 **(518) Coin change II**
-Task: count the number of combinations of coins sum up to target(amount)
+Task: count the number of (ordered) combinations of coins sum up to target(amount)
 
-Idea: `dp[i]` stores number of combinations that can sum up to `i`.
+Idea: `dp[i]` stores number of (ordered) combinations that can sum up to `i`.
 
-Solution: 
+Solution:
 
 ```python
-for c in coins:   # imaging you are free to use coin one type after one.
+for c in coins:  # imaging you are free to use coin one type after one.
     for i in range(c, amount):
-        dp[i] += dp[i-c]
-    
+        dp[i] += dp[i - c]
+
     # print(dp) suppose coins = [1,2,5], amount = 5
     # [1, 1, 1, 1, 1, 1]  only use coins = [1]
     # [1, 1, 2, 2, 3, 3]  only use coins = [1, 2]
     # [1, 1, 2, 2, 3, 4]  only use coins = [1, 2, 5]
-    
+
 ```
+
+**(377) Coin change II+/Combination Sum**
+Task: count the number of combinations of coins sum up to target(amount)
+
+Idea: `dp[i]` stores number of combinations that can sum up to `i`.
+
+Solution:
+
+```python
+for i in range(1, amount + 1):
+    for c in coins:
+        if i - c >= 0:
+            dp[i] += dp[i - n]
+```
+
 #### Finite coins
 
 **Coin change III/III+**
@@ -570,30 +637,28 @@ Solution:
 # Task: shortest
 for c in coins:
     # Iterate backwards to ensure each coin is only used once
-    for i in range(amount, c-1, -1):
-        dp[i] = min(dp[i], dp[i-c]+1)
-
+    for i in range(amount, c - 1, -1):
+        dp[i] = min(dp[i], dp[i - c] + 1)
 
 # Task: longest
 for c in coins:
-    for i in range(amount, c-1, -1):
-        dp[i] = max(dp[i], dp[i-c]+1)
+    for i in range(amount, c - 1, -1):
+        dp[i] = max(dp[i], dp[i - c] + 1)
 ```
 
 **Coin change IV**
-Task: judge whether exist sub-sequence of coins can sum up to the target. 
+Task: judge whether exist sub-sequence of coins can sum up to the target.
 
 Idea: `dp[i]` stores whether exist sub-sequence can sum up to `i`.
 
-Solution: 
+Solution:
 
 ```python
 
 for coin in coins:
     for i in range(amount, coin - 1, -1):
         dp[i] |= dp[i - coin]
-        
-        
+
     # print(dp) suppose coins = [1, 1, 2, 4], amount = 4
     # [T, T, False, False, False]   used coins = [1]
     # [T, T, T,     False, False]   used coins = [1, 1]
@@ -602,7 +667,7 @@ for coin in coins:
 ```
 
 **Coin change V**
-Task: return number of distinct sub-sequences can sum up to the target. 
+Task: return number of distinct sub-sequences can sum up to the target.
 
 Idea: `dp[i]` stores number of sub-sequences that can sum up to `i`.
 
@@ -611,8 +676,8 @@ Solution:
 ```python
 
 for c in coins:
-    for i in range(amount, c-1, -1):
-        dp[i] += dp[i-c]
+    for i in range(amount, c - 1, -1):
+        dp[i] += dp[i - c]
 
 ```
 
