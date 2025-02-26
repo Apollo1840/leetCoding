@@ -185,6 +185,7 @@ Hint: use a 2-D dp matrix to record `s[i:(j+1)]` **is Palindrome or not**
 Solution: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
 
 ```python
+
 def longestPalindrome(self, s: str) -> str:
     n = len(s)
     # DP table to check if s[i:j] is a palindrome
@@ -568,6 +569,7 @@ Idea: `dp[i]` stores whether exist sub-sequence can sum up to `i`.
 Solution: 
 
 ```python
+
 for coin in coins:
     for i in range(amount, coin - 1, -1):
         dp[i] |= dp[i - coin]
@@ -577,7 +579,6 @@ for coin in coins:
     # [T, T, False, False, False]   used coins = [1]
     # [T, T, T,     False, False]   used coins = [1, 1]
     # [T, T, T,     T, T]       used coins = [1, 1, 2]
-
 
 ```
 
@@ -589,9 +590,11 @@ Idea: `dp[i]` stores number of sub-sequences that can sum up to `i`.
 Solution:
 
 ```python
+
 for c in coins:
     for i in range(amount, c-1, -1):
         dp[i] += dp[i-c]
+
 ```
 
 
