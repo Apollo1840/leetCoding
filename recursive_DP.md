@@ -193,7 +193,8 @@ High dimensional DP is a special case of Multiple DP. Usually using `dp[i][j]` a
         - (97) Interleaving string
         - (72) Edit distance
         - (LCS) (1143/583)Longest common sub-seq/Delete game
-        - (LCS) (718) Longest commong sub-array
+        - (LCS) (718) Longest common sub-array
+        - (115) \# sub-sequences
 
 **(5) Longest sub-Palindromic**
 Task: find longest Plindromic substring given a string.
