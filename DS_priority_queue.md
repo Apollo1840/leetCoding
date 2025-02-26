@@ -11,9 +11,34 @@ typical case:
 
 ## All-in & All-out
 
-- 1337 k-weakest rows
-- 506 Rank & Medal
-- 451 Sortby freq
+- sort
+    - (506) Rank & Medal
+    - (451) Sortby freq
+- get k-th
+    - (347) k-frequent item
+    - (1337) k-weakest rows
+
+```python
+# Trival usage of PQ:
+
+# (-freq, char)
+# 1337 k-weakest rows
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    h = [(-c, n) for n, c in Counter(nums).items()]
+    heapify(h)
+    return [heappop(h)[1] for _ in range(k)]
+
+# (value, index)
+# 347 k-frequent item
+def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+    h = [(row.count(1), i) for i, row in enumerate(mat)]
+    heapify(h)
+    return [heappop(h)[1] for _ in range(k)]
+
+```
+Although straight-forward, this is not the most efficient (time & space) to solve 1337 and 347. A better approach is in 
+"Gradually-in and Gradually-out".
+
 
 ## All-in & All-out with replacement
 
@@ -97,6 +122,44 @@ Often with greedy solution:
 ## Gradually-in & Gradually-out
 
 Those are typically the hardest application of PQ.
+
+- (347) k-frequent item
+- (1337) k-weakest rows
+- (373) k-smallest pair
+
+```python
+# 347 k-frequent item
+# A better approach, maintain a k-size heap
+
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    h = []
+    for n, c in Counter(nums).items():
+        if len(h) < k:
+            heappush(h, (c, n))
+        else:
+            if c > h[0][0]:
+                heappop(h)
+                heappush(h, (c, n))
+    return [n for _, n in h]
+
+
+# (1337) k-weakest rows
+def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+    h = []
+    for i, row in enumerate(mat):
+        if len(h) < k:
+            heappush(h, (-row.count(1), -i))
+        else:
+            if row.count(1) < -h[0][0]:
+                heappop(h)
+                heappush(h, (-row.count(1), -i))
+
+    res = []
+    while h:
+        res.append(-heappop(h)[1])
+    return res[::-1]
+
+```
 
 ### Array-based: Sections
 - 253 Meeting Rooms II
@@ -209,5 +272,5 @@ Solution: `(cost, node, stops)` in heap.
 
 ### Others
 - (simple) 502 IPO
-- 378 K-th smallest in matrix 
+- 378 k-smallest in matrix 
 - 218 Skyline

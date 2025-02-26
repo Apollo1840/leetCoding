@@ -105,3 +105,6 @@ with PQ to process the result step by step
 ### calculation
 - (1128) Domino pairs
 - (447) Boomerang amount
+
+### Simulation
+- (688) Knights within board

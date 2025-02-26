@@ -12,6 +12,7 @@ Very close to the concept of finding index.
 
 ### k-th
 - 1337 k-weakest row
+- 373 k-smallest pair
 - 378 k-smallest in matrix
 - 347 k-frequent item
 - 658 k-closest int
