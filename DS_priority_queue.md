@@ -247,6 +247,7 @@ def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
 ### Tree-based
 - 743 Network delay
 - 787 Cheapest Path
+- 847 Shortest traverse (PQ-guided BFS)
 - (Grid) 778 Flooding swim
 
 **Network delay**
