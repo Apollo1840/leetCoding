@@ -59,6 +59,7 @@ Can be understood as single-channel DP, where an array of answers or answer-rela
 
 Enumerate all previous indices and update on a sub-set based on certain condition.
 
+Idea: `dp[i]` represents length of longest increasing subsequence ends with i.
 ```python
 # longest sub-increasing
 for j in range(i):
@@ -73,6 +74,7 @@ for j in range(i):
         # use prev, max_index, max_length to store the information for trace back the results
 
 ```
+
 
 - Conditional fixed-set
     - (322) Coin change
@@ -136,23 +138,39 @@ Examples:
 - (256) Paint House
 - (673) \# longest sub-increasing (hint: conditional flexible DP)
 
-```python
+**(256) Paint House**
 
-#  Paint House
+Idea: `dp_color[i]` represents minimum cost of painting houses with `i`-th room paint as `color`.
+```python
+# (!) First initialize dp_red, dp_green, dp_blue with sole cost.
+
 for i in range(1, n):
     dp_red[i] += min(dp_green[i - 1], dp_blue[i - 1])
     dp_green[i] += min(dp_red[i - 1], dp_blue[i - 1])
     dp_blue[i] += min(dp_red[i - 1], dp_green[i - 1])
 # (p.s here DP is also alternative)
 
-# Number of longest sub-increasing
-for j in range(i):
-    if nums[j] < nums[i]:
-        if dp_len[j] + 1 > dp_len[i]:
-            dp_len[i] = dp_len[j] + 1
-            dp_count[i] = dp_count[j]
-        elif dp_len[j] + 1 == dp_len[i]:
-            dp_count[i] += dp_count[j]
+```
+
+
+**(673) \# longest sub-increasing**
+
+Idea: 
+- `dp_len[i]`  representss the **length** of longest increasing subsequence ends with `nums[i]`.
+- `dp_count[i]` representss the **amount** of longest increasing subsequence ends with `nums[i]`.
+
+Solution: 
+```python
+
+for i in range(n):
+    for j in range(i):
+        if nums[j] < nums[i]:
+            if dp_len[j] + 1 > dp_len[i]:
+                dp_len[i] = dp_len[j] + 1
+                dp_count[i] = dp_count[j]
+            elif dp_len[j] + 1 == dp_len[i]:
+                dp_count[i] += dp_count[j]
+
 ```
 
 #### High dimensional DP
