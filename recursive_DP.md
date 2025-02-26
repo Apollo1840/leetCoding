@@ -384,7 +384,7 @@ def findLength(self, nums1: List[int], nums2: List[int]) -> int:
 
 Also can be understood as a generative way.
 
-(Highly recommended to learn [classic: Coin change](### Coin change) first.)
+(Highly recommended to learn [classic: Coin change](#Coin change) first.)
 
 - (518) Coin change II
 - (474) Coin change III+ -> Ones and zeros (hint: 2D DP)
