@@ -413,6 +413,27 @@ Also can be understood as a generative way.
 - (416) Coin change IV -> Equal partition
 - (494) Coin change V -> Target Sum
 
+**0/1 Knapsack**
+Task:  The goal is to determine the optimal way to pack the backpack to maximize the total value while ensuring the total weight does not exceed m.
+Given n items and a backpack with a maximum weight capacity of m, each item has a weight W[i] and a value V[i].
+
+
+Idea: 
+- `dp[i]` represents max value can achieve with capacity limit as `i`.
+- Similar to Coin Change III+.
+
+Solution:
+
+```python
+
+for i in range(n):
+    for j in range(m, W[i] - 1, -1):  # 逆序遍历，保证只用上一行的数据
+        dp[j] = max(dp[j], dp[j - W[i]] + V[i])
+
+
+```
+
+
 **(474) Ones \& Zeros**
 Task: return size of largest subset of strs where 0s and 1s below m and n.
 
