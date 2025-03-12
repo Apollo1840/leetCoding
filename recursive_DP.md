@@ -467,6 +467,26 @@ Task: return number of combinations of expressions(+/-) results in target sum.
 
 Idea: A variant of Coin Change V. Starts from `-sum(nums)` then the problem == Coin Change V.
 
+```python
+
+def findTargetSumWays(self, nums: List[int], target: int) -> int:
+    """
+    dp[i] represent # expressions gets [i-sum(nums)]
+    dp[i]
+    """
+    s = sum(nums)
+    if target < -s or target > s:
+        return 0
+
+    dp = [0] * (2 * s + 1)
+    dp[0] = 1
+    for n in nums:
+        for i in range(2*s, 2*n-1, -1):
+            dp[i] += dp[i-2*n]
+    return dp[target+s]
+
+```
+
 ### 5. Aligned DP
 
 `dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
