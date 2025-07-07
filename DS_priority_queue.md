@@ -2,12 +2,26 @@
 
 PQ is often used to sort/query extrems.
 
-Normally, we put a tuple of information into the heap, 
+Normally, we put a tuple of information into the heap,
+eg. `(first_entry, second_entry)`,
 and take them out with order of the first entry and following entry is the information we care.
 
 typical case:
-- string: (-freq, char)
-- array: (value, index)
+- string: `(-freq, char)`
+- array: `(value, index)`
+
+For PQ, one of the challenge is to implement it:
+```python
+# in python
+from heapq import heapify, heappop, heappush
+h = [3, 2, 5, 1]
+
+heapify(h)  # change h into a heap
+heappush(h, 0)  # push new item into heap
+print(h[0])  # peek heap top
+print(heappop(h))  # get heap top
+
+```
 
 ## All-in & All-out
 
@@ -15,34 +29,35 @@ typical case:
     - (506) Rank & Medal
     - (451) Sortby freq
 - get k-th
-    - (347) k-frequent item
+    - (347) k-frequent items
     - (1337) k-weakest rows
 
 ```python
 # Trival usage of PQ:
 
 # (-freq, char)
-# 1337 k-weakest rows
+# 347 k-frequent items
 def topKFrequent(self, nums: List[int], k: int) -> List[int]:
     h = [(-c, n) for n, c in Counter(nums).items()]
     heapify(h)
     return [heappop(h)[1] for _ in range(k)]
 
 # (value, index)
-# 347 k-frequent item
+# 1337 k-weakest rows
 def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
     h = [(row.count(1), i) for i, row in enumerate(mat)]
     heapify(h)
     return [heappop(h)[1] for _ in range(k)]
 
 ```
-Although straight-forward, this is not the most efficient (time & space) way to solve 1337 and 347. A better approach is in 
-"Gradually-in and Gradually-out".
+
+(Although straight-forward, this is NOT the most efficient (time & space) way to solve 1337 and 347. A better approach is in 
+"Gradually-in and Gradually-out". Better solutions will be showed later.)
 
 
 ## All-in & All-out with replacement
 
-Those challenges ofter ends with empty of the heap:
+Those challenges often ends with empty of the heap:
 
 ```python
 
@@ -123,14 +138,13 @@ Often with greedy solution:
 
 Those are typically the hardest application of PQ.
 
-- (347) k-frequent item
+- (347) k-frequent items
 - (1337) k-weakest rows
 - (373) k-smallest pair
 
 ```python
 # 347 k-frequent item
 # A better approach, maintain a k-size heap
-
 def topKFrequent(self, nums: List[int], k: int) -> List[int]:
     h = []
     for n, c in Counter(nums).items():
@@ -167,7 +181,7 @@ def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
 
 def. **Sections**: list of `(start, end)`.
 
-Often, the heap stores the `(end, *)`.
+Often, we sort the sections by `start` first, then create a heap stores the `(end, *)`.
 
 **Meeting rooms II** (253)
 
@@ -205,6 +219,8 @@ def minMeetingRooms(self, intervals):
 **Car pooling** (1094)
 
 Task: Given sections with num_passengers, judge whether it possible to taking them.
+
+Solution: `(end, n_passengers)` in heap.
 
 ```python
 
