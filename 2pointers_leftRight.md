@@ -1,4 +1,6 @@
 # Two pointers (Left-Right)
+Basically we are dealing with an array, we have a left pointer (`l`) started at beginning of this array, 
+and a right pointer (`r`) started at end of this array.
 
 ```python
 l, r = 0, len(s)
@@ -8,7 +10,7 @@ while l < r:
     # update
     l, r = l+1, r-1
     
-    # or conditional update
+    # OR conditional update
     if ...:
         l +=1
     elif ...:
@@ -20,11 +22,11 @@ while l < r:
 
 
 ## Palindrome
+Such as `tenet`.
+
 Task: judge whether it is a valid Palindrome.
 - (125) Valid Palindrome
 - (680) Valid Palindrome II
-
-`TENET`
 
 ## Reverse
 - (345) Reverse vowels
@@ -71,42 +73,11 @@ def reverseOnlyLetters(self, s: str) -> str:
 
 ```
 
-## Tri-sort
-
-**(75) Sort colors**
-
-Task: Sort an array with three kind of elements.
-
-Solution: use the pivot element
-
-
-```python
-
-def sortColors(self, nums: List[int]) -> None:
-    """
-    Do not return anything, modify nums in-place instead.
-    """
-    l, r = 0, len(nums) -1   # l: where 0 starts, where 2 starts.
-    p = 0
-    while p <= r:
-        if nums[p] == 2:  
-            nums[r], nums[p] = nums[p], nums[r]
-            r -= 1
-        elif nums[p] == 0:
-            nums[l], nums[p] = nums[p], nums[l]
-            l += 1
-            p += 1  # this is hard to understand
-        else:
-            p += 1
-         
-
-```
-
 
 ## Greedy
 
-- Two Sum II (167)
 - Largest container (11)
+- Two Sum II (167)
 
 ```python
 # Task: Find largest container, contains most water
@@ -130,5 +101,39 @@ Sometimes, in order to use LeftRight Pointer, we apply sort first.
 
 - 3Sum Closest (16)
 - 4Sum (18)
+
+
+## Tri-sort
+
+**(75) Sort colors**
+
+Task: Sort an array with three kind of elements.
+
+Solution: use the pivot element
+
+
+```python
+
+def sortColors(self, nums: List[int]) -> None:
+    """
+    Do not return anything, modify nums in-place instead.
+    """
+    
+    l, r = 0, len(nums) -1   # l: where 0 starts, where 2 starts.
+    p = 0
+    while p <= r:
+        if nums[p] == 2:  
+            nums[r], nums[p] = nums[p], nums[r]
+            r -= 1
+        elif nums[p] == 0:
+            nums[l], nums[p] = nums[p], nums[l]
+            l += 1
+            p += 1  # this is hard to understand
+        else:
+            p += 1
+         
+
+```
+
 
 

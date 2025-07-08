@@ -66,6 +66,24 @@ def compress(self, chars: List[str]) -> int:
     return len(chars)
 
 
+# (763) non-crossing sub-arrays
+def partitionLabels(self, s: str) -> List[int]:
+    locator = dict()  # record last appearance of the char.
+    for i, c in enumerate(s):
+        locator[c] = i
+    
+    ans = []
+    p1, p2_1, p2_2 = 0, 0, 0  # overlay, slow, fast
+
+    for p2_1, c in enumerate(s):
+        p2_2 = max(p2_2, locator[c])
+        if p2_1 == p2_2:
+            ans.append(p2_2 - p1 + 1)
+            p1 = p2_1 + 1  
+    return ans
+
+
+
 # In-place mergeSort
 def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     """
@@ -101,43 +119,56 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
 
 ## Sliding window
 
-- (209) Shortest sub-array
+- 209 (shortest) large sub-array
 
 ## Jumping pointer
-- (Jumping slow) 3 non-repeating sub-array
-- (Jumping fast) 763 non-crossing sub-array
+- (Jumping slow-) 3 non-repeating sub-array
+- (Jumping fast-) 763 non-crossing sub-arrays
 
 ```python
 
 # (3) non-repeating sub-array
-def nonRepeating(self, s):
-    visited = dict()  # non-repeating start
-    res = 0
+def lengthOfLongestSubstring(self, s: str) -> int:
+    """
+    slow pointer is jumping,
+    fast pointer is forwarding step by step,
+    so it is called jumping slow.
+    """
     
+    locator = dict()  # (char: index)
+    res = 0
     p1 = -1
-    for p2, c in enumerate(s):
-        if c in visited:
-            p1 = max(p1, visited[c])
-        visited[c] = p2
-        res = max(res, p2-p1)
-    return res        
-        
+    for p2, char in enumerate(s):
+      if char in locator:
+          p1 = max(p1, locator[char])
+    
+      # update locator
+      locator[char] = p2
+    
+      # catching result
+      res = max(res, p2 - p1)
+    
+    return res
 
-# (763) non-crossing sub-array
+        
+# (763) non-crossing sub-arrays (only for split point)
 def partitionLabels(self, s: str) -> List[int]:
-    last = dict()
+    """
+    fast pointer is jumping,
+    slow pointer is forwarding step by step,
+    so it is called jumping fast.
+    """
+        
+    locator = dict()  # record last appearance of the char.
     for i, c in enumerate(s):
-        last[c] = i
+        locator[c] = i
     
     ans = []
-    anchor = 0
-    
-    p2 = 0
+    p2 = -1
     for p1, c in enumerate(s):
-        p2 = max(p2, last[c])
+        p2 = max(p2, locator[c])
         if p1 == p2:
-            ans.append(p2 - anchor + 1)
-            anchor = p1 + 1  
+            ans.append(p2)  
     return ans
 
 
@@ -145,7 +176,7 @@ def partitionLabels(self, s: str) -> List[int]:
 
 ### Step recorder
 
-A typical jumping slow pointer is used as **step recorder**.
+**Step recorder** is a typical jumping slow-pointer.
 
 Conventionally, I use `p1` as slow pointer and `p2` as fast pointer.
 `p1` also used to mark something until it meets new occurence and update itself as `p2`(`p1 <- p2`).

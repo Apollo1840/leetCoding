@@ -13,7 +13,7 @@ If the array is an array of chars, it is also called **Substring**.
 
 Since we are dealing with two indices, 
 it is common that we use **Locator** (3, 525, 697)
-and **LeftRight Pointers** (76) to solve such problem.
+and **LeftRight Pointers** (209, 76) to solve such problem.
 In some case, it also use **2-D DP** (5, 718).
 
 ## Challenges
@@ -48,9 +48,10 @@ def lengthOfLongestSubstring(self, s: str) -> int:
 
 ```
 
-
+- 209 (shortest) large sub-array
 - 76 (shortest) Including sub-array
 - 697 (shortest) same-degree sub-array
+
   
 
 ```python
