@@ -1,6 +1,12 @@
 # Sub-sequence
-Sub-sequence is a **NOT** necessary contious sub array of an array.
 
+## Definition
+A **Sub-array** is a contiguous portion of an array.
+
+A **Sub-sequence** is a non-contiguous but same order portion of an array.
+
+
+## Challenges
 - Within
     - (300) (LIS) longest sub-increasing (based on all previous)
     - (673) (\#LIS) \# longest sub-increasing (hint: double-DP)

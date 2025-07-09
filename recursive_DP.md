@@ -56,13 +56,29 @@ Can be understood as single-channel DP, where an array of answers or answer-rela
     - (368) Divisible Subset (hint: DP not as result, but a processing tool)
     - (300) longest sub-increasing (based on all previous)
     - (673) \# longest sub-increasing (hint: double-DP)
+- Conditional fixed-set
+    - (91) decode ways (+ Aligned)
+    - (322/279) Coin change/Perfect Squares
+    - (377) Coin change II+/Combination Sum
+    
+**Conditional method**
 
 Enumerate all previous indices and update on a sub-set based on certain condition.
+Like:
 
-Idea: `dp[i]` represents length of longest increasing subsequence ends with i.
+```python
+# for i in range(n):
+for j in range(i):
+    if ...:
+        dp[i] = ... dp[j] ...
+
+```
+
+Examples:
 
 ```python
 # longest sub-increasing
+# Idea: `dp[i]` represents length of longest increasing subsequence ends with i.
 for j in range(i):
     if nums[j] < nums[i]:
         dp[i] = max(dp[i], dp[j] + 1)
@@ -76,20 +92,22 @@ for j in range(i):
 
 ```
 
-- Conditional fixed-set
-    - (91) decode ways (+ Aligned)
-    - (322/279) Coin change/Perfect Squares
-    - (377) Coin change II+/Combination Sum
+**Conditional fixed-set**
 
 Enumerate some previous indices and update on a sub-set based on certain condition.
+Like:
 
 ```python
 
-# decode ways
-if self.decodable(s[i - 2], s[i - 1]):
-    dp[i] += dp[i - 2]
-if s[i - 1] != "0":
-    dp[i] += dp[i - 1]
+# for i in range(n):
+for elem in elements:
+    if i - elem >= 0:
+        dp[i] = ... dp[i - elem] ...
+```
+
+Examples:
+
+```python
 
 # coin change
 for elem in coins:
@@ -109,10 +127,20 @@ for elem in coins:
 
 # If coins and squares are many and sorted.
 # we can use (if i-elem <0: break) to accelerate the algorithm
+
+# decode ways
+if self.decodable(s[i - 2], s[i - 1]):
+    dp[i] += dp[i - 2]
+if s[i - 1] != "0":
+    dp[i] += dp[i - 1]
+
 ```
 
 **(139) Word break**
-Can be solved both with conditional method and Conditional fixed-set method.
+
+Task: judge whether a long string can be divided into words in wordDict.
+
+Hint: Can be solved either with **Conditional method** or **Conditional fixed-set** method.
 
 ```python
 
@@ -215,26 +243,6 @@ Usually using `dp[i][j]` as 2-D DP. Use case including:
 - **String** operation.
 
 Challenges:
-- Matrix
-    - Naive-Board
-        - (simple) (62) Unique Path
-        - (63) Unique Path II
-    - 01-Board
-        - (542) Closest zero
-        - (221) Maximum Square
-    - Number-Board
-        - (329) Increasing Path
-- String
-    - single
-        - (5) Longest Sub-Palindromic
-    - tuple
-        - (97) Interleaving string
-        - (72) Edit distance
-        - (LCS) (1143/583)Longest common sub-seq/Delete game
-        - (LCS) (718) Longest common sub-array
-        - (115) \# sub-sequences
-
-    
 
 1) For **Matrix** operation (On Board), we have:
 
@@ -622,13 +630,7 @@ Based those two categories:
 
 #### Infinite coins
 
-- (322) Coin change: fewest \# of coins.
-- Coin change I+: largest \# of coins.
-- Coin change II-: judge exist combination.
-- (518) Coin change II: count \# of combinations
-- (377) Coin change II+: count \# of un-ordered combinations
-
-**(518) Coin change I/I+**
+**Coin change I/I+**
 
 Solution:
 
@@ -663,9 +665,12 @@ for c in coins:
 ```
 
 **(518) Coin change II**
-Task: count the number of (ordered) combinations of coins sum up to target(amount)
 
-Idea: `dp[i]` stores number of (ordered) combinations that can sum up to `i`.
+Note: `(1,1,2)` and `(1,2,1)` are same combinations.
+
+Task: count the number of combinations of coins sum up to target(amount)
+
+Idea: `dp[i]` stores number of combinations that can sum up to `i`.
 
 Solution:
 
@@ -682,17 +687,21 @@ for c in coins:  # imaging you are free to use coin one type after one.
 ```
 
 **(377) Coin change II+/Combination Sum**
-Task: count the number of combinations of coins sum up to target(amount)
 
-Idea: `dp[i]` stores number of combinations that can sum up to `i`.
+Note: `(1,1,2)` and `(1,2,1)` are different (sequential) combinations.
+
+Task: count the number of (sequential) combinations of coins sum up to target(amount)
+
+Idea: `dp[i]` stores number of (sequential) combinations that can sum up to `i`.
 
 Solution:
 
 ```python
+# just switch the c-loop and i-loop, because we can use different coins at every step.
 for i in range(1, amount + 1):
     for c in coins:
         if i - c >= 0:
-            dp[i] += dp[i - n]
+            dp[i] += dp[i - c]
 ```
 
 #### Finite coins
