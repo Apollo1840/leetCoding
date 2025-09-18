@@ -39,4 +39,4 @@ reference:
   - Matrix
   - 0-1 Matrix
 - Node
-- Graph (see `input_graph.md`)
+- Graph (see `special_topics/input_graph.md`)
