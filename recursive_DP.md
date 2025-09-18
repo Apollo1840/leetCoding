@@ -26,12 +26,28 @@ result is obtained.
 Since we are frequently re-use the previously computed values, it is beneficial to store those intermediate results in
 RAM (array for index query, or dict for hash query).
 
-(Notes: when you intutively get a recursive methods like DC or RC, think whether is able to transfer to DP to be more
+(Notes: when you intutively get a recursive methods like DC or RC, think whether is able to transfer to DP to be more memory
 efficient)
 
 ## Methodology
 
-### 1. Standard DP
+### 1. Hashmap DP
+
+- (464) Addition game
+
+```python
+
+def dp(n):
+    if n in self.dp_map:
+        return self.dp_map[n]
+
+    # res = = self.calc(self.dp(n-1), ...)
+    self.dp_map[n] = res
+    return self.dp_map[n]
+
+```
+
+### 2. Standard DP
 
 Can be understood as single-channel DP, where an array of answers or answer-related array `dp` is maintained.
 
@@ -50,17 +66,8 @@ Can be understood as single-channel DP, where an array of answers or answer-rela
 
 #### Flexible DP
 
-`dp[i]` based on a **dynamic** range of previous results `dp[i-1], dp[i-2], ...` and usually with multi-base:
+`dp[i]` based on a **dynamic** range of previous results `dp[i-1], dp[i-2], ...` and usually with multi-base.
 
-- Conditional
-    - (368) Divisible Subset (hint: DP not as result, but a processing tool)
-    - (300) longest sub-increasing (based on all previous)
-    - (673) \# longest sub-increasing (hint: double-DP)
-- Conditional fixed-set
-    - (91) decode ways (+ Aligned)
-    - (322/279) Coin change/Perfect Squares
-    - (377) Coin change II+/Combination Sum
-    
 **Conditional method**
 
 Enumerate all previous indices and update on a sub-set based on certain condition.
@@ -77,18 +84,22 @@ for j in range(i):
 Examples:
 
 ```python
-# longest sub-increasing
+# (300) longest sub-increasing
 # Idea: `dp[i]` represents length of longest increasing subsequence ends with i.
 for j in range(i):
     if nums[j] < nums[i]:
         dp[i] = max(dp[i], dp[j] + 1)
 
-# divisible subset (relaxation: only counting max size of the divisible subset)
+# (1025) Divisor Game
+
+
+# (368) divisible subset (relaxation: only counting max size of the divisible subset)
 for j in range(i):
     if nums[i] % nums[j] == 0:
         dp[i] = max(dp[i], dp[j] + 1)
 
         # use prev, max_index, max_length to store the information for trace back the results
+
 
 ```
 
@@ -109,17 +120,17 @@ Examples:
 
 ```python
 
-# coin change
+# (322) coin change
 for elem in coins:
     if i - elem >= 0:
         dp[i] = min(dp[i], dp[i - elem] + 1)
         
-# perfect square
+# (279) perfect square
 for elem in squares:
     if i - elem >= 0:
         dp[i] = min(dp[i], dp[i - elem] + 1)
         
-# coin change II+
+# (377) coin change II+
 for elem in coins:
     if i - elem >= 0:
         dp[i] += dp[i - elem]
@@ -128,7 +139,7 @@ for elem in coins:
 # If coins and squares are many and sorted.
 # we can use (if i-elem <0: break) to accelerate the algorithm
 
-# decode ways
+# (91) decode ways
 if self.decodable(s[i - 2], s[i - 1]):
     dp[i] += dp[i - 2]
 if s[i - 1] != "0":
@@ -161,22 +172,25 @@ for elem in wordDict:
 
 ```
 
-### 2. Hashmap DP
+To summarizy:
 
-- (464) Addition game
-- (1025) Divisor Game
+- Conditional
+    - (300) longest sub-increasing (hint: based on all previous)
+    - (673) \# longest sub-increasing (hint: double-DP)
+    - (368) Divisible Subset (hint: DP not as result, but a processing tool)
 
-```python
+- Conditional fixed-set
+    - (91) decode ways (+ Aligned)
+    - (322/279) Coin change/Perfect Squares
+    - (377) Coin change II+/Combination Sum
 
-def dp(n):
-    if n in self.dp_map:
-        return self.dp_map[n]
+#### Aligned DP
 
-    # res = = self.calc(self.dp(n-1), ...)
-    self.dp_map[n] = res
-    return self.dp_map[n]
+`dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
 
-```
+- (746) Climbing stairs II
+- (198) House Robber 
+
 
 ### 3. Multi-channel DP
 
@@ -246,15 +260,6 @@ Challenges:
 
 1) For **Matrix** operation (On Board), we have:
 
-- Naive-Board
-    - (simple) (62) Unique Path
-    - (63) Unique Path II
-- 01-Board
-    - (542) Closest zero
-    - (221) Maximum Square
-- Number-Board
-    - (329) Increasing Path
-
 **(62) Unique Path**
 Task: count number of unique paths from left-upper to right-bottom.
 
@@ -277,16 +282,17 @@ else:
 
 ```
 
-2) For **String** operation, we have:
+Summary: 
+- Naive-Board
+    - (simple) (62) Unique Path
+    - (63) Unique Path II
+- 01-Board
+    - (542) Closest zero
+    - (221) Maximum Square
+- Number-Board
+    - (329) Increasing Path
 
-- single
-    - (5) Longest Sub-Palindromic
-- tuple
-    - (97) Interleaving string
-    - (72) Edit distance
-    - (LCS) (1143/583)Longest common sub-seq/Delete game
-    - (LCS) (718) Longest common sub-array
-    - (115) \# sub-sequences
+2) For **String** operation, we have:
 
 **(5) Longest sub-Palindromic**
 Task: find longest Plindromic substring given a string.
@@ -405,6 +411,17 @@ def findLength(self, nums1: List[int], nums2: List[int]) -> int:
 
 ```
 
+Summary:
+- single
+    - (5) Longest Sub-Palindromic
+- tuple
+    - (97) Interleaving string
+    - (72) Edit distance
+    - (LCS) (1143/583)Longest common sub-seq/Delete game
+    - (LCS) (718) Longest common sub-array
+    - (115) \# sub-sequences
+
+
 ### 4. Multiple-rounds DP
 
 - (821) closest occurency
@@ -495,13 +512,7 @@ def findTargetSumWays(self, nums: List[int], target: int) -> int:
 
 ```
 
-### 5. Aligned DP
 
-`dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
-
-- (746) Climbing stairs II
-- (198) House Robber
-- (91) decode ways
 
 #### Alternative DP
 
