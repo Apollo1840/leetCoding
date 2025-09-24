@@ -424,10 +424,12 @@ Summary:
 
 ### 4. Multiple-rounds DP
 
-- (821) closest occurency
-- (2D) (542) closest zero
+#### Two rounds DP
 
-#### Flexible multi-rounds DP
+  - (821) closest occurency
+  - (2D) (542) closest zero
+
+#### Multi-rounds DP
 
 Also can be understood as a generative way.
 
@@ -515,9 +517,7 @@ def findTargetSumWays(self, nums: List[int], target: int) -> int:
 
 ```
 
-
-
-#### Alternative DP
+### 5. Alternative DP
 
 Based on `dp[i-1]` and others, but for the easy of thinking.
 
