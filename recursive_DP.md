@@ -193,7 +193,7 @@ To summarizy:
 
 ### 3. Alternative DP
 
-Based on `dp[i-1]` and others, but for the easy of thinking.
+Based on `dp[i-1]` and others. Not necerssary regard as DP, but for the easy of thinking.
 
 - (55) Jump game
 - (45) Jump game II
