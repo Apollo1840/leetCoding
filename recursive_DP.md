@@ -191,8 +191,14 @@ To summarizy:
 - (746) Climbing stairs II
 - (198) House Robber 
 
+### 3. Alternative DP
 
-### 3. Multi-channel DP
+Based on `dp[i-1]` and others, but for the easy of thinking.
+
+- (55) Jump game
+- (45) Jump game II
+
+### 4. Multi-channel DP
 
 Multiple DP sequences are adapted.
 
@@ -422,7 +428,7 @@ Summary:
     - (115) \# sub-sequences
 
 
-### 4. Multiple-rounds DP
+### 5. Multiple-rounds DP
 
 #### Two rounds DP
 
@@ -517,12 +523,7 @@ def findTargetSumWays(self, nums: List[int], target: int) -> int:
 
 ```
 
-### 5. Alternative DP
 
-Based on `dp[i-1]` and others, but for the easy of thinking.
-
-- (55) Jump game
-- (45) Jump game II
 
 ## Classic
 
