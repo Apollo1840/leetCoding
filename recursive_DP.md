@@ -11,7 +11,7 @@ eg.
 
 - $a_n = a_{n-1} + a_{n-2}$
 - $a_n = a_{n-1} * a_{n-2}$
-- $a_n = min(a_{n-1}, a_{n-2}+b_{n})$
+- $a_n = \min(a_{n-1}, a_{n-2}+b_{n})$
 
 Representative challenges:
 
@@ -484,13 +484,16 @@ for s in strs:
 **(416) Equal partition**
 Task: return whether can split the array into two subsets with equal sum.
 
-Idea: A variant of Coin Change IV. Calculate half-sum, then the problem = Coin Change IV. we can use `dp[i]` to store
-whether can get a sub-sequence that can sum up to i.
+Idea: 
+- A variant of Coin Change IV. Calculate half-sum, then the problem = Coin Change IV.
+- `dp[i]` to store whether can get a sub-sequence that can sum up to i.
 
 **(494) Target Sum**
 Task: return number of combinations of expressions(+/-) results in target sum.
 
-Idea: A variant of Coin Change V. Starts from `-sum(nums)` then the problem == Coin Change V.
+Idea: 
+- A variant of Coin Change V. == "Count subsets of `[2*n for n in nums]` that sum to `target + sum(nums)`".
+- `dp[i]` stores number of sub-sequences that can sum up to `i - sum(nums)`. So the answer is `dp[target * sum(nums)]`. Each `n` contribute `2n` to the sum.
 
 ```python
 
@@ -697,7 +700,9 @@ for c in coins:  # imaging you are free to use coin one type after one.
 
 ```
 
-**(377) Coin change II+/Combination Sum**
+**(377) Coin change II+/Combination Count**
+
+Also called count of **permutations**.
 
 Note: `(1,1,2)` and `(1,2,1)` are different (sequential) combinations.
 
@@ -730,17 +735,32 @@ Idea: `dp[i]` stores length of the sub-sequence that can sum up to `i`.
 Solution:
 
 ```python
+
+# important initialization
+dp[0] = 0
+
 # Task: shortest
 for c in coins:
     # Iterate backwards to ensure each coin is only used once
     for i in range(amount, c - 1, -1):
         dp[i] = min(dp[i], dp[i - c] + 1)
 
+    # print(dp) suppose coins = [1, 1, 2, 4], amount = 5
+    # [0, 1, inf, inf, inf, inf] used coins = [1]
+    # [0, 1, 2, inf, inf, inf]   used coins = [1, 1]
+    # [0, 1, 1, 2, 3, inf]       used coins = [1, 1, 2]
+    # [0, 1, 1, 2, 1, 2]         used coins = [1, 1, 2, 4]
+
 # Task: longest
 for c in coins:
     for i in range(amount, c - 1, -1):
         dp[i] = max(dp[i], dp[i - c] + 1)
 ```
+
+
+
+Similar challenge:
+- (1049) Last stone
 
 **Coin change IV**
 Task: judge whether exist sub-sequence of coins can sum up to the target.
@@ -762,6 +782,9 @@ for coin in coins:
 
 ```
 
+Similar challenge:
+- (416) Equal partition
+
 **Coin change V**
 Task: return number of distinct sub-sequences can sum up to the target.
 
@@ -778,7 +801,8 @@ for c in coins:
 ```
 
 
-
+Similar challenge:
+- (494) Target Sum
 
 
 
