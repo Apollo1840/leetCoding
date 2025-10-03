@@ -28,7 +28,7 @@ Examples:
 ## In Rotated Array
 - 153   Minimum in rotated
 - 33    Search in rotated
-- 34    Search in rotated II
+- 81    Search in rotated II
 
 In this cases, we usually differentiate the situation via:
 - edge case
@@ -43,30 +43,32 @@ def findMin(self, nums: List[int]) -> int:
     while l < r:
         mid = (l+r)//2
 
-        # Edge cases
+        # End case
+        if nums[l] == nums[mid]:
+            break
+        
+        # Edge case
         if nums[l] < nums[r]:
             return nums[l]
-        elif nums[l] == nums[mid] > nums[r]:
-            return nums[r]
-
+        
         # left part is sorted
-        elif nums[l] < nums[mid]:
+        if nums[l] < nums[mid]:
             l = mid + 1
         
         # right part is sorted
         else:
             r = mid
 
-    return nums[l]
+    return min(nums[l], nums[r])
 
-# 34 Search in rotated II
+# 81 Search in rotated II
 def search(self, nums: List[int], target: int) -> bool:
     l, r = 0, len(nums) - 1
 
     while l < r:
         mid = (l + r) // 2
 
-        # Check if the middle element is the target
+        # End case: check if the middle element is the target
         if nums[mid] == target:
             return True
 
@@ -89,19 +91,9 @@ def search(self, nums: List[int], target: int) -> bool:
             else:
                 r = mid
 
-    return nums[l]==target
+    return nums[l]==target  # l == mid == r
 
 ```
-
-## BS as Problem Reduce/DC
-Very similar to the idea of Divide&Conquer(DC).
-
-- 162 Local Maximum
-
-Half the problem size.
-
-- (Hard) 4 Median in 2 sorted
-
 
 ## BS Computing
 Sometimes use tricky BS to find numerical solution.
@@ -205,3 +197,12 @@ def achieve(self, weights, capacity, d):
 
 
 ```
+
+## BS as Problem Reduce/DC
+Very similar to the idea of Divide&Conquer(DC).
+
+- 162 Local Maximum
+
+Half the problem size.
+
+- (Hard) 4 Median in 2 sorted
