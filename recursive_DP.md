@@ -632,11 +632,11 @@ There are two types of coin change problem:
 Based those two categories:
 
 - infinite coins
-    - (322) Coin change: fewest \# of coins.
+    - (322) Coin changeI: fewest \# of coins.
     - Coin change I+: largest \# of coins.
-    - Coin change II-: judge exist combination.
+    - Coin change II*: judge exist combination.
     - (518) Coin change II: count \# of combinations
-    - (377) Coin change II+: count \# of un-ordered combinations
+    - (377) Coin change II+: count \# of permutations(un-ordered combinations)
 - finite coins
     - Coin change III: fewest \# of coins.
     - Coin change III+: largest \# of coins.
@@ -647,6 +647,14 @@ Based those two categories:
 
 **Coin change I/I+**
 
+Task: use fewest coins to make up total value M.
+
+Idea:
+
+- Use 1:      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+- Use 1,2:    -, -, 1, 1+1, 2, 2+1, 3, 3+1, 4, 4+1, 5
+- Use 1,2,5:  -, -, -, -, -, 1, 1+1, 1+1, 1+2, 1+3, 2 
+
 Solution:
 
 ```python
@@ -656,6 +664,11 @@ Solution:
 for c in coins:
     for i in range(c, amount):  # or if i - c >= 0:
         dp[i] = min(dp[i], dp[i - c] + 1)
+
+    # print(dp) suppose coins = [1,2,5], amount = 5
+    # [1, 2, 3, 4, 5, 6]  only use coins = [1]
+    # [1, 1, 2, 2, 3, 3]  only use coins = [1, 2]
+    # [1, 1, 2, 2, 1, 2]  only use coins = [1, 2, 5]
 # ...
 
 # Task: maximum number of coins.
@@ -666,7 +679,7 @@ for c in coins:
 # ...
 ```
 
-**Coin change II-**
+**Coin change II\***
 Task: judge exist (ordered) combination.
 
 Solution:
@@ -681,7 +694,7 @@ for c in coins:
 
 **(518) Coin change II**
 
-Note: `(1,1,2)` and `(1,2,1)` are same combinations.
+Note: `(1,2,1)` and `(2,1,1)` are same combinations.
 
 Task: count the number of combinations of coins sum up to target(amount)
 
@@ -690,7 +703,7 @@ Idea: `dp[i]` stores number of combinations that can sum up to `i`.
 Solution:
 
 ```python
-for c in coins:  # imaging you are free to use coin one type after one.
+for c in coins:  # imaging you are free to use coin one type after another.
     for i in range(c, amount):
         dp[i] += dp[i - c]
 
@@ -705,7 +718,7 @@ for c in coins:  # imaging you are free to use coin one type after one.
 
 Also called count of **permutations**.
 
-Note: `(1,1,2)` and `(1,2,1)` are different (sequential) combinations.
+Note: `(1,2,1)` and `(2,1,1)`  are different (sequential) combinations.
 
 Task: count the number of (sequential) combinations of coins sum up to target(amount)
 
