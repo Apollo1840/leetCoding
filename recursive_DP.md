@@ -661,21 +661,29 @@ Solution:
 
 # Task: minimum number of coins.
 # ...
+for i in range(c, amount+1):
+    for c in coins:
+        if i - c >= 0:
+            dp[i] = min(dp[i], dp[i - c] + 1)
+
+# or
 for c in coins:
-    for i in range(c, amount):  # or if i - c >= 0:
+    for i in range(c, amount):  
         dp[i] = min(dp[i], dp[i - c] + 1)
 
-    # print(dp) suppose coins = [1,2,5], amount = 5
-    # [1, 2, 3, 4, 5, 6]  only use coins = [1]
-    # [1, 1, 2, 2, 3, 3]  only use coins = [1, 2]
-    # [1, 1, 2, 2, 1, 2]  only use coins = [1, 2, 5]
+# print(dp) suppose coins = [1,2,5], amount = 5
+# [1, 2, 3, 4, 5, 6]  only use coins = [1]
+# [1, 1, 2, 2, 3, 3]  only use coins = [1, 2]
+# [1, 1, 2, 2, 1, 2]  only use coins = [1, 2, 5]
+
 # ...
 
 # Task: maximum number of coins.
 # ...
-for c in coins:
-    for i in range(c, amount):  # or if i - c >= 0:
-        dp[i] = max(dp[i], dp[i - c] + 1)
+for i in range(c, amount+1):
+    for c in coins:
+        if i - c >= 0:
+            dp[i] = max(dp[i], dp[i - c] + 1)
 # ...
 ```
 
@@ -685,10 +693,11 @@ Task: judge exist (ordered) combination.
 Solution:
 
 ```python
-    # ...
-for c in coins:
-    for i in range(c, amount):  # or if i - c >= 0:
-        dp[i] |= dp[i - c]
+# ...
+for i in range(c, amount+1):
+    for c in coins:
+        if i - c >= 0:
+            dp[i] |= dp[i - c]
 # ...
 ```
 
@@ -703,7 +712,8 @@ Idea: `dp[i]` stores number of combinations that can sum up to `i`.
 Solution:
 
 ```python
-for c in coins:  # imaging you are free to use coin one type after another.
+# inverse from i-loop to c-loop
+for c in coins:  
     for i in range(c, amount):
         dp[i] += dp[i - c]
 
