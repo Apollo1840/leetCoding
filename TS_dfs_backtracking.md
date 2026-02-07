@@ -1,6 +1,6 @@
 # DFS Backtracking
-Often used in collection tasks, collect all valid solutions.
-Also used in some judgement tasks where resource can not be reused.
+- Often used in **collection** tasks, collect all valid solutions.
+- Also used in some judgement tasks where resource can not be reused.
 
 ## Methodology
 
@@ -44,10 +44,13 @@ def dfs(self, digits, path):
         return
     
     # recursive
-    for letter in self.phone_map[digits[0]]:
+    for letter in self.phone_map[digits[0]]:  # digits[0] is current resource
         path = path + [letter]
-        self.dfs(digits[1:], path)
+        
+        self.dfs(digits[1:], path)  # digits[1:] is reduced resource
+        
         path.pop()  # The BACK-tracking step
+        # resources are automatic freed because digits[1:] created a copy, so it is not actually 'used'
 
 
 ```
@@ -95,11 +98,30 @@ def dfs(self, nums, used, path):
 
         # here is core of the BACK-tracking
         path.pop()
-        used[i] = False  
+        used[i] = False  # free the resource
 
 
 
 ```
+
+Shorter version of `dfs()`, implicit back-tracking:
+```python
+
+def dfs(self, nums, used, path):
+    # finish ends
+    if len(path)==len(used):
+        self.result.append(path[:])
+        return 
+
+    # recursive
+    for i, n in enumerate(nums):
+        if used[i]:
+            continue
+        used[i] = True
+        self.dfs(nums, used, path+[n])
+        used[i] = False  
+```
+
 #### 78 Subsets 
 Tasks: return all possible subsets
 
@@ -114,14 +136,16 @@ def dfs(self, i, path):
     # include i
     path += [self.nums[i]]
     self.dfs(i+1, path)
+    path.pop()
 
     # not include i
-    path.pop()
     self.dfs(i+1, path)
         
 ```
 
 - 90 Subsets II (hint: first sort, when skip, skip all the rest)
+
+Task: return all possible subsets, but input has duplicates.
   
 ```python
 
@@ -145,7 +169,10 @@ def dfs(self, i, path):
 ```
 
 #### 131 Palindrome partition
-Task: return all partition methods on a string to make each substring palindrome.
+Task: return all partition methods on a string(in the form of list of list of substrings) to make each substring palindrome.
+
+Prerequiste: Suppose you already have a `def is_palindrome(i, j)` return whether `nums[i, j+1]` is palindrome.
+
 
 Solution: **DFS Backtracking for enumerate all valid partitions**
 ```python
@@ -158,7 +185,7 @@ def dfs(self, start, n, path):
     
     # recursive
     for end in range(start, n):
-        if dp[start][end]:  # Check if s[start:end+1] is a palindrome
+        if is_palindrome[start][end]: 
             path += [s[start:(end + 1)]]
             self.dfs(end + 1, n, path)
             path.pop()
@@ -169,9 +196,15 @@ def dfs(self, start, n, path):
 #### 126 Word Ladder II
 Task: Return all possible ladders.
 
-Prerequisties: `self.nodes` stores levels of nodes of  the search tree containing the word ladder.
+Prerequisties: 
 
-Straight forward:
+- Better view (127) Word Ladder First.
+
+- Suppose you already have:
+  - a `self.nodes` stores levels of nodes of  that search tree containing the word ladder.
+  - a `self.areNeighbors(i, j)` function to determine whether two nodes are neighbors in that search tree. 
+
+Straight forwards:
 ```python
 
 def dfs(self, word, endWord, n, level, path):
@@ -189,10 +222,11 @@ def dfs(self, word, endWord, n, level, path):
             path.pop()
 ```
 
-Actually better: 
+Backwards is actually better: 
 ```python
 # The Search tree is a wide tree. 
-# Only consider the valid path, hence much faster            
+# Only consider the valid path, hence much faster
+# If we search backwards, we only consider the valid path.            
 def dfs_reverse(self, word, beginWord, level, path):
     if word == beginWord:
         self.result.append(path[::-1])
@@ -203,9 +237,8 @@ def dfs_reverse(self, word, beginWord, level, path):
 
     for item in self.nodes[level]:
         if self.areNeighbors(item, word):
-            path += [item]
-            self.dfs(item, beginWord, level-1, path)
-            path.pop()
+            self.dfs_reverse(item, beginWord, level-1, path + [item])
+
 
 ```
 

@@ -1,7 +1,7 @@
 # Sub-array
 
 ## Definition
-A **Sub-array** is a contiguous portion of an array.
+A **Sub-array** is a **contiguous** portion of an array.
 
 Meaning it consists of elements that appear sequentially in the original array and maintains their original order.
 
@@ -9,11 +9,17 @@ so it also can be interpreted as finding two indices.
 
 If the array is an array of chars, it is also called **Substring**.
 
+(p.s A **Sub-sequence** is a **non-contiguous** but same order portion of an array.)
+
 ## Understanding
 
 Since we are dealing with two indices, 
-it is common that we use **Locator** (3, 525, 697)
-and **LeftRight Pointers** (209, 76) to solve such problem.
+it is common that we use:
+-  **Locator** (3, 525, 697)
+- and **LeftRight Pointers** (209, 76) 
+
+to solve such problem.
+
 In some case, it also use **2-D DP** (5, 718).
 
 ## Challenges

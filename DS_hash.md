@@ -217,7 +217,7 @@ Locator is a Map(dict) record indices of key elements.
 - (index) 1 Two Sum
   
 `(mid-target: index)`:
-- (index) 525 balance sub-array
+- (index) 525 0-sum sub-array
 
 **Longest non-repeating**
 
@@ -244,7 +244,7 @@ Locator is a Map(dict) record indices of key elements.
 
 
 
-**525 balance sub-array**
+**525 balance sub-array (0-sum sub-array)**
 
 ```python
 

@@ -31,23 +31,7 @@ efficient)
 
 ## Methodology
 
-### 1. Hashmap DP
-
-- (464) Addition game
-
-```python
-
-def dp(n):
-    if n in self.dp_map:
-        return self.dp_map[n]
-
-    # res = = self.calc(self.dp(n-1), ...)
-    self.dp_map[n] = res
-    return self.dp_map[n]
-
-```
-
-### 2. Standard DP
+### 1. Standard DP
 
 Can be understood as single-channel DP, where an array of answers or answer-related array `dp` is maintained.
 
@@ -56,57 +40,30 @@ Can be understood as single-channel DP, where an array of answers or answer-rela
 `dp[i]` based on `dp[i-1], dp[i-2], ..., dp[i-k]`:
 
 - (509) Fibonacci (`dp[i] = dp[i-1] + dp[i-2]`)
-- (70) Climbing stairs (`dp[i] = dp[i-1] + dp[i-2]`)
+- (70) Climbing stairs (`dp[i] = dp[i-1] + dp[i-2]`) (#Ways)
 
 #### Jumping DP
 
 `dp[i]` based on some `dp[i-x]`, where `x` is not straightforward)
 
-- (338) Counting Bits (hint: forward generative)
+- (338) Counting Bits (`dp[i] = dp[i - i//2] + i%2` )(hint: understand it with forward generative)
 
-#### Flexible DP
+#### Conditional DP
 
-`dp[i]` based on a **dynamic** range of previous results `dp[i-1], dp[i-2], ...` and usually with multi-base.
+`dp[i]` based on a **dynamic** subset of previous results `dp[i-1], dp[i-2], ...` and usually with multi-base.
 
-**Conditional method**
+**Bounded Condition**
 
-Enumerate all previous indices and update on a sub-set based on certain condition.
-Like:
+Enumerate some previous indices and update on a sub-set of a fixed length.
 
-```python
-# for i in range(n):
-for j in range(i):
-    if ...:
-        dp[i] = ... dp[j] ...
-
-```
-
-Examples:
+With a subset as `{dp[i - 2], dp[i - 1]}`.
 
 ```python
-# (300) longest sub-increasing
-# Idea: `dp[i]` represents length of longest increasing subsequence ends with i.
-for j in range(i):
-    if nums[j] < nums[i]:
-        dp[i] = max(dp[i], dp[j] + 1)
-
-# (1025) Divisor Game
-
-
-# (368) divisible subset (relaxation: only counting max size of the divisible subset)
-for j in range(i):
-    if nums[i] % nums[j] == 0:
-        dp[i] = max(dp[i], dp[j] + 1)
-
-        # use prev, max_index, max_length to store the information for trace back the results
-
-
+# (91) decode ways
+dp[i] += dp[i - 2]*(self.decodable(s[i - 2], s[i - 1])) + dp[i - 1]*(s[i - 1] != "0")
 ```
 
-**Conditional fixed-set**
-
-Enumerate some previous indices and update on a sub-set based on certain condition.
-Like:
+With a subset as `{dp[i - elem]}`:
 
 ```python
 
@@ -135,17 +92,50 @@ for elem in coins:
     if i - elem >= 0:
         dp[i] += dp[i - elem]
 
-
 # If coins and squares are many and sorted.
 # we can use (if i-elem <0: break) to accelerate the algorithm
 
-# (91) decode ways
-if self.decodable(s[i - 2], s[i - 1]):
-    dp[i] += dp[i - 2]
-if s[i - 1] != "0":
-    dp[i] += dp[i - 1]
+```
+
+**Unbounded condition**
+
+Enumerate all previous indices and update on a sub-set based on certain condition.
+Like:
+
+```python
+# for i in range(n):
+for j in range(i):
+    if ...:
+        dp[i] = ... dp[j] ...
 
 ```
+
+Examples:
+
+```python
+# (300) longest sub-increasing
+# Idea: `dp[i]` represents length of longest increasing subsequence ends with i.
+for j in range(i):
+    if nums[j] < nums[i]:
+        dp[i] = max(dp[i], dp[j] + 1)
+
+# (1025) Divisor Game
+# Idea: `dp[i]` represents definite win of the next player. So fails into definite loss is a definite win.
+for j in range(1, i):
+     if i % j == 0:
+        dp[i] = dp[i] or not dp[i-j]  # has more effective way.
+
+
+# (368) divisible subset (relaxation: only counting max size of the divisible subset)
+for j in range(i):
+    if nums[i] % nums[j] == 0:
+        dp[i] = max(dp[i], dp[j] + 1)
+
+        # use prev, max_index, max_length to store the information for trace back the results
+
+
+```
+
 
 **(139) Word break**
 
@@ -171,6 +161,7 @@ for elem in wordDict:
             break
 
 ```
+
 
 To summarizy:
 
@@ -261,6 +252,7 @@ Usually using `dp[i][j]` as 2-D DP. Use case including:
 
 - **Matrix** operation and
 - **String** operation.
+- others
 
 Challenges:
 
@@ -427,6 +419,11 @@ Summary:
     - (LCS) (718) Longest common sub-array
     - (115) \# sub-sequences
 
+3) others
+
+(1155) Dice Rolls With Target Sum
+
+
 
 ### 5. Multiple-rounds DP
 
@@ -523,7 +520,21 @@ def findTargetSumWays(self, nums: List[int], target: int) -> int:
 
 ```
 
+### Extra. Hashmap DP
 
+- (464) Addition game
+
+```python
+
+def dp(n):
+    if n in self.dp_map:
+        return self.dp_map[n]
+
+    # res = = self.calc(self.dp(n-1), ...)
+    self.dp_map[n] = res
+    return self.dp_map[n]
+
+```
 
 ## Classic
 

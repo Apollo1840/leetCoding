@@ -3,7 +3,7 @@
 ```python
 # HalfOpen: left-closed, right-open pattern
 
-l, r = 0, len(s)
+l, r = 0, len(s) - 1
 while l < r:
     mid = (l+r)//2
     # do something
