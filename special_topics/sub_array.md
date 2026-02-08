@@ -1,4 +1,4 @@
-# Sub-array
+# Sub-array/Substring
 
 ## Definition
 A **Sub-array** is a **contiguous** portion of an array.

@@ -42,11 +42,18 @@ Can be understood as single-channel DP, where an array of answers or answer-rela
 - (509) Fibonacci (`dp[i] = dp[i-1] + dp[i-2]`)
 - (70) Climbing stairs (`dp[i] = dp[i-1] + dp[i-2]`) (#Ways)
 
-#### Jumping DP
 
-`dp[i]` based on some `dp[i-x]`, where `x` is not straightforward)
 
-- (338) Counting Bits (`dp[i] = dp[i - i//2] + i%2` )(hint: understand it with forward generative)
+#### Aligned DP
+
+`dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `{a[i]}`:
+
+- (746) Climbing stairs II
+- (198) House Robber 
+- (91) decode ways
+```python
+dp[i] += dp[i - 2]*(self.decodable(s[i - 2], s[i - 1])) + dp[i - 1]*(s[i - 1] != "0")
+```
 
 #### Conditional DP
 
@@ -56,12 +63,7 @@ Can be understood as single-channel DP, where an array of answers or answer-rela
 
 Enumerate some previous indices and update on a sub-set of a fixed length.
 
-With a subset as `{dp[i - 2], dp[i - 1]}`.
 
-```python
-# (91) decode ways
-dp[i] += dp[i - 2]*(self.decodable(s[i - 2], s[i - 1])) + dp[i - 1]*(s[i - 1] != "0")
-```
 
 With a subset as `{dp[i - elem]}`:
 
@@ -141,55 +143,45 @@ for j in range(i):
 
 Task: judge whether a long string can be divided into words in wordDict.
 
-Hint: Can be solved either with **Conditional method** or **Conditional fixed-set** method.
+Hint: Can be solved either with **Bounded** or **Unbounded** method.
 
 ```python
 
-# word break: conditional
-# (better approach)
-for j in range(max(i - wordlen_max, 0), i):
-    if s[j:i] in wordDictSet:
-        dp[i] = dp[i] or dp[j]
-        if dp[i]:
-            break
-
-# word break: conditional fix-set
+# word break: Bounded
 for elem in wordDict:
     if i - len(elem) >= 0 and s[i - len(elem):i] == elem:
         dp[i] = dp[i] or dp[i - len(elem)]
         if dp[i]:
             break
 
+# word break: Unbounded
+# (better approach)
+for j in range(max(i - wordlen_max, 0), i):
+    if s[j:i] in wordDictSet:
+        dp[i] = dp[i] or dp[j]
+        if dp[i]:
+            break
 ```
 
 
-To summarizy:
+To summarize:
 
-- Conditional
+- Bounded
+    - (322/279) Coin change/Perfect Squares
+    - (377) Coin change II+/Combination Sum
+
+- Unbounded
     - (300) longest sub-increasing (hint: based on all previous)
     - (673) \# longest sub-increasing (hint: double-DP)
     - (368) Divisible Subset (hint: DP not as result, but a processing tool)
 
-- Conditional fixed-set
-    - (91) decode ways (+ Aligned)
-    - (322/279) Coin change/Perfect Squares
-    - (377) Coin change II+/Combination Sum
+#### Jumping DP
 
-#### Aligned DP
+`dp[i]` based on some `dp[i-x]`, where `x` is not straightforward:
 
-`dp[i]` based on `dp[i-1], dp[i-2], ...` and an extra sequence `a[i]`:
+- (338) Counting Bits (`dp[i] = dp[i - i//2] + i%2` )(hint: understand it with forward generative)
 
-- (746) Climbing stairs II
-- (198) House Robber 
-
-### 3. Alternative DP
-
-Based on `dp[i-1]` and others. Not necerssary regard as DP, but for the easy of thinking.
-
-- (55) Jump game
-- (45) Jump game II
-
-### 4. Multi-channel DP
+### 2. Multi-channel DP (2D DP)
 
 Multiple DP sequences are adapted.
 
@@ -197,7 +189,7 @@ Either in form of ：
 
 - `dp_0`, `dp_1` or
 - `dp[:][0]`, `dp[:][1]` or
-- `dp[i][j]` as 2-D DP
+- `dp[i][j]` as 2D DP
 
 If the number of DP arrays are fixed and equiped with specfic meaning, then recommended to use meaningful name such
 as `dp_name_1`, `dp_name_2`.
@@ -205,7 +197,7 @@ as `dp_name_1`, `dp_name_2`.
 Examples:
 
 - (256) Paint House
-- (673) \# longest sub-increasing (hint: conditional flexible DP)
+- (673) \# longest sub-increasing (hint: Unbounded DP, based on all previous)
 
 **(256) Paint House**
 
@@ -215,9 +207,9 @@ Idea: `dp_color[i]` represents minimum cost of painting houses with `i`-th room 
 # (!) First initialize dp_red, dp_green, dp_blue with sole cost.
 
 for i in range(1, n):
-    dp_red[i] += min(dp_green[i - 1], dp_blue[i - 1])
-    dp_green[i] += min(dp_red[i - 1], dp_blue[i - 1])
-    dp_blue[i] += min(dp_red[i - 1], dp_green[i - 1])
+    dp_red[i] += min(dp_green[i - 1], dp_blue[i - 1]) + x_red
+    dp_green[i] += min(dp_red[i - 1], dp_blue[i - 1]) + x_green
+    dp_blue[i] += min(dp_red[i - 1], dp_green[i - 1]) + x_blue
 # (p.s here DP is also alternative)
 
 ```
@@ -236,19 +228,21 @@ Solution:
 for i in range(n):
     for j in range(i):
         if nums[j] < nums[i]:
+
+            # update dp_count 
             if dp_len[j] + 1 > dp_len[i]:
-                dp_len[i] = dp_len[j] + 1
                 dp_count[i] = dp_count[j]
             elif dp_len[j] + 1 == dp_len[i]:
                 dp_count[i] += dp_count[j]
 
+            # update dp_len
+            dp_len[i] = max(dp_len[i], dp_len[j]+1)
+
 ```
 
-#### High dimensional DP
+#### 2-dimensional(2D) DP
 
-High dimensional DP is a special case of Multiple DP.
-
-Usually using `dp[i][j]` as 2-D DP. Use case including:
+Using `dp[i][j]` as 2-D DP. Use case including:
 
 - **Matrix** operation and
 - **String** operation.
@@ -256,7 +250,7 @@ Usually using `dp[i][j]` as 2-D DP. Use case including:
 
 Challenges:
 
-1) For **Matrix** operation (On Board), we have:
+##### 1) Matrix (Or Board)
 
 **(62) Unique Path**
 Task: count number of unique paths from left-upper to right-bottom.
@@ -266,6 +260,8 @@ Solution: `dp[i][j] = dp[i-1][j] + dp[i][j-1]`
 **(221) Maximum square**
 Task: return the area of the maximum ones square
 
+Idea: `dp[i][j]` represents largest area of matrix[:i][:j] with largest square right-bottom corner align to the matrix's right-bottom corner.
+        
 Solution:
 
 ```python
@@ -273,7 +269,7 @@ Solution:
 if matrix[i - 1][j - 1] == "1":
     dp[i][j] = 1 + min(dp[i - 1][j],
                        dp[i][j - 1],
-                       dp[i - 1][j - 1])
+                       dp[i - 1][j - 1]) # for the left top corner
     max_side = max(max_side, dp[i][j])
 else:
     dp[i][j] = 0
@@ -290,51 +286,7 @@ Summary:
 - Number-Board
     - (329) Increasing Path
 
-2) For **String** operation, we have:
-
-**(5) Longest sub-Palindromic**
-Task: find longest Plindromic substring given a string.
-
-Hint: use a 2-D dp matrix to record `s[i:(j+1)]` **is Palindrome or not**
-
-Solution: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
-
-```python
-
-def longestPalindrome(self, s: str) -> str:
-    n = len(s)
-    # DP table to check if s[i:j] is a palindrome
-    dp = [[False] * n for _ in range(n)]
-
-    start, end = 0, 0
-    # Fill DP table
-    for length in range(n):  # Length of substring
-        for i in range(n - length):
-            j = i + length
-            if s[i] == s[j]:
-                if length <= 1:  # Single character or two equal characters
-                    dp[i][j] = True
-                else:
-                    dp[i][j] = dp[i + 1][j - 1]  # Check inner substring
-                if dp[i][j]:
-                    start, end = i, j  # update to the longest
-    return s[start: (end + 1)]
-
-```
-
-**(97) Interleaving string**
-Task: judge whether two string can interleave a target string or not.
-
-Hint: `dp[i][j]` represent whether `s1[:i]`, `s2[:j]` interleave `s3[:(i+j)]`
-
-Solution:
-
-```python
-
-dp[i][j] = (dp[i - 1][j] and s1[i - 1] == s3[i + j - 1]) or
-(dp[i][j - 1] and s2[j - 1] == s3[i + j - 1])
-
-```
+##### 2) String
 
 **(72) Edit distance**
 Task: count minimum number of operation that makes word1 and word2 same.
@@ -354,7 +306,37 @@ else:
     )
 ```
 
-**(1143/583) LCS/Delete game**
+
+
+
+**(718) LCS**
+Task:  count length of the longest common sub-array.
+
+Hint: `dp[i][j]` represents length of LCS between `nums1[:i]` and `nums2[:j]` ends with `nums1[i-1]` and `nums2[j-1]`.
+
+```python
+
+def findLength(self, nums1: List[int], nums2: List[int]) -> int:
+    """
+    dp[i][j]:  LCS between nums1[:i] and nums2[:j] ends with nums1[i-1] and nums2[j-1]
+    """
+    m, n = len(nums1), len(nums2)
+    max_len = 0
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if nums1[i - 1] == nums2[j - 1]:
+                dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + 1)
+            else:
+                dp[i][j] = 0
+            max_len = max(max_len, dp[i][j])
+    return max_len
+
+
+```
+
+
+**(1143/583) LCS sub-seq/Delete game**
 Task:
 
 - 1143: count length of the longest common sub sequence.
@@ -383,49 +365,66 @@ def minDistance(self, word1: str, word2: str) -> int:
     return m + n - 2 * lcs
 ```
 
-**(718) LCS sub-array**
-Task:  count length of the longest common sub-array.
 
-Hint: `dp[i][j]` represents length of LCS between `nums1[:i]` and `nums2[:j]` ends with `nums1[i-1]` and `nums2[j-1]`.
+**(5) Longest sub-Palindromic**
+Task: (relaxtion) find the length of longest Plindromic substring given a string.
+
+Hint: use a 2-D dp matrix to record `s[i:(j+1)]` **is Palindrome or not**. Unbounded DP with DP as a process, not the result. 
+
+Solution: `dp[i][j] = dp[i+1][j-1] and s[i] == s[j]`
 
 ```python
 
-def findLength(self, nums1: List[int], nums2: List[int]) -> int:
-    """
-    dp[i][j]:  LCS between nums1[:i] and nums2[:j] ends with nums1[i-1] and nums2[j-1]
-    """
-    m, n = len(nums1), len(nums2)
+def lengthOflongestPalindrome(self, s: str) -> int:
+    n = len(s)
+    # DP table to check if s[i:j] is a palindrome
+    dp = [[False] * n for _ in range(n)]
+
     max_len = 0
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    for i in range(1, m + 1):
-        for j in range(1, n + 1):
-            if nums1[i - 1] == nums2[j - 1]:
-                dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + 1)
-            else:
-                dp[i][j] = 0
-            max_len = max(max_len, dp[i][j])
+    
+    # Fill DP table
+    for j in range(n):
+        for i in range(j + 1): 
+            if s[i] == s[j] and (j - i <= 1 or dp[i + 1][j - 1]):
+                dp[i][j] = True
+                max_len = max(max_len, j-i+1)
     return max_len
 
+```
+
+**(97) Interleaving string**
+Task: judge whether two string can interleave a target string or not.
+
+Hint: `dp[i][j]` represent whether `s1[:i]`, `s2[:j]` interleave `s3[:(i+j)]`
+
+Solution:
+
+```python
+
+dp[i][j] = (dp[i - 1][j] and s1[i - 1] == s3[i + j - 1]) or
+(dp[i][j - 1] and s2[j - 1] == s3[i + j - 1])
 
 ```
 
 Summary:
+
+- tuple
+    - (ED (72) Edit distance
+    - (LCS) (718) Longest common sub-array
+    - (LCS) (1143/583) Longest common sub-seq/Delete game
+    - (97) Interleaving string
+    - (115) \# sub-sequences
+    
 - single
     - (5) Longest Sub-Palindromic
-- tuple
-    - (97) Interleaving string
-    - (72) Edit distance
-    - (LCS) (1143/583)Longest common sub-seq/Delete game
-    - (LCS) (718) Longest common sub-array
-    - (115) \# sub-sequences
 
-3) others
+##### 3) others
 
 (1155) Dice Rolls With Target Sum
 
 
 
-### 5. Multiple-rounds DP
+### 3. Multiple-rounds DP
 
 #### Two rounds DP
 
@@ -520,7 +519,15 @@ def findTargetSumWays(self, nums: List[int], target: int) -> int:
 
 ```
 
-### Extra. Hashmap DP
+### Extra 1: Alternative DP
+
+Based on `dp[i-1]` and others. Not necerssary regard as DP, but for the easy of thinking.
+
+- (55) Jump game
+- (45) Jump game II
+
+
+### Extra 2: Hashmap DP
 
 - (464) Addition game
 
