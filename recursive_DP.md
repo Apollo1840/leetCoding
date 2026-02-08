@@ -306,9 +306,6 @@ else:
     )
 ```
 
-
-
-
 **(718) LCS**
 Task:  count length of the longest common sub-array.
 
@@ -336,11 +333,10 @@ def findLength(self, nums1: List[int], nums2: List[int]) -> int:
 ```
 
 
-**(1143/583) LCS sub-seq/Delete game**
-Task:
+**(1143) LCS sub-seq**
 
-- 1143: count length of the longest common sub sequence.
-- 583: count minimum number of deletion that makes word1 and word2 same.
+Task: Count length of the longest common sub sequence.
+
 
 Hint: use `dp[i][j]` to represent length of longest equal sub-sequence between `word1[:i]` and `word2[:j]`.
 `if word1[i-1] == word2[j-1]: dp[i][j] = dp[i-1][j-1] + 1`
@@ -358,8 +354,13 @@ def minDistance(self, word1: str, word2: str) -> int:
                 dp[i][j] = dp[i - 1][j - 1] + 1
             else:
                 dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    return dp[m][n]
+```
 
-    # LCS length
+**(583) Delete game**: count minimum number of deletion that makes word1 and word2 same.
+
+```python
+
     lcs = dp[m][n]
     # Minimum deletions = total characters - 2 * LCS length
     return m + n - 2 * lcs
@@ -411,7 +412,8 @@ Summary:
 - tuple
     - (ED (72) Edit distance
     - (LCS) (718) Longest common sub-array
-    - (LCS) (1143/583) Longest common sub-seq/Delete game
+    - (LCS) (1143) Longest common sub-seq
+      - (583) Delete game
     - (97) Interleaving string
     - (115) \# sub-sequences
     
